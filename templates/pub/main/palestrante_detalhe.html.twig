@@ -1,0 +1,160 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <!-- Header/Breadcrumb Area -->
+    <!-- Header/Breadcrumb Area -->
+    <div class="bg-slate-900 pt-8 pb-32 relative overflow-hidden">
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+        {% else %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        {% endif %}
+        <div class="container mx-auto px-6 relative z-10">
+            <nav class="text-sm font-semibold text-slate-300 mb-8" aria-label="Breadcrumb">
+                <ol class="list-none p-0 inline-flex">
+                    <li class="flex items-center">
+                        <a href="{{ path('app_home') }}" class="hover:text-white transition-colors">Home</a>
+                        <span class="material-symbols-outlined text-sm mx-2">chevron_right</span>
+                    </li>
+                    <li class="flex items-center">
+                        <a href="{{ path('app_palestrantes') }}" class="hover:text-white transition-colors">Speakers</a>
+                        <span class="material-symbols-outlined text-sm mx-2">chevron_right</span>
+                    </li>
+                    <li class="text-secondary" aria-current="page">{{ speaker.name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Profile Card -->
+    <div class="container mx-auto px-6 max-w-5xl -mt-24 relative z-10" data-aos="fade-up">
+        <div class="bg-white rounded-2xl card-shadow overflow-hidden border border-slate-100 flex flex-col md:flex-row mb-12">
+            <!-- Image Sidebar -->
+            <div class="md:w-1/3 bg-slate-200 relative shrink-0">
+                {% if speaker.image and speaker.image.imageName %}
+                    <img src="{{ asset('uploads/' ~ speaker.image.imageName) }}" alt="{{ speaker.name }}" class="w-full h-full object-cover min-h-[400px]">
+                {% else %}
+                    <img src="{{ asset('fundecitrus-congresso-layout/assets/images/avatar-placeholder.jpg') }}" alt="{{ speaker.name }}" class="w-full h-full object-cover min-h-[400px]">
+                {% endif %}
+            </div>
+            
+            <!-- Details Main -->
+            <div class="md:w-2/3 p-10 md:p-14 flex flex-col justify-center">
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
+                    <div>
+                        <h1 class="text-4xl font-bold text-primary mb-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary text-3xl">person</span>
+                            {{ speaker.name }}
+                        </h1>
+                        <p class="text-xl font-semibold text-secondary">{{ speaker.institution }}</p>
+                        {% if speaker.department %}
+                            <p class="text-slate-500 font-medium mt-1 text-sm uppercase tracking-wider">{{ speaker.department }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-4 mb-8 border-b border-slate-100 pb-8">
+                    {% if speaker.linkedinUrl %}
+                        <a href="{{ speaker.linkedinUrl }}" target="_blank" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#0077b5] hover:text-white transition-colors" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in text-base"></i>
+                        </a>
+                    {% endif %}
+                    {% if speaker.instagramUrl %}
+                        <a href="{{ speaker.instagramUrl }}" target="_blank" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#E1306C] hover:text-white transition-colors" title="Instagram">
+                            <i class="fa-brands fa-instagram text-base"></i>
+                        </a>
+                    {% endif %}
+                    {% if speaker.facebookUrl %}
+                        <a href="{{ speaker.facebookUrl }}" target="_blank" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#1877F2] hover:text-white transition-colors" title="Facebook">
+                            <i class="fa-brands fa-facebook-f text-base"></i>
+                        </a>
+                    {% endif %}
+                    {% if speaker.youtubeUrl %}
+                        <a href="{{ speaker.youtubeUrl }}" target="_blank" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#FF0000] hover:text-white transition-colors" title="YouTube">
+                            <i class="fa-brands fa-youtube text-base"></i>
+                        </a>
+                    {% endif %}
+                </div>
+
+                <!-- Academic Areas -->
+                {% if speaker.researchAreas is not empty %}
+                    <div class="mb-4">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3">Key Research Areas</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {% for area in speaker.researchAreas %}
+                                <span class="bg-primary/5 text-primary border border-primary/20 px-3 py-1 rounded text-sm font-semibold">{{ area }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Content (Biography) -->
+            <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="bg-white rounded-2xl card-shadow p-10 border border-slate-100 mb-8">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary">person_book</span>
+                        Biography
+                    </h2>
+                        {{ speaker.bio|raw }}
+                    </div>
+                </div>
+                
+                <!-- Publications Showcase -->
+                {% if speaker.papers is not empty %}
+                    <div class="bg-white rounded-2xl card-shadow p-10 border border-slate-100">
+                        <h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary">article</span>
+                            Submitted Papers & Abstracts
+                        </h2>
+                        <ul class="space-y-6">
+                            {% for paper in speaker.papers %}
+                                <li class="border-l-4 border-primary pl-4">
+                                    <h4 class="font-bold text-lg text-slate-800 mb-1">{{ paper.title }}</h4>
+                                    <p class="text-sm text-slate-500 mb-2">{{ paper.callDetails }}</p>
+                                    {% if paper.pdfFile and paper.pdfFile.imageName %}
+                                        <a href="{{ asset('uploads/' ~ paper.pdfFile.imageName) }}" target="_blank" class="text-sm font-bold text-secondary hover:underline">Download Abstract (PDF)</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Sidebar Content (Schedule) -->
+            <div class="lg:col-span-1" data-aos="fade-left">
+                <div class="bg-slate-900 rounded-2xl card-shadow p-8 border-t-4 border-secondary text-white sticky top-24">
+                    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary">calendar_month</span>
+                        Conference Agenda
+                    </h2>
+                    
+                    {% if speaker.activities is not empty %}
+                        <p class="text-sm text-slate-400 mb-8">{{ speaker.name }} is scheduled to engage in the following sessions during the IRCHLB event:</p>
+                        
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-slate-700">
+                            {% for act in speaker.activities %}
+                                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                    <div class="flex items-center justify-center w-5 h-5 rounded-full border-2 border-slate-900 bg-secondary shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"></div>
+                                    <div class="w-[calc(100%-2rem)] p-4 rounded border border-slate-700 bg-slate-800/50">
+                                        <span class="bg-secondary/20 text-secondary text-xs px-2 py-1 rounded inline-block mb-2 font-bold">
+                                            {{ act.eventDay.title }} ({{ act.eventDay.date ? act.eventDay.date|date('M d') : '' }})
+                                        </span>
+                                        <h4 class="font-bold text-sm mb-1">{{ act.title }}</h4>
+                                        <p class="text-xs text-slate-400 mb-2">{{ act.startTime ? act.startTime|date('H:i A') : '' }}{% if act.room %} - {{ act.room.name }}{% endif %}</p>
+                                        <a href="{{ path('app_programa', {'day': act.eventDay.id}) }}" class="text-xs text-white hover:text-secondary underline decoration-slate-500 underline-offset-2">View in Schedule</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-sm text-slate-400">No scheduled sessions for this speaker yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

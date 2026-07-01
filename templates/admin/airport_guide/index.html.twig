@@ -1,0 +1,91 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            <i class="fa-solid fa-rectangle-list" style="margin-right:8px;color:var(--bm-accent)" aria-hidden="true"></i>
+            Guia de Aeroportos        </h1>
+        <p class="page-subtitle"></p>
+    </div>
+    <div>
+        <a href="{{ path('app_admin_airport_guide_new') }}" class="btn-primary">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            Adicionar
+        </a>
+    </div>
+</div>
+
+<div class="admin-card">
+    
+    <table class="admin-table">
+        <thead>
+            <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>Imagem</th>
+                                    <th>Nome</th>
+                                    <th>Código IATA</th>
+                                    <th>Distância</th>
+                                    <th>Meio de Transporte</th>
+                                <th></th>
+            </tr>
+        </thead>
+        <tbody id="airport-guide-sortable">
+            {% for airport_guide in airport_guides %}
+                <tr class="sortable-row" data-id="{{ airport_guide.id }}">
+                                                                    <td style="width: 30px; text-align: center;"><i class="fa-solid fa-grip-vertical" style="cursor: grab; color: #a1a1aa;"></i></td>
+                                                                    <td>{{ airport_guide.id }}</td>
+                                                                    <td>
+                                                                        {% if airport_guide.image and airport_guide.image.imageName %}
+                                                                            <img src="{{ asset('uploads/' ~ airport_guide.image.imageName) }}" alt="{{ airport_guide.name }}" style="max-width: 60px; max-height: 40px; object-fit: cover; border-radius: 4px;">
+                                                                        {% else %}
+                                                                            <span style="font-size: 11px; opacity: 0.6;">-</span>
+                                                                        {% endif %}
+                                                                    </td>
+                                                                                            <td>{{ airport_guide.name }}</td>
+                                                                                            <td>{{ airport_guide.code }}</td>
+                                                                                            <td>{{ airport_guide.distance }}</td>
+                                                                                            <td>{{ airport_guide.transport }}</td>
+                                                                 <td><a href="{{ path('app_admin_airport_guide_edit', {'id': airport_guide.id}) }}" class="btn-secondary" aria-label="Editar {{ airport_guide.name }}" title="Editar {{ airport_guide.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Nenhum registro</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <script>
+        {% if airport_guides is not empty %}
+            $(document).ready(function () {
+            $('.admin-table').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json',
+                },
+                ordering: false,
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, -1], [5, 10, 25, 'Todos']],
+            });
+        {% endif %}
+    });
+    </script>
+    {{ include('admin/_sortable_script.html.twig', {
+        tbody_id: 'airport-guide-sortable',
+        reorder_url: path('app_admin_reorder', { entityName: 'AirportGuide' })
+    }) }}
+{% endblock %}

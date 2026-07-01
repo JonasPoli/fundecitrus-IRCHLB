@@ -1,0 +1,26 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <!-- Hero Banner for Institutional Page -->
+    <section class="bg-slate-900 text-white py-20 relative overflow-hidden" data-aos="fade-down">
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+        {% else %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        {% endif %}
+        <div class="container mx-auto px-6 text-center max-w-3xl relative z-10">
+            <span class="material-symbols-outlined text-secondary text-5xl mb-4">article</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ page.title }}</h1>
+            <div class="w-16 h-1 bg-secondary mx-auto rounded-full"></div>
+        </div>
+    </section>
+
+    <!-- Page Content Section -->
+    <section class="py-24 bg-white" data-aos="fade-up" data-aos-delay="200">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed space-y-6">
+                {{ page.content|raw }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <section class="bg-slate-900 text-white py-16 relative overflow-hidden border-b-8 border-secondary">
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+        {% else %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        {% endif %}
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <span class="material-symbols-outlined text-secondary text-5xl mb-4">handshake</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Sponsors & Exhibitors</h1>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Discover the organizations making IRCHLB 2027 possible and driving innovation in citriculture.</p>
+        </div>
+    </section>
+
+    <!-- Sponsor Tiers -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-5xl">
+            {% if tiers is not empty %}
+                {% for tier in tiers %}
+                    {% if tier.sponsors is not empty %}
+                        <div class="mb-20 text-center" data-aos="fade-up">
+                            <h2 class="text-2xl font-bold text-slate-700 mb-8 uppercase tracking-widest flex items-center justify-center gap-3">
+                                <span class="w-12 h-px bg-slate-200"></span>
+                                {{ tier.name }}
+                                <span class="w-12 h-px bg-slate-200"></span>
+                            </h2>
+                            <div class="flex flex-wrap justify-center gap-12">
+                                {% for sponsor in tier.sponsors %}
+                                    <a href="{{ sponsor.websiteUrl ?? '#' }}" target="_blank" 
+                                       class="bg-white p-8 rounded-xl border border-slate-100 card-shadow hover-effect w-64 h-48 flex items-center justify-center group"
+                                       title="{{ sponsor.name }} - Stand {{ sponsor.standNumber }}"
+                                       data-aos="fade-up"
+                                       data-aos-delay="{{ (loop.index0 % 3) * 200 }}">
+                                        {% if sponsor.logo and sponsor.logo.imageName %}
+                                            <img src="{{ asset('uploads/' ~ sponsor.logo.imageName) }}" alt="{{ sponsor.name }}" 
+                                                 class="max-w-full max-h-full opacity-70 group-hover:opacity-100 transition-opacity filter grayscale group-hover:grayscale-0">
+                                        {% else %}
+                                            <span class="font-bold text-primary">{{ sponsor.name }}</span>
+                                        {% endif %}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="text-center py-20 bg-slate-50 rounded-xl border border-slate-100 card-shadow mb-12">
+                    <span class="material-symbols-outlined text-5xl text-slate-300 mb-4">handshake</span>
+                    <h3 class="text-xl font-bold text-slate-700">No sponsors registered yet.</h3>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Exhibitors Catalog & Captation -->
+    <section class="py-24 bg-slate-50 border-t border-slate-200">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="text-3xl font-bold text-primary mb-12 text-center" data-aos="fade-up">Become a Partner</h2>
+            
+            <div class="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden card-shadow">
+                <!-- Prospectus Info -->
+                <div class="bg-primary text-white p-10 md:w-5/12 flex flex-col justify-center" data-aos="fade-right">
+                    <span class="material-symbols-outlined text-5xl text-secondary mb-6">handshake</span>
+                    <h3 class="text-2xl font-bold mb-4">Sponsorship Prospectus</h3>
+                    <p class="text-slate-300 mb-8">Align your brand with the pinnacle of agricultural research. Download our detailed prospectus to view quota levels, physical exhibition stand sizes, and ROI metrics.</p>
+                    {% if event_config and event_config.prospectusFile and event_config.prospectusFile.imageName %}
+                        <a href="{{ asset('uploads/' ~ event_config.prospectusFile.imageName) }}" target="_blank" 
+                           class="bg-secondary text-primary font-bold py-3 px-6 rounded text-center hover-effect inline-block">
+                            Download Prospectus (PDF)
+                        </a>
+                    {% else %}
+                        <a href="#" onclick="alert('Prospectus file not uploaded yet.'); return false;" 
+                           class="bg-secondary text-primary font-bold py-3 px-6 rounded text-center hover-effect inline-block">
+                            Download Prospectus (PDF)
+                        </a>
+                    {% endif %}
+                </div>
+                
+                <!-- Inquiry Form -->
+                <div class="p-10 md:w-7/12" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-primary mb-6">Inquire About Opportunities</h3>
+                    <form action="{{ path('app_sponsorship_inquiry') }}" method="POST" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">Company Name</label>
+                                <input type="text" name="companyName" required
+                                       class="w-full border border-slate-300 rounded px-4 py-2 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">Contact Person</label>
+                                <input type="text" name="contactPerson" required
+                                       class="w-full border border-slate-300 rounded px-4 py-2 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Corporate Email</label>
+                            <input type="email" name="corporateEmail" required
+                                   class="w-full border border-slate-300 rounded px-4 py-2 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Interest Area</label>
+                            <select name="interestArea" required
+                                    class="w-full border border-slate-300 rounded px-4 py-2 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
+                                <option value="Diamond Quota">Diamond Quota</option>
+                                <option value="Silver Quota">Silver Quota</option>
+                                <option value="Physical Stand Only">Physical Stand Only</option>
+                                <option value="Custom Partnership">Custom Partnership</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-primary text-white font-bold py-3 rounded hover-effect mt-4">Send Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

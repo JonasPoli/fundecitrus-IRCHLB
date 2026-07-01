@@ -1,0 +1,110 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <section class="bg-slate-900 text-white py-20 relative overflow-hidden border-b-8 border-secondary">
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+        {% else %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        {% endif %}
+        <div class="container mx-auto px-6 text-center max-w-4xl relative z-10">
+            <span class="material-symbols-outlined text-secondary text-5xl mb-4">description</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Call for Papers</h1>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Present your latest research to the global scientific community. Review the thematic groups, rules, and crucial deadlines below.</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-24 bg-white text-slate-800">
+        <div class="container mx-auto px-6 max-w-5xl">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Left Column (Text & Rules) -->
+                <div class="md:col-span-2 space-y-12" data-aos="fade-right">
+                    
+                    <!-- Call Details -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 card-shadow hover-effect">
+                        <h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-secondary text-3xl">description</span>
+                            Thematic Groups
+                        </h2>
+                        <ul class="list-disc list-inside space-y-3 text-slate-700 ml-4">
+                            <li><strong>Pathogen Biology & Genetics:</strong> Mechanisms of 'Candidatus Liberibacter' spp.</li>
+                            <li><strong>Vector Ecology & Control:</strong> Diaphorina citri population dynamics.</li>
+                            <li><strong>Citrus Plant Response:</strong> Genetic resistance, tolerance, and immunity.</li>
+                            <li><strong>Therapeutics & Disease Management:</strong> Novel antimicrobial delivery and orchard practices.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Regulation & Peer Review -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 card-shadow hover-effect">
+                        <h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-secondary text-3xl">rule</span>
+                            Regulation & Evaluation
+                        </h2>
+                        <div class="prose text-slate-700">
+                            <p>All submissions undergo a rigorous <strong>blind peer-review</strong> process conducted by our international scientific committee. The evaluation criteria include originality, methodological soundness, and relevance to the global combat against HLB.</p>
+                            <p>Communication regarding acceptance or revision requests will be conducted via the centralized submission system. Only formatted PDFs following the exact template specifications will be considered.</p>
+                        </div>
+                    </div>
+
+                    <!-- External System Redirection Warning -->
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-lg hover-effect">
+                        <div class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-amber-500 text-3xl">warning</span>
+                            <div>
+                                <h4 class="font-bold text-amber-800 mb-2">Submission Portal (Fealq System)</h4>
+                                <p class="text-amber-700 text-sm mb-4">You will be redirected to the secure portal operated by the Fealq institution. This external environment handles our native evaluation workflows.</p>
+                                <a href="https://fealq.org.br" target="_blank" class="inline-flex items-center gap-2 bg-amber-500 text-white font-bold py-2 px-6 rounded hover:bg-amber-600 transition-colors">
+                                    Acessar Sistema Fealq <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column (Sidebar) -->
+                <div data-aos="fade-left">
+                    <!-- Critical Timeline -->
+                    {% if timeline_items is not empty %}
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 mb-8 card-shadow hover-effect">
+                            <h3 class="text-xl font-bold text-primary mb-6 text-center">Critical Timeline</h3>
+                            <ul class="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
+                                {% for item in timeline_items %}
+                                    <li class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group {% if loop.first %}is-active{% endif %}">
+                                        <div class="flex items-center justify-center w-5 h-5 rounded-full border-2 {% if loop.first %}border-secondary bg-white{% else %}border-slate-300 bg-white{% endif %} text-slate-500 z-10 font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"></div>
+                                        <div class="w-[calc(100%-2.5rem)] p-4 rounded-lg bg-white border border-slate-100 shadow-sm hover-effect">
+                                            <h4 class="font-bold text-primary text-sm">{{ item.title }}</h4>
+                                            <p class="text-xs text-slate-500 mb-1">{{ item.description }}</p>
+                                            <span class="text-xs {% if loop.first %}text-secondary{% else %}text-slate-500{% endif %} font-semibold">
+                                                {{ item.eventDate ? item.eventDate|date('M d, Y') : '' }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <!-- Edital Download -->
+                    <div class="bg-primary text-white rounded-xl p-8 text-center card-shadow hover-effect">
+                        <span class="material-symbols-outlined text-4xl text-secondary mb-4">picture_as_pdf</span>
+                        <h3 class="text-xl font-bold mb-4">Official Call Document</h3>
+                        <p class="text-sm text-slate-300 mb-6">Download the complete PDF containing absolute formatting rules and the official edital.</p>
+                        {% if event_config and event_config.prospectusFile and event_config.prospectusFile.imageName %}
+                            <a href="{{ asset('uploads/' ~ event_config.prospectusFile.imageName) }}" target="_blank" class="block w-full bg-secondary text-primary font-bold py-3 rounded hover-effect">
+                                Download PDF File
+                            </a>
+                        {% else %}
+                            <a href="#" onclick="alert('Document not uploaded yet.'); return false;" class="block w-full bg-secondary text-primary font-bold py-3 rounded hover-effect">
+                                Download PDF File
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

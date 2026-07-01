@@ -1,0 +1,278 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <!-- Hero Section with Banners / Slider -->
+    {% if banners is not empty %}
+        {% if banners|length > 1 %}
+            <!-- Swiper Slider Container -->
+            <section class="swiper hero-swiper w-full relative bg-slate-900 text-white overflow-hidden">
+                <div class="swiper-wrapper">
+                    {% for banner in banners %}
+                        <div class="swiper-slide relative flex items-center py-32 lg:py-48 bg-cover bg-center">
+                            {% if banner.image and banner.image.imageName %}
+                                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ banner.image.imageName) }}'); background-color: #004040;"></div>
+                            {% else %}
+                                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+                            {% endif %}
+                            
+                            <div class="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
+                                {% if banner.eventDate %}
+                                    <span class="bg-secondary text-primary font-bold px-3 py-1 rounded-full text-sm mb-6 uppercase tracking-wider" data-aos="fade-up" data-aos-delay="200">
+                                        {{ banner.eventDate }}
+                                    </span>
+                                {% endif %}
+                                
+                                {% if banner.subtitle %}
+                                    <h5 class="text-4xl md:text-5xl font-bold mb-2 leading-tight" data-aos="fade-up" data-aos-delay="400">
+                                        {{ banner.subtitle }}
+                                    </h5>
+                                {% endif %}
+                                
+                                {% if banner.mainTitle %}
+                                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="600">
+                                        {{ banner.mainTitle }}
+                                    </h1>
+                                {% endif %}
+                                
+                                {% if banner.description1 %}
+                                    <p class="text-lg md:text-xl text-slate-200 mb-2 max-w-3xl font-medium" data-aos="fade-up" data-aos-delay="800">
+                                        {{ banner.description1 }}
+                                    </p>
+                                {% endif %}
+                                
+                                {% if banner.description %}
+                                    <p class="text-base md:text-lg text-slate-300 mb-8 max-w-3xl" data-aos="fade-up" data-aos-delay="1000">
+                                        {{ banner.description }}
+                                    </p>
+                                {% endif %}
+
+                                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-6" data-aos="fade-up" data-aos-delay="1200">
+                                    {% if banner.button1Text and banner.button1Link %}
+                                        <a href="{{ banner.button1Link }}" class="bg-secondary text-primary font-bold text-lg px-8 py-4 rounded shadow-lg hover-effect">
+                                            {{ banner.button1Text }}
+                                        </a>
+                                    {% endif %}
+                                    {% if banner.button2Text and banner.button2Link %}
+                                        <a href="{{ banner.button2Link }}" class="bg-primary border border-primary text-white font-bold text-lg px-8 py-4 rounded hover:bg-white hover:text-primary transition-all">
+                                            {{ banner.button2Text }}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Swiper Navigation & Pagination -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev !text-white opacity-60 hover:opacity-100 transition-opacity"></div>
+                <div class="swiper-button-next !text-white opacity-60 hover:opacity-100 transition-opacity"></div>
+            </section>
+        {% else %}
+            {# Single Banner - No Slider #}
+            {% set banner = banners[0] %}
+            <section class="relative bg-slate-900 text-white py-32 lg:py-48 overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center">
+                {% if banner.image and banner.image.imageName %}
+                    <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ banner.image.imageName) }}'); background-color: #004040;"></div>
+                {% else %}
+                    <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+                {% endif %}
+                <div class="container mx-auto px-6 relative z-10 text-center flex flex-col items-center w-full">
+                    {% if banner.eventDate %}
+                        <span class="bg-secondary text-primary font-bold px-3 py-1 rounded-full text-sm mb-6 uppercase tracking-wider" data-aos="fade-up" data-aos-delay="200">
+                            {{ banner.eventDate }}
+                        </span>
+                    {% endif %}
+                    
+                    {% if banner.subtitle %}
+                        <h5 class="text-4xl md:text-5xl font-bold mb-2 leading-tight" data-aos="fade-up" data-aos-delay="400">
+                            {{ banner.subtitle }}
+                        </h5>
+                    {% endif %}
+                    
+                    {% if banner.mainTitle %}
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="600">
+                            {{ banner.mainTitle }}
+                        </h1>
+                    {% endif %}
+                    
+                    {% if banner.description1 %}
+                        <p class="text-lg md:text-xl text-slate-200 mb-2 max-w-3xl font-medium" data-aos="fade-up" data-aos-delay="800">
+                            {{ banner.description1 }}
+                        </p>
+                    {% endif %}
+                    
+                    {% if banner.description %}
+                        <p class="text-base md:text-lg text-slate-300 mb-8 max-w-3xl" data-aos="fade-up" data-aos-delay="1000">
+                            {{ banner.description }}
+                        </p>
+                    {% endif %}
+
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-6" data-aos="fade-up" data-aos-delay="1200">
+                        {% if banner.button1Text and banner.button1Link %}
+                            <a href="{{ banner.button1Link }}" class="bg-secondary text-primary font-bold text-lg px-8 py-4 rounded shadow-lg hover-effect">
+                                {{ banner.button1Text }}
+                            </a>
+                        {% endif %}
+                        {% if banner.button2Text and banner.button2Link %}
+                            <a href="{{ banner.button2Link }}" class="bg-primary border border-primary text-white font-bold text-lg px-8 py-4 rounded hover:bg-white hover:text-primary transition-all">
+                                {{ banner.button2Text }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    {% else %}
+        {# Fallback Banner - Event Config #}
+        <section class="relative bg-slate-900 text-white py-32 lg:py-48 overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center">
+            {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+            {% else %}
+                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+            {% endif %}
+            <div class="container mx-auto px-6 relative z-10 text-center flex flex-col items-center w-full">
+                <span class="bg-secondary text-primary font-bold px-3 py-1 rounded-full text-sm mb-6 uppercase tracking-wider" data-aos="fade-up" data-aos-delay="200">
+                    {{ event_config.eventDates ?? 'October 26-29, 2027' }}
+                </span>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="400">
+                    {{ event_config.title ?? 'VIII International Research Conference on Huanglongbing' }}
+                </h1>
+                {% if event_config and event_config.subtitle %}
+                    <p class="text-xl md:text-2xl text-slate-200 mb-8 max-w-3xl" data-aos="fade-up" data-aos-delay="600">
+                        {{ event_config.subtitle }}
+                    </p>
+                {% endif %}
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-6" data-aos="fade-up" data-aos-delay="800">
+                    <a href="{{ path('app_inscricoes') }}" class="bg-secondary text-primary font-bold text-lg px-8 py-4 rounded shadow-lg hover-effect">
+                        Register Now
+                    </a>
+                    <a href="{{ path('app_submissao') }}" class="bg-primary border border-primary text-white font-bold text-lg px-8 py-4 rounded hover:bg-white hover:text-primary transition-all">
+                        Call for Papers
+                    </a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Interactive Stats Section -->
+    {% if statistic_items is not empty %}
+        <section class="py-16 bg-white border-b border-slate-100">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    {% for item in statistic_items %}
+                        <div data-aos="fade-up" data-aos-delay="{{ loop.index0 * 200 }}">
+                            <h3 class="text-5xl font-bold text-primary mb-2">{{ item.value }}</h3>
+                            <p class="text-slate-500 font-semibold uppercase tracking-wider text-sm">{{ item.label }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Venue Highlights -->
+    <section class="py-24 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-primary mb-4" data-aos="fade-up" data-aos-delay="0">Discover the Venue</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto text-lg" data-aos="fade-up" data-aos-delay="200">Hospitality and prime infrastructure in the agribusiness capital of Brazil. Find everything you need for your stay.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Flights Card -->
+                <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="400">
+                    <div class="h-56 bg-slate-200 relative overflow-hidden">
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/flights.jpg') }}" alt="Flights"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Flights</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600">Information on primary airports, shuttles, and best ways to reach Ribeirão Preto securely.</p>
+                    </div>
+                </a>
+
+                <!-- Partner Hotels Card -->
+                <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="600">
+                    <div class="h-56 bg-slate-200 relative overflow-hidden">
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/hotels.jpg') }}" alt="Hotels"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Partner Hotels</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600">Curated accommodations with exclusive rates and optimal proximity to the conference center.</p>
+                    </div>
+                </a>
+
+                <!-- Restaurants Card -->
+                <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="800">
+                    <div class="h-56 bg-slate-200 relative overflow-hidden">
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/restaurants.jpg') }}" alt="Restaurants"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Dining</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600">Top recommendations for local gastronomy, from executive lunches to elegant dinners.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="1000">
+                <a href="{{ path('app_local') }}"
+                    class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
+                    View full venue guide <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        .hero-swiper .swiper-pagination-bullet-active {
+            background: #b9d04a !important;
+        }
+        .hero-swiper .swiper-button-next:after, 
+        .hero-swiper .swiper-button-prev:after {
+            font-size: 24px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.querySelector('.hero-swiper')) {
+                const swiper = new Swiper('.hero-swiper', {
+                    loop: true,
+                    effect: 'fade',
+                    fadeEffect: {
+                        crossFade: true
+                    },
+                    autoplay: {
+                        delay: 6000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+
+                swiper.on('slideChangeTransitionEnd', () => {
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refreshHard();
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,223 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block body %}
+
+{# ── Page Header ───────────────────────────────────────────────────────────── #}
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Painel Geral</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+            Bem-vindo, <strong>{{ app.user.userIdentifier }}</strong> · {{ 'now'|date('d/m/Y') }}
+        </p>
+    </div>
+</div>
+
+{# ── Stat Cards ────────────────────────────────────────────────────────────── #}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+
+    {# Palestrantes #}
+    <div class="stat-card">
+        <div class="stat-card-icon bg-primary/10 text-primary" aria-hidden="true">
+            <i class="fa-solid fa-microphone" aria-hidden="true"></i>
+        </div>
+        <div>
+            <p class="stat-card-value">{{ stats.speakers_total }}</p>
+            <p class="stat-card-label">Palestrantes</p>
+        </div>
+    </div>
+
+    {# Patrocinadores #}
+    <div class="stat-card">
+        <div class="stat-card-icon bg-secondary/10 text-secondary" aria-hidden="true">
+            <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+        </div>
+        <div>
+            <p class="stat-card-value">{{ stats.sponsors_total }}</p>
+            <p class="stat-card-label">Patrocinadores</p>
+        </div>
+    </div>
+
+    {# Contatos Pendentes #}
+    <div class="stat-card">
+        <div class="stat-card-icon {% if stats.contacts_pending > 0 %}bg-amber-100 text-amber-600{% else %}bg-slate-100 text-slate-500{% endif %}" aria-hidden="true">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        </div>
+        <div>
+            <p class="stat-card-value">{{ stats.contacts_pending }} <span class="text-xs font-normal text-slate-400">/ {{ stats.contacts_total }}</span></p>
+            <p class="stat-card-label">Contatos pendentes</p>
+        </div>
+    </div>
+
+    {# Solicitações de Patrocínio #}
+    <div class="stat-card">
+        <div class="stat-card-icon {% if stats.inquiries_pending > 0 %}bg-red-100 text-red-600{% else %}bg-slate-100 text-slate-500{% endif %}" aria-hidden="true">
+            <i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i>
+        </div>
+        <div>
+            <p class="stat-card-value">{{ stats.inquiries_pending }} <span class="text-xs font-normal text-slate-400">/ {{ stats.inquiries_total }}</span></p>
+            <p class="stat-card-label">Interesses de patrocínio</p>
+        </div>
+    </div>
+
+</div>
+
+{# ── Main Dashboard Layout ─────────────────────────────────────────────────── #}
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    {# Left / Main Col: Recent Interactions #}
+    <div class="lg:col-span-2 space-y-8">
+        
+        {# Últimos Contatos #}
+        <div class="admin-card">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="admin-card-title flex items-center gap-2">
+                    <i class="fa-solid fa-messages text-primary" aria-hidden="true"></i>
+                    Últimas Mensagens de Contato
+                </h2>
+                <a href="{{ path('app_admin_contact_message_index') }}" class="text-xs font-semibold text-secondary hover:underline">
+                    Ver tudo
+                </a>
+            </div>
+            
+            {% if recent_contacts is not empty %}
+                <div class="overflow-x-auto">
+                    <table class="admin-table text-sm">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Assunto</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contact in recent_contacts %}
+                                <tr>
+                                    <td class="font-semibold">{{ contact.firstName }} {{ contact.lastName }}</td>
+                                    <td>{{ contact.subject }}</td>
+                                    <td>{{ contact.createdAt ? contact.createdAt|date('d/m/Y H:i') : '' }}</td>
+                                    <td>
+                                        {% if contact.status == 'New' %}
+                                            <span class="badge badge-danger">Nova</span>
+                                        {% else %}
+                                            <span class="badge badge-success">{{ contact.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('app_admin_contact_message_edit', {'id': contact.id}) }}" class="btn-secondary px-2 py-1 text-xs" title="Visualizar / Tratar">
+                                            <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-slate-500 text-sm text-center py-6">Nenhuma mensagem recente.</p>
+            {% endif %}
+        </div>
+
+        {# Últimas Solicitações de Patrocínio #}
+        <div class="admin-card">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="admin-card-title flex items-center gap-2">
+                    <i class="fa-solid fa-file-signature text-secondary" aria-hidden="true"></i>
+                    Últimos Interesses de Patrocínio
+                </h2>
+                <a href="{{ path('app_admin_sponsorship_inquiry_index') }}" class="text-xs font-semibold text-secondary hover:underline">
+                    Ver tudo
+                </a>
+            </div>
+            
+            {% if recent_inquiries is not empty %}
+                <div class="overflow-x-auto">
+                    <table class="admin-table text-sm">
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Contato</th>
+                                <th>Cota de Interesse</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for inquiry in recent_inquiries %}
+                                <tr>
+                                    <td class="font-semibold">{{ inquiry.companyName }}</td>
+                                    <td>{{ inquiry.contactPerson }}</td>
+                                    <td>{{ inquiry.interestArea }}</td>
+                                    <td>{{ inquiry.createdAt ? inquiry.createdAt|date('d/m/Y H:i') : '' }}</td>
+                                    <td>
+                                        {% if inquiry.status == 'New' %}
+                                            <span class="badge badge-danger">Nova</span>
+                                        {% else %}
+                                            <span class="badge badge-success">{{ inquiry.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('app_admin_sponsorship_inquiry_edit', {'id': inquiry.id}) }}" class="btn-secondary px-2 py-1 text-xs" title="Visualizar / Tratar">
+                                            <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-slate-500 text-sm text-center py-6">Nenhum interesse de patrocínio recente.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    {# Right Col: Quick Links & Actions #}
+    <div class="space-y-8">
+        
+        <div class="admin-card">
+            <h2 class="admin-card-title flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-circle-nodes text-primary" aria-hidden="true"></i>
+                Atalhos Rápidos
+            </h2>
+            <div class="grid grid-cols-1 gap-2">
+                <a href="{{ path('app_admin_speaker_new') }}" class="flex items-center gap-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm">
+                    <i class="fa-solid fa-microphone-lines text-primary w-5 text-center" aria-hidden="true"></i>
+                    Cadastrar Palestrante
+                </a>
+                <a href="{{ path('app_admin_agenda_activity_new') }}" class="flex items-center gap-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm">
+                    <i class="fa-solid fa-calendar-plus text-primary w-5 text-center" aria-hidden="true"></i>
+                    Nova Atividade na Agenda
+                </a>
+                <a href="{{ path('app_admin_sponsor_new') }}" class="flex items-center gap-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm">
+                    <i class="fa-solid fa-handshake-angle text-primary w-5 text-center" aria-hidden="true"></i>
+                    Novo Patrocinador
+                </a>
+                <a href="{{ path('app_admin_faq_item_new') }}" class="flex items-center gap-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-sm">
+                    <i class="fa-solid fa-circle-question text-primary w-5 text-center" aria-hidden="true"></i>
+                    Adicionar FAQ
+                </a>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2 class="admin-card-title flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-circle-info text-secondary" aria-hidden="true"></i>
+                Sobre o IRCHLB 2027
+            </h2>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Este painel permite gerenciar dinamicamente toda a estrutura pública do congresso. Certifique-se de manter a configuração em <strong>Evento Geral</strong> sempre atualizada com as informações base do evento.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

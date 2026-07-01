@@ -1,0 +1,83 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            <i class="fa-solid fa-rectangle-list" style="margin-right:8px;color:var(--bm-accent)" aria-hidden="true"></i>
+            Lotes de Inscrição        </h1>
+        <p class="page-subtitle"></p>
+    </div>
+    <div>
+        <a href="{{ path('app_admin_registration_batch_new') }}" class="btn-primary">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            Adicionar
+        </a>
+    </div>
+</div>
+
+<div class="admin-card">
+    
+    <table class="admin-table">
+        <thead>
+            <tr>
+                                    <th></th>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>StartDate</th>
+                                    <th>EndDate</th>
+                                    <th>Price</th>
+                                <th></th>
+            </tr>
+        </thead>
+        <tbody id="registration-batch-sortable">
+            {% for registration_batch in registration_batches %}
+                <tr class="sortable-row" data-id="{{ registration_batch.id }}">
+                                                                    <td style="width: 30px; text-align: center;"><i class="fa-solid fa-grip-vertical" style="cursor: grab; color: #a1a1aa;"></i></td>
+                                                                    <td>{{ registration_batch.id }}</td>
+                                                                                            <td>{{ registration_batch.name }}</td>
+                                                                                            <td>{{ registration_batch.startDate ? registration_batch.startDate|date('Y-m-d H:i:s') : '' }}</td>
+                                                                                            <td>{{ registration_batch.endDate ? registration_batch.endDate|date('Y-m-d H:i:s') : '' }}</td>
+                                                                                            <td>{{ registration_batch.price }}</td>
+                                                                 <td><a href="{{ path('app_admin_registration_batch_edit', {'id': registration_batch.id}) }}" class="btn-secondary" aria-label="Editar {{ registration_batch.name }}" title="Editar {{ registration_batch.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Nenhum registro</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <script>
+        {% if registration_batches is not empty %}
+            $(document).ready(function () {
+            $('.admin-table').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json',
+                },
+                ordering: false,
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, -1], [5, 10, 25, 'Todos']],
+            });
+        {% endif %}
+    });
+    </script>
+    {{ include('admin/_sortable_script.html.twig', {
+        tbody_id: 'registration-batch-sortable',
+        reorder_url: path('app_admin_reorder', { entityName: 'RegistrationBatch' })
+    }) }}
+{% endblock %}

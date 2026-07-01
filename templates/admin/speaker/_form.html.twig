@@ -1,0 +1,50 @@
+{{ form_start(form) }}
+    <div class="admin-card space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.name) }}
+            {{ form_row(form.institution) }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.department) }}
+            {{ form_row(form.researchAreas) }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.shortBio) }}
+            {{ form_row(form.isFeatured) }}
+        </div>
+        <div>
+            {{ form_row(form.bio) }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {{ form_row(form.linkedinUrl) }}
+            {{ form_row(form.instagramUrl) }}
+            {{ form_row(form.facebookUrl) }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {{ form_row(form.youtubeUrl) }}
+            {{ form_row(form.whatsappUrl) }}
+            {{ form_row(form.scholarUrl) }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.lattesUrl) }}
+            {{ form_row(form.activities) }}
+        </div>
+        <div>
+            {{ form_row(form.image) }}
+            {% if speaker is defined and speaker.image and speaker.image.imageName %}
+                <div class="mt-2">
+                    <span class="text-xs text-slate-500 block mb-1">Visualização da foto atual:</span>
+                    <img src="{{ asset('uploads/' ~ speaker.image.imageName) }}" alt="Preview" class="w-32 h-32 object-cover rounded-full shadow border border-slate-200">
+                </div>
+            {% endif %}
+        </div>
+        {{ form_row(form.position) }}
+    </div>
+    
+    <div class="w-full text-right mt-6">
+        <button type="submit" class="btn-primary" id="submit-btn">
+            <i class="fa-solid fa-check" aria-hidden="true"></i>
+            Salvar
+        </button>
+    </div>
+{{ form_end(form) }}

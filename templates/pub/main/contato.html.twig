@@ -1,0 +1,163 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <section class="bg-slate-900 text-white py-16 relative overflow-hidden border-b-8 border-secondary">
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+        {% else %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        {% endif %}
+        <div class="container mx-auto px-6 text-center max-w-3xl relative z-10">
+            <span class="material-symbols-outlined text-secondary text-5xl mb-4">contact_support</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Contact & FAQ</h1>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Reach out to our support team and check the most frequently asked questions about the conference.</p>
+        </div>
+    </section>
+
+    <!-- Support Hub & Form -->
+    <section class="py-24 bg-slate-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- Contact Channels -->
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-primary mb-8">Get in Touch</h2>
+                    
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-secondary text-3xl">mark_email_read</span>
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-800">Corporate Email</h4>
+                                <a href="mailto:{{ event_config.supportEmail ?? 'support@irchlb.org' }}" class="text-primary hover:underline">
+                                    {{ event_config.supportEmail ?? 'support@irchlb.org' }}
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-secondary text-3xl">support_agent</span>
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-800">Phone Support</h4>
+                                <p class="text-primary">{{ event_config.supportPhone ?? '+55 (16) 3301-7000' }}</p>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Direct -->
+                        {% if event_config and event_config.whatsappNumber %}
+                            <div class="bg-white border-l-4 border-green-500 p-6 rounded-r-lg card-shadow mt-4 inline-block w-full">
+                                <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
+                                    WhatsApp Agent
+                                </h4>
+                                <p class="text-sm text-slate-600 mb-4">Instant support bridging directly to officialized numbers.</p>
+                                <a href="https://wa.me/{{ event_config.whatsappNumber|replace({' ': '', '-': '', '(': '', ')': '', '+': ''}) }}" target="_blank"
+                                   class="bg-green-500 text-white font-bold py-2 px-6 rounded hover:bg-green-600 transition-colors inline-block text-center w-full sm:w-auto">
+                                    Chat on WhatsApp
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Social Media Integrations -->
+                    <div class="pt-8 border-t border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-4">Follow us</h4>
+                        <div class="flex gap-4">
+                            {% if event_config and event_config.linkedinUrl %}
+                                <a href="{{ event_config.linkedinUrl }}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary card-shadow hover-effect" title="LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in text-base"></i>
+                                </a>
+                            {% endif %}
+                            {% if event_config and event_config.instagramUrl %}
+                                <a href="{{ event_config.instagramUrl }}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary card-shadow hover-effect" title="Instagram">
+                                    <i class="fa-brands fa-instagram text-base"></i>
+                                </a>
+                            {% endif %}
+                            {% if event_config and event_config.youtubeUrl %}
+                                <a href="{{ event_config.youtubeUrl }}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary card-shadow hover-effect" title="YouTube">
+                                    <i class="fa-brands fa-youtube text-base"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transactional Form -->
+                <div class="bg-white p-8 rounded-2xl card-shadow border border-slate-100" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-primary mb-6">Send a Message</h3>
+                    <form action="{{ path('app_contact_message') }}" method="POST" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">First Name</label>
+                                <input type="text" name="firstName" required
+                                       class="w-full border border-slate-300 rounded px-4 py-2 focus:ring-1 focus:ring-secondary focus:border-secondary transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">Last Name</label>
+                                <input type="text" name="lastName" required
+                                       class="w-full border border-slate-300 rounded px-4 py-2 focus:ring-1 focus:ring-secondary focus:border-secondary transition-colors">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+                            <input type="email" name="email" required
+                                   class="w-full border border-slate-300 rounded px-4 py-2 focus:ring-1 focus:ring-secondary focus:border-secondary transition-colors">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Subject / Category</label>
+                            <select name="subject" required
+                                    class="w-full border border-slate-300 rounded px-4 py-2 focus:ring-1 focus:ring-secondary focus:border-secondary transition-colors">
+                                <option value="Registration Processing">Registration Processing</option>
+                                <option value="Paper Submissions (Fealq)">Paper Submissions (Fealq)</option>
+                                <option value="Financial & Refunds">Financial & Refunds</option>
+                                <option value="General Information">General Information</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Message</label>
+                            <textarea name="message" rows="4" required
+                                      class="w-full border border-slate-300 rounded px-4 py-2 focus:ring-1 focus:ring-secondary focus:border-secondary transition-colors"></textarea>
+                        </div>
+
+                        <div class="flex items-start gap-2">
+                            <input type="checkbox" name="consent" id="consent" class="mt-1" required>
+                            <label for="consent" class="text-xs text-slate-500 leading-tight">I consent to the basic treatment of my data in accordance with the privacy policy for answering this specific request.</label>
+                        </div>
+
+                        <button type="submit" class="bg-secondary text-primary font-bold py-3 px-6 rounded w-full hover-effect shadow-md">
+                            Submit Request
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    {% if faq_items is not empty %}
+        <section id="faq" class="py-24 bg-white border-t border-slate-200">
+            <div class="container mx-auto px-6 max-w-4xl" data-aos="fade-up">
+                <div class="text-center mb-12">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">quiz</span>
+                    <h2 class="text-3xl font-bold text-primary">Frequently Asked Questions</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    {% for faq in faq_items %}
+                        <details class="group bg-slate-50 rounded-lg border border-slate-200 open:bg-white open:ring-1 open:ring-slate-300 open:shadow-sm">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-slate-800">
+                                <span class="font-bold">{{ faq.question }}</span>
+                                <span class="transition group-open:rotate-180 material-symbols-outlined text-slate-400">expand_more</span>
+                            </summary>
+                            <div class="text-slate-600 p-5 pt-0 border-t border-slate-100 mt-2">
+                                <p>{{ faq.answer }}</p>
+                            </div>
+                        </details>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

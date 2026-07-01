@@ -1,0 +1,32 @@
+{{ form_start(form) }}
+    <div class="admin-card space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.name) }}
+            {{ form_row(form.code) }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.distance) }}
+            {{ form_row(form.transport) }}
+        </div>
+        <div>
+            {{ form_row(form.description) }}
+        </div>
+        <div>
+            {{ form_row(form.image) }}
+            {% if airport_guide is defined and airport_guide.image and airport_guide.image.imageName %}
+                <div class="mt-2">
+                    <span class="text-xs text-slate-500 block mb-1">Visualização da imagem atual:</span>
+                    <img src="{{ asset('uploads/' ~ airport_guide.image.imageName) }}" alt="Preview" class="w-48 h-32 object-cover rounded shadow border border-slate-200">
+                </div>
+            {% endif %}
+        </div>
+        {{ form_row(form.position) }}
+    </div>
+    
+    <div class="w-full text-right mt-6">
+        <button type="submit" class="btn-primary" id="submit-btn">
+            <i class="fa-solid fa-check" aria-hidden="true"></i>
+            Salvar
+        </button>
+    </div>
+{{ form_end(form) }}

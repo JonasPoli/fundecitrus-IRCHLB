@@ -1,0 +1,108 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <!-- Page Header -->
+    <section class="bg-slate-900 text-white py-20 relative overflow-hidden border-b-8 border-secondary">
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+        {% else %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        {% endif %}
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <span class="material-symbols-outlined text-secondary text-5xl mb-4">groups</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">About the Conference</h1>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Discover the foundation, history, and the dedicated team behind the global assembly on Huanglongbing.</p>
+        </div>
+    </section>
+
+    <!-- Mission & Objectives -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl" data-aos="fade-up">
+            <div class="text-center mb-12">
+                <span class="material-symbols-outlined text-secondary text-5xl mb-4">flag</span>
+                <h2 class="text-3xl font-bold text-primary mb-6">Mission & Objectives</h2>
+            </div>
+            <div class="prose prose-lg text-slate-700 mx-auto">
+                <p>The VIII International Research Conference on Huanglongbing represents the most vital academic and operational convergence point for discussing, mapping, and confronting the HLB citrus disease. Our root conceptual objective is to foster deep collaboration across borders.</p>
+                <p>We aim to aggregate scientists, industry leaders, and agricultural stewards to formulate resilient solutions against the devastation caused by HLB, paving the path to sustainable practices over the next decade.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizing Committee -->
+    {% if committee_members is not empty %}
+        <section class="py-24 bg-slate-50 border-t border-b border-slate-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-primary mb-4 text-center" data-aos="fade-up">Organizing Committee</h2>
+                <p class="text-center text-slate-500 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Meet the specialists and institutional leaders dedicated to bringing forth a world-class conference.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {% for member in committee_members %}
+                        <div class="bg-white rounded-xl card-shadow border border-slate-100 p-8 text-center hover-effect" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 4) * 100 }}">
+                            {% if member.image and member.image.imageName %}
+                                <img src="{{ asset('uploads/' ~ member.image.imageName) }}" alt="{{ member.name }}"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-6 bg-slate-200">
+                            {% else %}
+                                <img src="{{ asset('fundecitrus-congresso-layout/assets/images/avatar-placeholder.jpg') }}" alt="{{ member.name }}"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-6 bg-slate-200">
+                            {% endif %}
+                            
+                            <h3 class="text-xl font-bold text-primary">{{ member.name }}</h3>
+                            <p class="text-sm font-semibold text-secondary mb-1">{{ member.role }}</p>
+                            <p class="text-xs text-slate-400 mb-3">{{ member.institution }}</p>
+                            <p class="text-sm text-slate-500 line-clamp-3">{{ member.bio }}</p>
+                            
+                            <div class="flex justify-center gap-3 mt-4">
+                                {% if member.linkedinUrl %}
+                                    <a href="{{ member.linkedinUrl }}" target="_blank" class="text-slate-400 hover:text-primary transition-colors">
+                                        <i class="fa-brands fa-linkedin text-lg"></i>
+                                    </a>
+                                {% endif %}
+                                {% if member.academicLink %}
+                                    <a href="{{ member.academicLink }}" target="_blank" class="text-slate-400 hover:text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-lg">school</span>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Benefits (Why Participate) -->
+    <section class="py-24 bg-primary text-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-16 items-center">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <h2 class="text-4xl font-bold mb-6">Why You Should Attend</h2>
+                    <p class="text-lg text-slate-300 mb-8 leading-relaxed">Attending the IRCHLB represents an imperative investment for professionals and academics within the agricultural sciences.</p>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-secondary align-top">tips_and_updates</span>
+                            <div>
+                                <h4 class="font-bold text-xl">Knowledge Acquisition</h4>
+                                <p class="text-slate-300">Access unreleased papers, frontier research, and data from international groups working directly on the HLB challenge.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-secondary align-top">diversity_3</span>
+                            <div>
+                                <h4 class="font-bold text-xl">Premium Networking</h4>
+                                <p class="text-slate-300">Interact with regulators, industry heavyweights, and global researchers during our targeted coffee breaks and social events.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <div class="relative rounded-2xl overflow-hidden card-shadow">
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/conference-room.jpg') }}" alt="Conference Room"
+                            class="w-full h-auto object-cover bg-slate-200">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            <i class="fa-solid fa-rectangle-list" style="margin-right:8px;color:var(--bm-accent)" aria-hidden="true"></i>
+            Salas do Evento        </h1>
+        <p class="page-subtitle"></p>
+    </div>
+    <div>
+        <a href="{{ path('app_admin_venue_room_new') }}" class="btn-primary">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            Adicionar
+        </a>
+    </div>
+</div>
+
+<div class="admin-card">
+    
+    <table class="admin-table">
+        <thead>
+            <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Capacity</th>
+                                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venue_room in venue_rooms %}
+                <tr>
+                                                                    <td>{{ venue_room.id }}</td>
+                                                                                            <td>{{ venue_room.name }}</td>
+                                                                                            <td>{{ venue_room.capacity }}</td>
+                                                                <td><a href="{{ path('app_admin_venue_room_edit', {'id': venue_room.id}) }}" class="btn-secondary" aria-label="Editar {{ venue_room.name }}" title="Editar {{ venue_room.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum registro</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <script>
+        {% if venue_rooms is not empty %}
+            $(document).ready(function () {
+            $('.admin-table').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json',
+                },
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, -1], [5, 10, 25, 'Todos']],
+                order: [[0, 'asc']],
+            });
+        {% endif %}
+    });
+    </script>
+{% endblock %}

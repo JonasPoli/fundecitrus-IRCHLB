@@ -1,0 +1,206 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+    <section class="bg-slate-900 text-white py-16 relative overflow-hidden border-b-8 border-secondary">
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+        {% else %}
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        {% endif %}
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <span class="material-symbols-outlined text-secondary text-5xl mb-4">explore</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Venue & Travel Guide</h1>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Comprehensive information mapping out your journey, stay, and culinary experience in Ribeirão Preto.</p>
+        </div>
+    </section>
+
+    <!-- Map & Address Component -->
+    <section class="py-16 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row gap-12 bg-white rounded-2xl overflow-hidden card-shadow" data-aos="fade-up">
+                
+                <div class="md:w-1/3 p-10 bg-primary text-white flex flex-col justify-center">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-6">pin_drop</span>
+                    <h2 class="text-3xl font-bold mb-4">Event Complex</h2>
+                    <p class="text-slate-300 mb-6 font-semibold">{{ event_config.locationName ?? 'Convention Center' }}</p>
+                    <address class="not-italic text-sm text-slate-400 space-y-2 mb-8 border-l-2 border-secondary pl-4">
+                        {% if event_config %}
+                            <p>{{ event_config.addressStreet }}</p>
+                            <p>{{ event_config.addressNeighborhood }}</p>
+                            <p>{{ event_config.addressCity }} - {{ event_config.addressZipCode }}</p>
+                        {% else %}
+                            <p>Av. Dr. Adhemar Pereira de Barros, 201</p>
+                            <p>Vila Melhado, Ribeirão Preto</p>
+                            <p>SP, Brazil - 14807-040</p>
+                        {% endif %}
+                    </address>
+                    {% if event_config and event_config.googleMapsUrl %}
+                        <a href="{{ event_config.googleMapsUrl }}" target="_blank" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-white transition-colors">
+                            Get Directions <span class="material-symbols-outlined text-sm">open_in_new</span>
+                        </a>
+                    {% endif %}
+                </div>
+
+                <!-- Google Map API Integration -->
+                <div class="md:w-2/3 h-80 md:h-auto bg-slate-200 relative">
+                    {% if event_config and event_config.googleMapsUrl and ('iframe' in event_config.googleMapsUrl) %}
+                        {{ event_config.googleMapsUrl|raw }}
+                    {% elseif event_config and event_config.googleMapsUrl %}
+                        <iframe src="{{ event_config.googleMapsUrl }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+                    {% else %}
+                        <div class="absolute inset-0 flex items-center justify-center text-slate-500 flex-col">
+                            <span class="material-symbols-outlined text-5xl mb-2 text-slate-400">map</span>
+                            <p class="font-bold">Interactive Google Map API Integration</p>
+                            <p class="text-xs">Location pointer explicitly marked</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Air Travel & Flights -->
+    {% if airports is not empty %}
+        <section class="py-20 bg-slate-50">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg">
+                        <span class="material-symbols-outlined">flight_takeoff</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-primary">Air Travel & Connectivity</h2>
+                </div>
+                
+                <p class="text-slate-600 mb-10 max-w-3xl text-lg">Multiple options are available to reach Ribeirão Preto. Choose the airport that best fits your international or domestic flight schedule.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {% for airport in airports %}
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow flex flex-col justify-between h-full hover-effect group" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 3) * 100 }}">
+                            <div>
+                                <div class="overflow-hidden h-48">
+                                    {% if airport.image and airport.image.imageName %}
+                                        <img src="{{ asset('uploads/' ~ airport.image.imageName) }}" alt="{{ airport.name }}" class="w-full h-full object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-500">
+                                    {% else %}
+                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/flights.jpg') }}" alt="{{ airport.name }}" class="w-full h-full object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-500">
+                                    {% endif %}
+                                </div>
+                                <div class="p-6">
+                                    <span class="text-xs font-bold text-secondary uppercase tracking-wider mb-2 block">{{ airport.code }} Hub</span>
+                                    <h3 class="text-xl font-bold text-primary mb-3">{{ airport.name }}</h3>
+                                    <p class="text-sm text-slate-600 mb-4">{{ airport.description }}</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0">
+                                <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-100 pt-4">
+                                    <li><strong class="text-slate-700">Distance:</strong> {{ airport.distance }}</li>
+                                    <li><strong class="text-slate-700">Transport:</strong> {{ airport.transport }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Partner Hotels -->
+    {% if hotels is not empty %}
+        <section class="py-20 bg-white border-y border-slate-200">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg">
+                        <span class="material-symbols-outlined">bed</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-primary">Official Hotel Partners</h2>
+                </div>
+                
+                <p class="text-slate-600 mb-10 max-w-3xl text-lg">We have negotiated exclusive rate discounts with premium hospitality partners to guarantee comfort and logistical ease for all participants.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for hotel in hotels %}
+                        <div class="bg-white rounded-xl border border-slate-100 card-shadow hover-effect group flex flex-col justify-between h-full" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 4) * 100 }}">
+                            <div>
+                                <div class="relative h-40 overflow-hidden rounded-t-xl">
+                                    {% if hotel.image and hotel.image.imageName %}
+                                        <img src="{{ asset('uploads/' ~ hotel.image.imageName) }}" alt="{{ hotel.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    {% else %}
+                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/hotels.jpg') }}" alt="{{ hotel.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    {% endif %}
+                                </div>
+                                <div class="p-5">
+                                    <h3 class="font-bold text-primary mb-1">{{ hotel.name }}</h3>
+                                    <div class="flex text-amber-400 text-sm mb-3">
+                                        {% if hotel.stars > 0 %}
+                                            {% for i in 1..hotel.stars %}
+                                                <span class="material-symbols-outlined text-sm">star</span>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <p class="text-xs text-slate-500 mb-4">{{ hotel.description }}</p>
+                                </div>
+                            </div>
+                            <div class="p-5 pt-0">
+                                <div class="bg-slate-50 p-2 rounded text-center border border-slate-100">
+                                    {% if hotel.bookingLink %}
+                                        <span class="text-xs text-slate-400 block mb-1">Booking Link:</span>
+                                        <a href="{{ hotel.bookingLink }}" target="_blank" class="text-secondary font-bold text-xs hover:underline">Click Here</a>
+                                    {% elseif hotel.bookingCode %}
+                                        <span class="text-xs text-slate-400 block mb-1">Booking Code:</span>
+                                        <strong class="text-secondary font-mono">{{ hotel.bookingCode }}</strong>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Culinary & Dining -->
+    {% if restaurants is not empty %}
+        <section class="py-20 bg-slate-50">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg">
+                        <span class="material-symbols-outlined">restaurant</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-primary">Dining & Culture</h2>
+                </div>
+                
+                <p class="text-slate-600 mb-10 max-w-3xl text-lg">Experience the vibrant "Capital of Agribusiness" culinary scene. From casual networking to executive fine dining.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {% for rest in restaurants %}
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow group flex flex-col justify-between h-full hover-effect" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 3) * 100 }}">
+                            <div>
+                                <div class="overflow-hidden h-56">
+                                    {% if rest.image and rest.image.imageName %}
+                                        <img src="{{ asset('uploads/' ~ rest.image.imageName) }}" alt="{{ rest.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    {% else %}
+                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/restaurants.jpg') }}" alt="{{ rest.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    {% endif %}
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="text-xl font-bold text-primary">{{ rest.name }}</h3>
+                                        <span class="bg-slate-100 text-slate-500 text-xs px-2 py-1 rounded font-bold">{{ rest.priceRange }}</span>
+                                    </div>
+                                    <p class="text-sm font-semibold text-secondary mb-2">{{ rest.category }}</p>
+                                    <p class="text-slate-600 text-sm mb-4">{{ rest.description }}</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0">
+                                {% if rest.locationUrl %}
+                                    <a href="{{ rest.locationUrl }}" target="_blank" class="text-primary hover:text-secondary font-bold text-sm flex items-center gap-1 transition-colors">
+                                        Location <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

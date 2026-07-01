@@ -1,0 +1,110 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            <i class="fa-solid fa-rectangle-list admin-page-title-icon" aria-hidden="true"></i>
+            Congressistas/Palestrantes        </h1>
+        <p class="page-subtitle"></p>
+    </div>
+    <div>
+        <a href="{{ path('app_admin_speaker_new') }}" class="btn-primary">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            Adicionar
+        </a>
+    </div>
+</div>
+
+<div class="admin-card">
+    
+    <table class="admin-table">
+        <thead>
+            <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>Foto</th>
+                                    <th>Nome</th>
+                                    <th>Instituição / Departamento</th>
+                                    <th>Áreas de Pesquisa</th>
+                                    <th>Destaque?</th>
+                                <th></th>
+            </tr>
+        </thead>
+        <tbody id="speaker-sortable">
+            {% for speaker in speakers %}
+                <tr class="sortable-row" data-id="{{ speaker.id }}">
+                                                                    <td class="admin-table-grip-td"><i class="fa-solid fa-grip-vertical admin-table-grip-icon" aria-hidden="true"></i></td>
+                                                                    <td>{{ speaker.id }}</td>
+                                                                    <td>
+                                                                        {% if speaker.image and speaker.image.imageName %}
+                                                                            <img src="{{ asset('uploads/' ~ speaker.image.imageName) }}" alt="{{ speaker.name }}" class="admin-table-thumb-round">
+                                                                        {% else %}
+                                                                            <span style="font-size: 11px; opacity: 0.6;">-</span>
+                                                                        {% endif %}
+                                                                    </td>
+                                                                                            <td>{{ speaker.name }}</td>
+                                                                                            <td>
+                                                                                                <div class="font-semibold">{{ speaker.institution }}</div>
+                                                                                                {% if speaker.department %}
+                                                                                                    <div class="text-xs text-slate-500">{{ speaker.department }}</div>
+                                                                                                {% endif %}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {% if speaker.researchAreas is not empty %}
+                                                                                                    {% for area in speaker.researchAreas %}
+                                                                                                        <span class="badge badge-neutral mb-1">{{ area }}</span>
+                                                                                                    {% endfor %}
+                                                                                                {% else %}
+                                                                                                    <span class="text-xs opacity-50">-</span>
+                                                                                                {% endif %}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {% if speaker.isFeatured %}
+                                                                                                    <span class="badge badge-success">Sim</span>
+                                                                                                {% else %}
+                                                                                                    <span class="badge badge-neutral">Não</span>
+                                                                                                {% endif %}
+                                                                                            </td>
+                                                                 <td><a href="{{ path('app_admin_speaker_edit', {'id': speaker.id}) }}" class="btn-secondary" aria-label="Editar {{ speaker.name }}" title="Editar {{ speaker.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Nenhum registro</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <script>
+        {% if speakers is not empty %}
+            $(document).ready(function () {
+            $('.admin-table').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json',
+                },
+                ordering: false,
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, -1], [5, 10, 25, 'Todos']],
+            });
+        {% endif %}
+    });
+    </script>
+    {{ include('admin/_sortable_script.html.twig', {
+        tbody_id: 'speaker-sortable',
+        reorder_url: path('app_admin_reorder', { entityName: 'Speaker' })
+    }) }}
+{% endblock %}
