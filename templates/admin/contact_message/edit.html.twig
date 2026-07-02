@@ -10,7 +10,7 @@
         </div>
         <a href="{{ path('app_admin_contact_message_index') }}" class="btn-secondary">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            Voltar à listagem
+            Voltar
         </a>
     </div>
         
@@ -18,9 +18,9 @@
     
     <form method="post" action="{{ path('app_admin_contact_message_delete', {'id': contact_message.id}) }}" onsubmit="return confirm('Tem certeza de que quer apagar este registro?');" class="text-right mt-6">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contact_message.id) }}">
-            <button type="submit" class="btn-danger" id="submit-btn">
-                <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-                Apagar registro
+            <button type="submit" class="btn-danger">
+                <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                Excluir
             </button>
         </form>
 {% endblock %}

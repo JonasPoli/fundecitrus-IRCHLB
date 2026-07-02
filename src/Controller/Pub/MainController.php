@@ -3,6 +3,7 @@
 namespace App\Controller\Pub;
 
 use App\Entity\ContactMessage;
+use App\Entity\NewsletterRequest;
 use App\Entity\SponsorshipInquiry;
 use App\Repository\AirportGuideRepository;
 use App\Repository\AgendaActivityRepository;
@@ -125,6 +126,26 @@ final class MainController extends AbstractController
         }
 
         return $this->redirectToRoute('app_patrocinadores');
+    }
+
+    #[Route('/newsletter/subscribe', name: 'app_newsletter_subscribe', methods: ['POST'])]
+    public function newsletterSubscribe(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $email = $request->request->get('email');
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $newsletterRequest = new NewsletterRequest();
+            $newsletterRequest->setEmail($email);
+
+            $entityManager->persist($newsletterRequest);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Thank you for subscribing to our newsletter!');
+        } else {
+            $this->addFlash('error', 'Please fill in a valid email address.');
+        }
+
+        $referer = $request->headers->get('referer');
+        return $referer ? $this->redirect($referer) : $this->redirectToRoute('app_home');
     }
 
     #[Route('/inscricoes', name: 'app_inscricoes')]

@@ -2,9 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
 use App\Entity\Sponsor;
 use App\Entity\SponsorshipTier;
+use App\Form\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\AbstractType;
@@ -27,10 +27,9 @@ class SponsorType extends AbstractType
             ->add('isExhibitor', null, [
                 'label' => 'É Expositor?'])
             ->add('position', HiddenType::class)
-            ->add('logo', EntityType::class, [
-                'class' => Image::class,
-                'choice_label' => 'id',
+            ->add('logo', ImageType::class, [
                 'label' => 'Logotipo (Imagem)',
+                'required' => false,
             ])
             ->add('tier', EntityType::class, [
                 'class' => SponsorshipTier::class,

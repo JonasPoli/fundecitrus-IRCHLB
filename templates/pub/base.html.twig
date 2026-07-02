@@ -55,7 +55,7 @@
                 <a href="{{ path('app_contato') }}" class="transition-colors hover:text-secondary {{ route == 'app_contato' ? 'text-secondary' : '' }}">Contact</a>
             </nav>
             
-            <button class="lg:hidden text-white hover:text-secondary focus:outline-none" aria-label="Toggle Menu">
+            <button id="mobile-menu-open" class="lg:hidden text-white hover:text-secondary focus:outline-none active:scale-95 transition-transform" aria-label="Open Menu">
                 <span class="material-symbols-outlined text-3xl">menu</span>
             </button>
         </div>
@@ -114,8 +114,8 @@
             <div>
                 <h4 class="text-lg font-bold text-white mb-4">Newsletter</h4>
                 <p class="text-sm mb-4">Stay updated on the latest conference news.</p>
-                <form action="javascript:void(0);" class="flex" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
-                    <input type="email" placeholder="Your e-mail address"
+                <form action="{{ path('app_newsletter_subscribe') }}" method="POST" class="flex">
+                    <input type="email" name="email" placeholder="Your e-mail address"
                         class="w-full px-3 py-2 rounded-l-md text-slate-900 focus:outline-none" required>
                     <button type="submit"
                         class="bg-secondary text-primary font-bold px-4 py-2 rounded-r-md hover:brightness-110 transition-all flex items-center justify-center" aria-label="Subscribe">
@@ -132,23 +132,82 @@
         </div>
     </footer>
 
+    {# Mobile Menu Drawer & Backdrop Overlay #}
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div id="mobile-menu-drawer" class="fixed right-0 top-0 bottom-0 w-[85%] max-w-[320px] bg-gradient-to-b from-primary to-slate-950 text-white p-5 shadow-2xl flex flex-col justify-between translate-x-full transition-all duration-300 ease-in-out">
+            <div>
+                <div class="flex justify-between items-center mb-5">
+                    <a href="{{ path('app_home') }}">
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/logo.png') }}" alt="IRCHLB 2027" class="h-9 w-auto">
+                    </a>
+                    <button id="mobile-menu-close" class="text-white hover:text-secondary focus:outline-none p-1 transition-transform duration-200 active:scale-95" aria-label="Close Menu">
+                        <span class="material-symbols-outlined text-2xl">close</span>
+                    </button>
+                </div>
+                
+                <nav class="flex flex-col space-y-1.5">
+                    {% set links = [
+                        {'route': 'app_home', 'label': 'Home', 'icon': 'home'},
+                        {'route': 'app_sobre', 'label': 'About', 'icon': 'info'},
+                        {'route': 'app_inscricoes', 'label': 'Registration', 'icon': 'local_activity'},
+                        {'route': 'app_submissao', 'label': 'Call for Papers', 'icon': 'description'},
+                        {'route': 'app_programa', 'label': 'Program', 'icon': 'calendar_month'},
+                        {'route': 'app_palestrantes', 'label': 'Speakers', 'icon': 'groups'},
+                        {'route': 'app_patrocinadores', 'label': 'Sponsors', 'icon': 'workspace_premium'},
+                        {'route': 'app_local', 'label': 'Venue', 'icon': 'location_on'},
+                        {'route': 'app_contato', 'label': 'Contact', 'icon': 'mail'}
+                    ] %}
+
+                    {% for item in links %}
+                        {% set isActive = (item.route == 'app_palestrantes' and route in ['app_palestrantes', 'app_palestrante_detalhe']) or (item.route == route) %}
+                        <a href="{{ path(item.route) }}" 
+                           class="flex items-center space-x-3.5 py-1.5 px-3 rounded-lg text-sm font-semibold tracking-wide transition-all duration-300 {% if isActive %}bg-secondary text-primary shadow-md translate-x-1{% else %}text-slate-100 hover:bg-white/5 hover:text-white hover:translate-x-1{% endif %}">
+                            <span class="material-symbols-outlined text-xl {% if isActive %}text-primary{% else %}text-secondary{% endif %}">{{ item.icon }}</span>
+                            <span>{{ item.label }}</span>
+                        </a>
+                    {% endfor %}
+                </nav>
+            </div>
+            
+            <div class="border-t border-white/10 pt-4 mt-6">
+                <p class="text-[10px] text-slate-400 mb-3 text-center">VIII International Research Conference on Huanglongbing</p>
+                <a href="{{ path('app_inscricoes') }}" class="w-full flex justify-center items-center py-2 bg-secondary text-primary text-xs font-extrabold rounded-lg shadow-lg hover:brightness-110 active:scale-95 transition-all text-center">
+                    <span class="material-symbols-outlined mr-2 text-lg">local_activity</span>
+                    Register Now
+                </a>
+            </div>
+        </div>
+    </div>
+
     {# Mobile Menu Toggle Script #}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const menuBtn = document.querySelector('header button');
-            const nav = document.querySelector('header nav');
+            const openBtn = document.getElementById('mobile-menu-open');
+            const closeBtn = document.getElementById('mobile-menu-close');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const drawer = document.getElementById('mobile-menu-drawer');
 
-            if (menuBtn && nav) {
-                menuBtn.addEventListener('click', () => {
-                    nav.classList.toggle('hidden');
-                    nav.classList.toggle('flex');
-                    nav.classList.toggle('flex-col');
-                    nav.classList.toggle('absolute');
-                    nav.classList.toggle('top-16');
-                    nav.classList.toggle('left-0');
-                    nav.classList.toggle('w-full');
-                    nav.classList.toggle('bg-primary');
-                    nav.classList.toggle('p-6');
+            if (openBtn && overlay && drawer) {
+                const openMenu = () => {
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    overlay.classList.add('opacity-100', 'pointer-events-auto');
+                    drawer.classList.remove('translate-x-full');
+                    drawer.classList.add('translate-x-0');
+                    document.body.style.overflow = 'hidden';
+                };
+
+                const closeMenu = () => {
+                    overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                    overlay.classList.add('opacity-0', 'pointer-events-none');
+                    drawer.classList.remove('translate-x-0');
+                    drawer.classList.add('translate-x-full');
+                    document.body.style.overflow = '';
+                };
+
+                openBtn.addEventListener('click', openMenu);
+                if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) closeMenu();
                 });
             }
         });

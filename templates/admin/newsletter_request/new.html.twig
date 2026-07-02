@@ -1,0 +1,20 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">
+                <i class="fa-solid fa-paper-plane" style="margin-right:8px;color:var(--bm-accent)" aria-hidden="true"></i>
+                Newsletter
+            </h1>
+            <p class="page-subtitle">Criar inscrição manual</p>
+        </div>
+        <a href="{{ path('admin_newsletter_request_index') }}" class="btn-secondary">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Voltar
+        </a>
+    </div>
+        
+    {{ include('admin/newsletter_request/_form.html.twig') }}
+
+{% endblock %}

@@ -17,7 +17,7 @@ class Sponsor
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(targetEntity: Image::class)]
+    #[ORM\ManyToOne(targetEntity: Image::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Image $logo = null;
 

@@ -18,7 +18,7 @@ class ImageType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Marque para excluir a imagem atual',
                 'download_uri' => false,
-                'image_uri' => false,
+                'image_uri' => true,
                 'asset_helper' => true,
                 'label' => 'Arquivo de Imagem',
             ])

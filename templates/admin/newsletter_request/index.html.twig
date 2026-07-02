@@ -1,0 +1,83 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            <i class="fa-solid fa-paper-plane" style="margin-right:8px;color:var(--bm-accent)" aria-hidden="true"></i>
+            Newsletter
+        </h1>
+        <p class="page-subtitle">Solicitações de inscrição de e-mail na newsletter</p>
+    </div>
+    <div class="flex gap-2">
+        <a href="{{ path('admin_newsletter_request_export') }}" class="btn-secondary">
+            <i class="fa-solid fa-file-csv" aria-hidden="true"></i>
+            Exportar CSV
+        </a>
+        <a href="{{ path('admin_newsletter_request_new') }}" class="btn-primary">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            Adicionar
+        </a>
+    </div>
+</div>
+
+<div class="admin-card">
+    
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>E-mail</th>
+                <th>Data de Solicitação</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for newsletter_request in newsletter_requests %}
+                <tr>
+                    <td>{{ newsletter_request.id }}</td>
+                    <td class="font-medium">{{ newsletter_request.email }}</td>
+                    <td>{{ newsletter_request.createdAt ? newsletter_request.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('admin_newsletter_request_edit', {'id': newsletter_request.id}) }}" class="btn-secondary" aria-label="Editar {{ newsletter_request.email }}" title="Editar {{ newsletter_request.email }}">
+                            <i class="fa-solid fa-pen" aria-hidden="true"></i>
+                            Editar
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum registro</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <script>
+        {% if newsletter_requests is not empty %}
+            $(document).ready(function () {
+                $('.admin-table').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json',
+                    },
+                    pageLength: 10,
+                    lengthMenu: [[5, 10, 25, -1], [5, 10, 25, 'Todos']],
+                    order: [[0, 'desc']],
+                });
+            });
+        {% endif %}
+    </script>
+{% endblock %}

@@ -18,21 +18,87 @@
     {% if days is not empty %}
         <section class="py-12 bg-white sticky top-[72px] z-40 border-b border-slate-200 shadow-sm">
             <div class="container mx-auto px-6">
-                <div class="flex overflow-x-auto hide-scroll-bar gap-4 p-2 justify-start md:justify-center" data-aos="fade-down">
-                    {% for day in days %}
-                        {% if active_day and active_day.id == day.id %}
-                            <a href="{{ path('app_programa', {'day': day.id}) }}" class="bg-primary text-white px-8 py-3 rounded-full font-bold whitespace-nowrap card-shadow">
-                                {{ day.title }} ({{ day.date ? day.date|date('M d, Y') : '' }})
-                            </a>
-                        {% else %}
-                            <a href="{{ path('app_programa', {'day': day.id}) }}" class="bg-slate-100 text-slate-600 hover:bg-slate-200 px-8 py-3 rounded-full font-bold whitespace-nowrap transition-colors">
-                                {{ day.title }} ({{ day.date ? day.date|date('M d, Y') : '' }})
-                            </a>
-                        {% endif %}
-                    {% endfor %}
+                <!-- Relative wrapper for horizontal scroll indicators -->
+                <div class="relative w-full overflow-hidden" id="days-nav-wrapper">
+                    <!-- Left indicator: faded gradient + chevron. Hidden initially. -->
+                    <div id="scroll-left-indicator" class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-10 flex items-center justify-start opacity-0 transition-opacity duration-300">
+                        <span class="material-symbols-outlined text-primary font-extrabold ml-1 bg-white/90 p-1.5 rounded-full shadow-md">chevron_left</span>
+                    </div>
+
+                    <!-- Scrollable container -->
+                    <div id="days-nav-container" class="flex overflow-x-auto hide-scroll-bar gap-4 p-2 justify-start md:justify-center scroll-smooth scrollbar-none" data-aos="fade-down">
+                        {% for day in days %}
+                            {% if active_day and active_day.id == day.id %}
+                                <a href="{{ path('app_programa', {'day': day.id}) }}" class="bg-primary text-white px-8 py-3 rounded-full font-bold whitespace-nowrap card-shadow">
+                                    {{ day.title }} ({{ day.date ? day.date|date('M d, Y') : '' }})
+                                </a>
+                            {% else %}
+                                <a href="{{ path('app_programa', {'day': day.id}) }}" class="bg-slate-100 text-slate-600 hover:bg-slate-200 px-8 py-3 rounded-full font-bold whitespace-nowrap transition-colors">
+                                    {{ day.title }} ({{ day.date ? day.date|date('M d, Y') : '' }})
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Right indicator: faded gradient + chevron. Visible initially (pulsating). -->
+                    <div id="scroll-right-indicator" class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-10 flex items-center justify-end opacity-0 transition-opacity duration-300">
+                        <span class="material-symbols-outlined text-primary font-extrabold mr-1 bg-white/90 p-1.5 rounded-full shadow-md animate-pulse">chevron_right</span>
+                    </div>
                 </div>
             </div>
         </section>
+
+        {# Scroll Indicators Controller Script #}
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const container = document.getElementById('days-nav-container');
+                const leftInd = document.getElementById('scroll-left-indicator');
+                const rightInd = document.getElementById('scroll-right-indicator');
+
+                if (container && leftInd && rightInd) {
+                    const updateIndicators = () => {
+                        const scrollLeft = container.scrollLeft;
+                        const maxScroll = container.scrollWidth - container.clientWidth;
+
+                        // Left indicator visibility
+                        if (scrollLeft > 10) {
+                            leftInd.classList.remove('opacity-0');
+                            leftInd.classList.add('opacity-100');
+                        } else {
+                            leftInd.classList.remove('opacity-100');
+                            leftInd.classList.add('opacity-0');
+                        }
+
+                        // Right indicator visibility (only if there is actually content to scroll)
+                        if (maxScroll > 10 && (maxScroll - scrollLeft > 10)) {
+                            rightInd.classList.remove('opacity-0');
+                            rightInd.classList.add('opacity-100');
+                        } else {
+                            rightInd.classList.remove('opacity-100');
+                            rightInd.classList.add('opacity-0');
+                        }
+                    };
+
+                    container.addEventListener('scroll', updateIndicators);
+                    
+                    // Initial check and check after load
+                    updateIndicators();
+                    window.addEventListener('resize', updateIndicators);
+                    
+                    // Scroll to the active button on load so it's visible
+                    const activeBtn = container.querySelector('.bg-primary');
+                    if (activeBtn) {
+                        const containerWidth = container.clientWidth;
+                        const btnLeft = activeBtn.offsetLeft;
+                        const btnWidth = activeBtn.clientWidth;
+                        container.scrollLeft = btnLeft - (containerWidth / 2) + (btnWidth / 2);
+                    }
+                    
+                    // Recheck position after scrolling active button into view
+                    setTimeout(updateIndicators, 100);
+                }
+            });
+        </script>
     {% endif %}
 
     <!-- Agenda Body -->
