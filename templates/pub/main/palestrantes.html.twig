@@ -3,7 +3,7 @@
 {% block body %}
     <section class="bg-slate-900 text-white py-16 relative overflow-hidden border-b-8 border-secondary">
         {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
-            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
         {% else %}
             <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
         {% endif %}
@@ -24,10 +24,10 @@
                             <div>
                                 <div class="relative overflow-hidden">
                                     {% if speaker.image and speaker.image.imageName %}
-                                        <img src="{{ asset('uploads/' ~ speaker.image.imageName) }}" alt="{{ speaker.name }}"
+                                        <img src="{{ ('uploads/' ~ speaker.image.imageName)|imagine_filter('avatar') }}" alt="{{ speaker.name }}" width="400" height="400" loading="{{ loop.index <= 4 ? 'eager' : 'lazy' }}"
                                             class="w-full h-80 object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-700">
                                     {% else %}
-                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/avatar-placeholder.jpg') }}" alt="{{ speaker.name }}"
+                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/avatar-placeholder.jpg') }}" alt="{{ speaker.name }}" width="400" height="400" loading="{{ loop.index <= 4 ? 'eager' : 'lazy' }}"
                                             class="w-full h-80 object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-700">
                                     {% endif %}
                                     <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
@@ -78,4 +78,13 @@
             {% endif %}
         </div>
     </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {# Preload the LCP Banner Image #}
+    {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+        <link rel="preload" as="image" href="{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}" />
+    {% else %}
+        <link rel="preload" as="image" href="{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}" />
+    {% endif %}
 {% endblock %}

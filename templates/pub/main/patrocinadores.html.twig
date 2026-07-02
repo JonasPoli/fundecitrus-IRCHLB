@@ -3,7 +3,7 @@
 {% block body %}
     <section class="bg-slate-900 text-white py-16 relative overflow-hidden border-b-8 border-secondary">
         {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
-            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
         {% else %}
             <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
         {% endif %}
@@ -34,7 +34,7 @@
                                        data-aos="fade-up"
                                        data-aos-delay="{{ (loop.index0 % 3) * 200 }}">
                                         {% if sponsor.logo and sponsor.logo.imageName %}
-                                            <img src="{{ asset('uploads/' ~ sponsor.logo.imageName) }}" alt="{{ sponsor.name }}" 
+                                            <img src="{{ ('uploads/' ~ sponsor.logo.imageName)|imagine_filter('sponsor_logo') }}" alt="{{ sponsor.name }}" width="250" height="120" loading="lazy"
                                                  class="max-w-full max-h-full opacity-70 group-hover:opacity-100 transition-opacity filter grayscale group-hover:grayscale-0">
                                         {% else %}
                                             <span class="font-bold text-primary">{{ sponsor.name }}</span>
@@ -115,4 +115,13 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {# Preload the LCP Banner Image #}
+    {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+        <link rel="preload" as="image" href="{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}" />
+    {% else %}
+        <link rel="preload" as="image" href="{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}" />
+    {% endif %}
 {% endblock %}

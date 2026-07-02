@@ -16,3 +16,28 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [400, 500], mode: inset }
+        avatar:
+            quality: 80
+            format: webp
+            filters:
+                thumbnail: { size: [256, 256], mode: outbound, allow_upscale: true }
+        avatar_mini:
+            quality: 75
+            format: webp
+            filters:
+                thumbnail: { size: [80, 80], mode: outbound, allow_upscale: true }
+        sponsor_logo:
+            quality: 85
+            format: webp
+            filters:
+                thumbnail: { size: [250, 120], mode: inset }
+        banner_hero:
+            quality: 80
+            format: webp
+            filters:
+                thumbnail: { size: [1600, 700], mode: outbound }
+        card_image:
+            quality: 80
+            format: webp
+            filters:
+                thumbnail: { size: [600, 314], mode: outbound }

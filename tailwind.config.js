@@ -16,22 +16,36 @@ module.exports = {
         },
         extend: {
             colors: {
-                // ── Brand Primary ─────────────────────────────────
+                // ── Brand Primary (Fundecitrus Green) ──────────────
                 'primary': {
-                    DEFAULT: '#0769a1',
-                    light:   '#1679b1',
-                    dark:    '#055a87',
-                    50:  '#eff7ff',
-                    100: '#dbeffe',
-                    200: '#bfe3fd',
-                    300: '#93d0fc',
-                    400: '#60b5f8',
-                    500: '#3b96f3',
-                    600: '#2578e7',
-                    700: '#1d62d4',
-                    800: '#1e4fab',
-                    900: '#1e4487',
+                    DEFAULT: '#014040',
+                    light:   '#025e5e',
+                    dark:    '#002626',
+                    50:  '#f0f7f7',
+                    100: '#dbebeb',
+                    200: '#bcd7d7',
+                    300: '#92bcbc',
+                    400: '#5f9999',
+                    500: '#014040',
+                    600: '#013636',
+                    700: '#012b2b',
+                    800: '#012020',
+                    900: '#001818',
                 },
+
+                // ── Brand Secondary (Fundecitrus Lime Green) ────────
+                'secondary': {
+                    DEFAULT: '#B9D04A',
+                    light:   '#cbe05c',
+                    dark:    '#a3b83b',
+                    50:  '#f9fceb',
+                    100: '#f1f8cc',
+                    200: '#e3f09d',
+                    300: '#cfe462',
+                    400: '#B9D04A',
+                    500: '#a3b83b',
+                },
+
 
                 // ── Semantic Colors ───────────────────────────────
                 'success': {

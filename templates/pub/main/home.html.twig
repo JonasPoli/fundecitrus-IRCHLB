@@ -10,7 +10,7 @@
                     {% for banner in banners %}
                         <div class="swiper-slide relative flex items-center py-32 lg:py-48 bg-cover bg-center">
                             {% if banner.image and banner.image.imageName %}
-                                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ banner.image.imageName) }}'); background-color: #004040;"></div>
+                                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ banner.image.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
                             {% else %}
                                 <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
                             {% endif %}
@@ -72,7 +72,7 @@
             {% set banner = banners[0] %}
             <section class="relative bg-slate-900 text-white py-32 lg:py-48 overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center">
                 {% if banner.image and banner.image.imageName %}
-                    <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ banner.image.imageName) }}'); background-color: #004040;"></div>
+                    <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ banner.image.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
                 {% else %}
                     <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
                 {% endif %}
@@ -126,7 +126,7 @@
         {# Fallback Banner - Event Config #}
         <section class="relative bg-slate-900 text-white py-32 lg:py-48 overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center">
             {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
-                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('uploads/' ~ event_config.heroImage.imageName) }}'); background-color: #004040;"></div>
+                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
             {% else %}
                 <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
             {% endif %}
@@ -182,7 +182,7 @@
                 <!-- Flights Card -->
                 <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="400">
                     <div class="h-56 bg-slate-200 relative overflow-hidden">
-                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/flights.jpg') }}" alt="Flights"
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/flights.jpg') }}" alt="Flights" width="1200" height="627" loading="lazy"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Flights</h3>
@@ -195,7 +195,7 @@
                 <!-- Partner Hotels Card -->
                 <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="600">
                     <div class="h-56 bg-slate-200 relative overflow-hidden">
-                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/hotels.jpg') }}" alt="Hotels"
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/hotels.jpg') }}" alt="Hotels" width="1200" height="627" loading="lazy"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Partner Hotels</h3>
@@ -208,7 +208,7 @@
                 <!-- Restaurants Card -->
                 <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="800">
                     <div class="h-56 bg-slate-200 relative overflow-hidden">
-                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/restaurants.jpg') }}" alt="Restaurants"
+                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/restaurants.jpg') }}" alt="Restaurants" width="1200" height="627" loading="lazy"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Dining</h3>
@@ -230,7 +230,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'" />
     <style>
         .hero-swiper .swiper-pagination-bullet-active {
             background: #b9d04a !important;
@@ -240,10 +240,25 @@
             font-size: 24px;
         }
     </style>
+    {# Preload the LCP Banner Image #}
+    {% if banners is not empty %}
+        {% set first_banner = banners|first %}
+        {% if first_banner.image and first_banner.image.imageName %}
+            <link rel="preload" as="image" href="{{ ('uploads/' ~ first_banner.image.imageName)|imagine_filter('banner_hero') }}" />
+        {% else %}
+            <link rel="preload" as="image" href="{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}" />
+        {% endif %}
+    {% else %}
+        {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
+            <link rel="preload" as="image" href="{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}" />
+        {% else %}
+            <link rel="preload" as="image" href="{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}" />
+        {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (document.querySelector('.hero-swiper')) {
