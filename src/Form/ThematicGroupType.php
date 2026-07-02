@@ -13,13 +13,14 @@ class ThematicGroupType extends AbstractType
     {
         $builder
             ->add('title', null, [
-                'label' => 'Title'])
+                'label' => 'Título'])
             ->add('description', null, [
-                'label' => 'Description'])
+                'label' => 'Descrição'])
             ->add('eventDate', null, [
-                'label' => 'Timeline Event Date',
+                'label' => 'Data do Evento',
                 'widget' => 'single_text',
             ])
+
         ;
     }
 

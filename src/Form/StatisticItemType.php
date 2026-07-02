@@ -14,12 +14,13 @@ class StatisticItemType extends AbstractType
     {
         $builder
             ->add('label', null, [
-                'label' => 'Label / Description'])
+                'label' => 'Rótulo / Descrição'])
             ->add('value', null, [
-                'label' => 'Value (e.g. 500+, 25+)'])
+                'label' => 'Valor (Ex: 500+, 25+)'])
             ->add('position', HiddenType::class)
             ->add('isActive', null, [
-                'label' => 'Is Active?'])
+                'label' => 'Está Ativo?'])
+
         ;
     }
 

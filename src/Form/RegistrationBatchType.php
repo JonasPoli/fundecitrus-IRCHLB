@@ -14,18 +14,19 @@ class RegistrationBatchType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Batch Name (e.g. 1st Batch)'])
+                'label' => 'Nome do Lote (Ex: 1º Lote)'])
             ->add('startDate', null, [
-                'label' => 'Start Date',
+                'label' => 'Data de Início',
                 'widget' => 'single_text',
             ])
             ->add('endDate', null, [
-                'label' => 'End Date / Deadline',
+                'label' => 'Data de Término / Prazo',
                 'widget' => 'single_text',
             ])
             ->add('position', HiddenType::class)
             ->add('price', null, [
-                'label' => 'Price / Value'])
+                'label' => 'Preço / Valor'])
+
         ;
     }
 

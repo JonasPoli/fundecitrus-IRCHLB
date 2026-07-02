@@ -16,17 +16,18 @@ class FaqItemType extends AbstractType
     {
         $builder
             ->add('question', null, [
-                'label' => 'Question'])
+                'label' => 'Pergunta'])
             ->add('answer', null, [
-                'label' => 'Answer'])
+                'label' => 'Resposta'])
             ->add('position', HiddenType::class)
             ->add('isActive', null, [
-                'label' => 'Is Active?'])
+                'label' => 'Está Ativo?'])
             ->add('category', EntityType::class, [
                 'class' => FaqCategory::class,
                 'choice_label' => 'name',
-                'label' => 'Category',
+                'label' => 'Categoria de FAQ',
             ])
+
         ;
     }
 

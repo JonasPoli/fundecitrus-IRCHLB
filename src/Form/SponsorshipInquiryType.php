@@ -13,19 +13,20 @@ class SponsorshipInquiryType extends AbstractType
     {
         $builder
             ->add('companyName', null, [
-                'label' => 'Company Name'])
+                'label' => 'Nome da Empresa'])
             ->add('contactPerson', null, [
-                'label' => 'Contact Person Name'])
+                'label' => 'Nome do Contato'])
             ->add('corporateEmail', null, [
-                'label' => 'Corporate E-mail'])
+                'label' => 'E-mail Corporativo'])
             ->add('interestArea', null, [
-                'label' => 'Interest Area (e.g. Quota level)'])
+                'label' => 'Área de Interesse (Cota de Patrocínio)'])
             ->add('createdAt', null, [
-                'label' => 'Inquiry Sent At',
+                'label' => 'Enviado Em',
                 'widget' => 'single_text',
             ])
             ->add('status', null, [
-                'label' => 'Status / Response State'])
+                'label' => 'Status da Resposta'])
+
         ;
     }
 

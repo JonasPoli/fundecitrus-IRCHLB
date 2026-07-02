@@ -13,23 +13,24 @@ class ContactMessageType extends AbstractType
     {
         $builder
             ->add('firstName', null, [
-                'label' => 'First Name'])
+                'label' => 'Nome'])
             ->add('lastName', null, [
-                'label' => 'Last Name'])
+                'label' => 'Sobrenome'])
             ->add('email', null, [
                 'label' => 'E-mail'])
             ->add('subject', null, [
-                'label' => 'Subject'])
+                'label' => 'Assunto'])
             ->add('message', null, [
-                'label' => 'Message'])
+                'label' => 'Mensagem'])
             ->add('consent', null, [
-                'label' => 'Consent to Data Privacy Regulations'])
+                'label' => 'Consentimento com Políticas de Privacidade'])
             ->add('createdAt', null, [
-                'label' => 'Created At',
+                'label' => 'Criado Em',
                 'widget' => 'single_text',
             ])
             ->add('status', null, [
-                'label' => 'Status / Response State'])
+                'label' => 'Status da Resposta'])
+
         ;
     }
 

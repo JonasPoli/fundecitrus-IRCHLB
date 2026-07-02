@@ -17,26 +17,27 @@ class SponsorType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Sponsor Name'])
+                'label' => 'Nome do Patrocinador'])
             ->add('websiteUrl', null, [
-                'label' => 'Website URL'])
+                'label' => 'URL do Site'])
             ->add('description', null, [
-                'label' => 'Description'])
+                'label' => 'Descrição'])
             ->add('standNumber', null, [
-                'label' => 'Stand Number / Area'])
+                'label' => 'Número do Estande / Área'])
             ->add('isExhibitor', null, [
-                'label' => 'Is Exhibitor?'])
+                'label' => 'É Expositor?'])
             ->add('position', HiddenType::class)
             ->add('logo', EntityType::class, [
                 'class' => Image::class,
                 'choice_label' => 'id',
-                'label' => 'Logo Image',
+                'label' => 'Logotipo (Imagem)',
             ])
             ->add('tier', EntityType::class, [
                 'class' => SponsorshipTier::class,
                 'choice_label' => 'name',
-                'label' => 'Sponsorship Tier',
+                'label' => 'Categoria de Patrocínio',
             ])
+
         ;
     }
 
