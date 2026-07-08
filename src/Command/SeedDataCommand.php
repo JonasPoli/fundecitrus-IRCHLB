@@ -24,6 +24,7 @@ use App\Entity\SponsorshipTier;
 use App\Entity\StatisticItem;
 use App\Entity\ThematicGroup;
 use App\Entity\VenueRoom;
+use App\Entity\HomeBanner;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -63,7 +64,7 @@ class SeedDataCommand extends Command
             'sponsor', 'sponsorship_tier', 'agenda_activity_speaker', 'agenda_activity',
             'speaker_paper', 'speaker_agenda', 'speaker', 'venue_room', 'event_day',
             'thematic_group', 'registration_batch', 'committee_member',
-            'page_content', 'statistic_item', 'event_config', 'image'
+            'page_content', 'statistic_item', 'event_config', 'image', 'home_banner'
         ];
         
         foreach ($tables as $table) {
@@ -135,6 +136,25 @@ class SeedDataCommand extends Command
         $eventConfig->setYoutubeUrl('https://www.youtube.com/user/Fundecitrus');
         
         $this->entityManager->persist($eventConfig);
+
+        // 3.1. Injeção de Dados: HomeBanner
+        $io->section('Seeding HomeBanners...');
+        $banner = new HomeBanner();
+        $banner->setEventDate('October 26-29, 2027');
+        $banner->setSubtitle('VIII International Research');
+        $banner->setMainTitle('Conference on Huanglongbing');
+        $banner->setDescription1('Join the global scientific community in Ribeirão Preto, Brazil, to discuss the most rigorous advancements against HLB.');
+        $banner->setDescription('The VIII International Research Conference on Huanglongbing represents the most vital academic and operational convergence point for discussing, mapping, and confronting the HLB citrus disease. Our root conceptual objective is to foster deep collaboration across borders.');
+        $banner->setButton1Text('Register Now');
+        $banner->setButton1Link('/inscricoes');
+        $banner->setButton2Text('Call for Papers');
+        $banner->setButton2Link('/submissao');
+        $banner->setPosition(1);
+        $banner->setIsActive(true);
+        if ($heroImage) {
+            $banner->setImage($heroImage);
+        }
+        $this->entityManager->persist($banner);
 
         // 4. Injeção de Dados: StatisticItem
         $io->section('Seeding StatisticItems...');
