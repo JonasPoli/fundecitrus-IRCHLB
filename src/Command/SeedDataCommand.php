@@ -76,7 +76,7 @@ class SeedDataCommand extends Command
         $io->success('Database cleaned successfully!');
 
         // 2. Configurações de Origem e Destino de Mídias
-        $layoutImagesDir = $this->projectDir . '/public/fundecitrus-congresso-layout/assets/images';
+        $layoutImagesDir = $this->projectDir . '/docs/imagens/seed';
         $logosImagesDir = $this->projectDir . '/docs/imagens/logos';
         $uploadDestinationDir = $this->projectDir . '/public/prod';
 
