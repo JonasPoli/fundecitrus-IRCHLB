@@ -64,7 +64,8 @@ class SeedDataCommand extends Command
             'sponsor', 'sponsorship_tier', 'agenda_activity_speaker', 'agenda_activity',
             'speaker_paper', 'speaker_agenda', 'speaker', 'venue_room', 'event_day',
             'thematic_group', 'registration_batch', 'committee_member',
-            'page_content', 'statistic_item', 'event_config', 'image', 'home_banner'
+            'page_content', 'statistic_item', 'event_config', 'image', 'home_banner',
+            'newsletter_request'
         ];
         
         foreach ($tables as $table) {
@@ -78,9 +79,17 @@ class SeedDataCommand extends Command
         // 2. Configurações de Origem e Destino de Mídias
         $layoutImagesDir = $this->projectDir . '/docs/imagens/seed';
         $logosImagesDir = $this->projectDir . '/docs/imagens/logos';
-        $uploadDestinationDir = $this->projectDir . '/public/prod';
+        $uploadDestinationDir = $this->projectDir . '/public/uploads';
 
-        if (!is_dir($uploadDestinationDir)) {
+        // Limpeza dos arquivos físicos de uploads anteriores do seed
+        if (is_dir($uploadDestinationDir)) {
+            $files = glob($uploadDestinationDir . '/*');
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    unlink($file);
+                }
+            }
+        } else {
             mkdir($uploadDestinationDir, 0777, true);
         }
 
