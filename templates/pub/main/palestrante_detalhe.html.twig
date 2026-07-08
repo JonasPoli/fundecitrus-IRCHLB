@@ -7,7 +7,7 @@
         {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
             <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
         {% else %}
-            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.jpg') }}'); background-color: #004040;"></div>
         {% endif %}
         <div class="container mx-auto px-6 relative z-10">
             <nav class="text-sm font-semibold text-slate-300 mb-8" aria-label="Breadcrumb">
@@ -34,7 +34,7 @@
                 {% if speaker.image and speaker.image.imageName %}
                     <img src="{{ ('uploads/' ~ speaker.image.imageName)|imagine_filter('avatar') }}" alt="{{ speaker.name }}" width="400" height="400" loading="eager" class="w-full h-full object-cover min-h-[400px]">
                 {% else %}
-                    <img src="{{ asset('fundecitrus-congresso-layout/assets/images/avatar-placeholder.jpg') }}" alt="{{ speaker.name }}" width="400" height="400" loading="eager" class="w-full h-full object-cover min-h-[400px]">
+                    <img src="{{ asset('images/avatar-placeholder.jpg') }}" alt="{{ speaker.name }}" width="400" height="400" loading="eager" class="w-full h-full object-cover min-h-[400px]">
                 {% endif %}
             </div>
             
@@ -164,7 +164,7 @@
     {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
         <link rel="preload" as="image" href="{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}" />
     {% else %}
-        <link rel="preload" as="image" href="{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}" />
+        <link rel="preload" as="image" href="{{ asset('images/hero-bg.jpg') }}" />
     {% endif %}
     {# Preload the Speaker Profile Photo #}
     {% if speaker.image and speaker.image.imageName %}

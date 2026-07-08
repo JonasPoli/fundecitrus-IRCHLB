@@ -5,7 +5,7 @@
         {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
             <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
         {% else %}
-            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.jpg') }}'); background-color: #004040;"></div>
         {% endif %}
         <div class="container mx-auto px-6 text-center relative z-10">
             <span class="material-symbols-outlined text-secondary text-5xl mb-4">explore</span>
@@ -81,7 +81,7 @@
                                     {% if airport.image and airport.image.imageName %}
                                         <img src="{{ ('uploads/' ~ airport.image.imageName)|imagine_filter('card_image') }}" alt="{{ airport.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-500">
                                     {% else %}
-                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/flights.jpg') }}" alt="{{ airport.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-500">
+                                        <img src="{{ asset('images/flights.jpg') }}" alt="{{ airport.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-500">
                                     {% endif %}
                                 </div>
                                 <div class="p-6">
@@ -124,7 +124,7 @@
                                     {% if hotel.image and hotel.image.imageName %}
                                         <img src="{{ ('uploads/' ~ hotel.image.imageName)|imagine_filter('card_image') }}" alt="{{ hotel.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                     {% else %}
-                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/hotels.jpg') }}" alt="{{ hotel.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                        <img src="{{ asset('images/hotels.jpg') }}" alt="{{ hotel.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                     {% endif %}
                                 </div>
                                 <div class="p-5">
@@ -178,7 +178,7 @@
                                     {% if rest.image and rest.image.imageName %}
                                         <img src="{{ ('uploads/' ~ rest.image.imageName)|imagine_filter('card_image') }}" alt="{{ rest.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     {% else %}
-                                        <img src="{{ asset('fundecitrus-congresso-layout/assets/images/restaurants.jpg') }}" alt="{{ rest.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                        <img src="{{ asset('images/restaurants.jpg') }}" alt="{{ rest.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     {% endif %}
                                 </div>
                                 <div class="p-6">
@@ -210,6 +210,6 @@
     {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
         <link rel="preload" as="image" href="{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}" />
     {% else %}
-        <link rel="preload" as="image" href="{{ asset('fundecitrus-congresso-layout/assets/images/hero-bg.jpg') }}" />
+        <link rel="preload" as="image" href="{{ asset('images/hero-bg.jpg') }}" />
     {% endif %}
 {% endblock %}
