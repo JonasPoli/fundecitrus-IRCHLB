@@ -28,8 +28,9 @@
                             <thead>
                                 <tr class="bg-primary text-white">
                                     <th class="py-4 px-6 font-bold">Registration Batch</th>
-                                    <th class="py-4 px-6 font-bold">Start Date</th>
-                                    <th class="py-4 px-6 font-bold">End Date / Deadline</th>
+                                    <th class="py-4 px-6 font-bold hidden md:table-cell">Start Date</th>
+                                    <th class="py-4 px-6 font-bold hidden md:table-cell">End Date / Deadline</th>
+                                    <th class="py-4 px-6 font-bold md:hidden">Dates / Period</th>
                                     <th class="py-4 px-6 font-bold">Value / Price</th>
                                 </tr>
                             </thead>
@@ -37,8 +38,31 @@
                                 {% for batch in batches %}
                                     <tr class="hover:bg-slate-50 transition-colors">
                                         <td class="py-4 px-6 font-semibold text-primary">{{ batch.name }}</td>
-                                        <td class="py-4 px-6">{{ batch.startDate ? batch.startDate|date('M d, Y') : '' }}</td>
-                                        <td class="py-4 px-6">{{ batch.endDate ? batch.endDate|date('M d, Y') : '' }}</td>
+                                        <td class="py-4 px-6 hidden md:table-cell">{{ batch.startDate ? batch.startDate|date('M d, Y') : '' }}</td>
+                                        <td class="py-4 px-6 hidden md:table-cell">{{ batch.endDate ? batch.endDate|date('M d, Y') : '' }}</td>
+                                        <td class="py-4 px-6 md:hidden">
+                                            {% if batch.startDate and batch.endDate %}
+                                                {% if batch.startDate|date('Y') == batch.endDate|date('Y') %}
+                                                    {% if batch.startDate|date('M') == batch.endDate|date('M') %}
+                                                        {% if batch.startDate|date('d') == batch.endDate|date('d') %}
+                                                            {{ batch.startDate|date('M d, Y') }}
+                                                        {% else %}
+                                                            {{ batch.startDate|date('M d') }}-{{ batch.endDate|date('d, Y') }}
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {{ batch.startDate|date('M d') }} - {{ batch.endDate|date('M d, Y') }}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {{ batch.startDate|date('M d, Y') }} - {{ batch.endDate|date('M d, Y') }}
+                                                {% endif %}
+                                            {% elseif batch.startDate %}
+                                                From {{ batch.startDate|date('M d, Y') }}
+                                            {% elseif batch.endDate %}
+                                                Until {{ batch.endDate|date('M d, Y') }}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
                                         <td class="py-4 px-6 font-bold text-secondary">$ {{ batch.price }}</td>
                                     </tr>
                                 {% endfor %}

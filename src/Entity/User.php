@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -61,15 +60,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTime $updatedAt = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /** Token único para reset de senha (nullable, 1h de validade) */
     #[ORM\Column(length: 100, nullable: true, unique: true)]
     private ?string $resetPasswordToken = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTime $resetPasswordExpiresAt = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $resetPasswordExpiresAt = null;
 
     /**
      * @var Collection<int, ExampleEntity>
@@ -88,13 +87,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function onPrePersist(): void
     {
         $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     #[ORM\PreUpdate]
     public function onPreUpdate(): void
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     // ─── Getters & Setters ──────────────────────────────────────────────────
@@ -205,7 +204,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -229,12 +228,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getResetPasswordExpiresAt(): ?\DateTime
+    public function getResetPasswordExpiresAt(): ?\DateTimeImmutable
     {
         return $this->resetPasswordExpiresAt;
     }
 
-    public function setResetPasswordExpiresAt(?\DateTime $expiresAt): static
+    public function setResetPasswordExpiresAt(?\DateTimeImmutable $expiresAt): static
     {
         $this->resetPasswordExpiresAt = $expiresAt;
         return $this;
@@ -244,7 +243,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->resetPasswordToken !== null
             && $this->resetPasswordExpiresAt !== null
-            && $this->resetPasswordExpiresAt > new \DateTime();
+            && $this->resetPasswordExpiresAt > new \DateTimeImmutable();
     }
 
     /**
