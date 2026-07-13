@@ -104,6 +104,10 @@
             <i class="fa-solid fa-users-gear" aria-hidden="true"></i>
             <span>Comissão</span>
         </a>
+        <a {{nav_item_class('admin_organizer')}} href="{{ path('admin_organizer_index') }}">
+            <i class="fa-solid fa-rectangle-list" aria-hidden="true"></i>
+            <span>Organizadores</span>
+        </a>
 
         <div class="sidebar-section-label">Inscrições & Prazos</div>
         <a {{nav_item_class('app_admin_registration_batch')}} href="{{ path('app_admin_registration_batch_index') }}">

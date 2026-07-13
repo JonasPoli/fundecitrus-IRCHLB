@@ -132,7 +132,7 @@
             {% endif %}
             <div class="container mx-auto px-6 relative z-10 text-center flex flex-col items-center w-full">
                 <span class="bg-secondary text-primary font-bold px-3 py-1 rounded-full text-sm mb-6 uppercase tracking-wider" data-aos="fade-up" data-aos-delay="200">
-                    {{ event_config.eventDates ?? 'October 26-29, 2027' }}
+                    {{ event_config.eventDates ?? 'October 25-29, 2027' }}
                 </span>
                 <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="400">
                     {{ event_config.title ?? 'VIII International Research Conference on Huanglongbing' }}
@@ -227,6 +227,202 @@
             </div>
         </div>
     </section>
+
+    <!-- Conference Overview Section -->
+    <section class="py-24 bg-white border-b border-slate-100" id="section-overview">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6 leading-tight">
+                        Two Conferences.<br>
+                        <span class="text-secondary">One Global Community.</span><br>
+                        One Shared Mission.
+                    </h2>
+                    <h3 class="text-xl font-bold text-slate-700 mb-4">
+                        Advancing science and innovation to protect the future of citrus.
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        Join leading scientists, citrus growers, industry representatives, and plant health professionals from around the world for inspiring discussions, valuable networking opportunities, and meaningful contributions to the advancement of citrus science and sustainable citrus production.
+                    </p>
+                    <div class="border-l-4 border-secondary pl-4 italic text-primary font-bold text-lg mb-8">
+                        "We look forward to welcoming you to Ribeirão Preto!"
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-slate-200 rounded-3xl card-shadow overflow-hidden flex flex-col md:flex-row" data-aos="fade-left">
+                    <!-- Photo Side -->
+                    <div class="md:w-5/12 h-64 md:h-auto relative overflow-hidden bg-slate-100">
+                        <img src="{{ asset('images/venue-hall.webp') }}" alt="Multiplan Hall Interior" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
+                    </div>
+                    
+                    <!-- Text Details Side -->
+                    <div class="md:w-7/12 p-8 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-primary mb-6 pb-2 border-b border-slate-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary">info</span>
+                            Conference Information
+                        </h3>
+                        
+                        <div class="space-y-5">
+                            <!-- XXIV IOCV -->
+                            <div class="flex items-start gap-3.5">
+                                <span class="material-symbols-outlined text-primary mt-0.5">calendar_today</span>
+                                <div>
+                                    <h4 class="font-bold text-primary text-base">XXIV IOCV Conference</h4>
+                                    <p class="text-slate-600 font-semibold text-xs">October 25, 2027</p>
+                                    <a href="{{ path('app_sobre') }}#section-timeline" class="text-[11px] text-secondary font-bold hover:underline mt-0.5 inline-block">View timeline</a>
+                                </div>
+                            </div>
+
+                            <!-- VIII IRCHLB -->
+                            <div class="flex items-start gap-3.5">
+                                <span class="material-symbols-outlined text-primary mt-0.5">calendar_today</span>
+                                <div>
+                                    <h4 class="font-bold text-primary text-base">VIII IRCHLB</h4>
+                                    <p class="text-slate-600 font-semibold text-xs">October 26–29, 2027</p>
+                                    <a href="{{ path('app_sobre') }}#section-timeline" class="text-[11px] text-secondary font-bold hover:underline mt-0.5 inline-block">View timeline</a>
+                                </div>
+                            </div>
+
+                            <!-- Venue -->
+                            <div class="flex items-start gap-3.5">
+                                <span class="material-symbols-outlined text-primary mt-0.5">location_on</span>
+                                <div>
+                                    <h4 class="font-bold text-primary text-base">Venue</h4>
+                                    <p class="text-slate-600 text-xs">
+                                        <strong class="text-slate-800">Multiplan Hall</strong><br>
+                                        Ribeirão Preto, São Paulo, Brazil
+                                    </p>
+                                    <a href="{{ path('app_local') }}#section-venue" class="text-[11px] text-secondary font-bold hover:underline mt-0.5 inline-block">View venue details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calls to Action Section (Registration & Submission) -->
+    <section class="py-16 bg-slate-50 border-b border-slate-100" id="section-cta">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Registration Card -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-8 card-shadow hover-effect flex flex-col justify-between" data-aos="fade-up" data-aos-delay="0">
+                    <div>
+                        <span class="inline-block bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-4">Registration</span>
+                        <h3 class="text-2xl font-bold text-primary mb-3">Join the Event</h3>
+                        <p class="text-slate-600 mb-6 font-medium">Registration opens soon. Secure your place at the leading global forums for citrus research.</p>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_inscricoes') }}" class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
+                            Registration details <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Abstract Submission Card -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-8 card-shadow hover-effect flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <span class="inline-block bg-secondary/25 text-primary font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-4">Call for Papers</span>
+                        <h3 class="text-2xl font-bold text-primary mb-3">Abstract Submission</h3>
+                        <p class="text-slate-600 mb-6 font-medium">Abstract submission opens soon. Share your scientific advancements and research with the global community.</p>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_submissao') }}" class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
+                            Submission guidelines <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Ribeirão Preto Section -->
+    <section class="py-24 bg-white border-b border-slate-100" id="section-ribeirao-preto">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <span class="text-xs font-bold text-secondary uppercase tracking-wider mb-2 block">Host Destination</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6">About Ribeirão Preto</h2>
+                    <p class="text-slate-600 mb-8 text-lg">Known as the <strong class="text-slate-800">"Brazilian Capital of Agribusiness,"</strong> Ribeirão Preto is a thriving hub of innovation, technology, and science.</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Pillar 1 -->
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-secondary text-2xl mt-1">agriculture</span>
+                            <div>
+                                <h4 class="font-bold text-lg text-primary mb-1">The Brazilian Capital of Agribusiness</h4>
+                                <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                                    <li>Home to <strong class="text-slate-800">Agrishow</strong>, Latin America's largest agricultural technology exhibition.</li>
+                                    <li>A nationally recognized center for agricultural innovation, technology, and agribusiness.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 2 -->
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-secondary text-2xl mt-1">domain</span>
+                            <div>
+                                <h4 class="font-bold text-lg text-primary mb-1">A Hub for Business and Innovation</h4>
+                                <p class="text-sm text-slate-600">Strategically located in the state of São Paulo, providing easy access to Brazil's major economic and industrial centers.</p>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 3 -->
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-secondary text-2xl mt-1">school</span>
+                            <div>
+                                <h4 class="font-bold text-lg text-primary mb-1">A Center for Education and Research</h4>
+                                <p class="text-sm text-slate-600">Home to leading universities, research institutes, and innovation centers, attracting students, scientists, and professionals from Brazil and around the world.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <a href="{{ path('app_local') }}#section-venue" class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
+                            More about the venue &amp; travel <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="{{ asset('images/ribeirao-preto.jpeg') }}" alt="Ribeirão Preto" class="w-full h-auto object-cover min-h-[400px]">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-secondary mb-1">São Paulo, Brazil</p>
+                            <h3 class="text-2xl font-bold">Ribeirão Preto City</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organized By Section -->
+    {% if organizers is not empty %}
+        <section class="py-16 bg-slate-50 border-t border-slate-100" id="section-organizers">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h3 class="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">Organized By</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+                    {% for organizer in organizers %}
+                        <a href="{{ organizer.websiteUrl ?? path('app_sobre') ~ '#section-committee' }}" target="_blank"
+                           class="organizer-logo-box hover-effect">
+                            {% if organizer.logo and organizer.logo.imageName %}
+                                <div class="w-full h-full flex items-center justify-center p-4">
+                                    <img src="{{ asset('uploads/' ~ organizer.logo.imageName) }}" alt="{{ organizer.name }}"
+                                         class="max-h-full max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                                </div>
+                            {% else %}
+                                <span class="font-bold text-primary group-hover:text-secondary transition-colors text-sm text-center leading-snug px-4">{{ organizer.name }}</span>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}

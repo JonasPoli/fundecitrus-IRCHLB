@@ -10,21 +10,37 @@
         {% endif %}
         <div class="container mx-auto px-6 text-center relative z-10">
             <span class="material-symbols-outlined text-secondary text-5xl mb-4">groups</span>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">About the Conference</h1>
-            <p class="text-secondary text-lg max-w-2xl mx-auto">Discover the foundation, history, and the dedicated team behind the global assembly on Huanglongbing.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">About the Event</h1>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Discover the joint assembly of the VIII IRCHLB and XXIV IOCV, their missions, and global history.</p>
+        </div>
+    </section>
+
+    <!-- About the Event -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl" data-aos="fade-up">
+            <div class="text-center mb-12">
+                <span class="material-symbols-outlined text-secondary text-5xl mb-4">info</span>
+                <h2 class="text-3xl font-bold text-primary mb-6">About the Event</h2>
+            </div>
+            <div class="prose prose-lg text-slate-700 mx-auto leading-relaxed space-y-6">
+                <p>Brazil, the world's largest producer of oranges and the leading exporter of orange juice, will host the <strong>VIII International Research Conference on Huanglongbing (IRCHLB)</strong> and the <strong>XXIV Conference of the International Organization of Citrus Virologists (IOCV)</strong> from <strong>October 25 to 29, 2027</strong>, in <strong>Ribeirão Preto, São Paulo, Brazil</strong>.</p>
+                <p>Recognized as the leading global forums in their respective fields, these conferences will bring together researchers, scientists, citrus growers, representatives of the citrus industry, and plant health authorities from around the world to exchange knowledge and discuss solutions to the most pressing challenges affecting citrus health worldwide.</p>
+                <p>Held jointly, the conferences will provide a unique opportunity to showcase the latest scientific advances and strengthen international collaboration in addressing the major phytosanitary challenges affecting citrus production worldwide, particularly <strong>Huanglongbing (HLB)</strong>, the most destructive citrus disease.</p>
+                <p>With nearly half of the commercial sweet orange trees in the <strong>Brazilian Citrus Belt</strong>—covering the state of São Paulo and the Triângulo Mineiro and Southwestern regions of Minas Gerais—affected by HLB in 2025, disease incidence continues to increase, although at a slower pace than in recent years, posing significant challenges for both citrus growers and the citrus industry.</p>
+                <p>By bringing together experts from different disciplines and countries, the conference will provide an exceptional platform for networking across the citrus value chain, fostering the exchange of knowledge, the development of new collaborations, and the advancement of research to support a more sustainable and resilient citrus industry in the face of HLB and other citrus diseases.</p>
+            </div>
         </div>
     </section>
 
     <!-- Mission & Objectives -->
-    <section class="py-24 bg-white">
+    <section class="py-24 bg-white border-t border-slate-100">
         <div class="container mx-auto px-6 max-w-4xl" data-aos="fade-up">
             <div class="text-center mb-12">
                 <span class="material-symbols-outlined text-secondary text-5xl mb-4">flag</span>
                 <h2 class="text-3xl font-bold text-primary mb-6">Mission & Objectives</h2>
             </div>
-            <div class="prose prose-lg text-slate-700 mx-auto">
-                <p>The VIII International Research Conference on Huanglongbing represents the most vital academic and operational convergence point for discussing, mapping, and confronting the HLB citrus disease. Our root conceptual objective is to foster deep collaboration across borders.</p>
-                <p>We aim to aggregate scientists, industry leaders, and agricultural stewards to formulate resilient solutions against the devastation caused by HLB, paving the path to sustainable practices over the next decade.</p>
+            <div class="prose prose-lg text-slate-700 mx-auto text-center font-medium leading-relaxed max-w-2xl">
+                <p>The conference reinforces the international commitment to scientific research, innovation, and the development of collaborative solutions for the future of global citrus production.</p>
             </div>
         </div>
     </section>
@@ -34,147 +50,442 @@
         <div class="container mx-auto px-6 max-w-5xl">
             <div class="text-center mb-16" data-aos="fade-up">
                 <span class="material-symbols-outlined text-secondary text-5xl mb-4">history</span>
-                <h2 class="text-3xl font-bold text-primary mb-4">History & Past Editions</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto">Tracing the legacy and growth of the global convergence against Huanglongbing (HLB) since its inception.</p>
+                <h2 class="text-3xl font-bold text-primary mb-4">History & Previous Editions</h2>
+                <p class="text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    The <strong>International Organization of Citrus Virologists (IOCV)</strong> has a long-standing tradition of promoting research and scientific collaboration on <strong>graft-transmissible citrus diseases</strong>, while the <strong>International Research Conference on Huanglongbing (IRCHLB)</strong> is recognized as the world's leading conference dedicated exclusively to Huanglongbing (HLB), the most devastating disease affecting citrus production worldwide.
+                </p>
             </div>
 
-            <!-- Timeline Container -->
-            <div class="relative wrap overflow-hidden p-2 lg:p-10 h-full">
+            <!-- Tabs Buttons -->
+            <div class="flex justify-center mb-12" data-aos="fade-up">
+                <div class="inline-flex p-1 bg-slate-200 rounded-xl">
+                    <button id="tab-irchlb" onclick="switchTimeline('irchlb')" class="px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 bg-primary text-white shadow-sm" aria-label="IRCHLB Timeline">
+                        IRCHLB Editions
+                    </button>
+                    <button id="tab-iocv" onclick="switchTimeline('iocv')" class="px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 text-slate-600 hover:text-primary" aria-label="IOCV Timeline">
+                        IOCV Editions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Timeline Container: IRCHLB -->
+            <div id="timeline-irchlb" class="relative wrap overflow-hidden p-2 lg:p-10 h-full transition-all duration-200">
                 <!-- Vertical Line -->
-                <div class="absolute border-l-2 border-slate-200 h-full left-5 lg:left-1/2 -translate-x-1/2"></div>
+                <div class="absolute border-l-2 border-slate-300 h-full left-5 lg:left-1/2 -translate-x-1/2"></div>
 
                 <!-- Timeline Item 7 (Right) -->
-                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full" data-aos="fade-left">
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative" data-aos="fade-left">
                     <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
-                    <div class="z-20 flex items-center order-1 bg-secondary shadow-xl w-10 h-10 rounded-full justify-center left-5 lg:left-1/2 -translate-x-1/2 absolute lg:relative">
-                        <span class="text-primary font-extrabold text-sm">7</span>
-                    </div>
-                    <div class="order-1 bg-white rounded-xl shadow-md border border-slate-100 lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
-                        <span class="text-xs font-bold text-secondary uppercase tracking-wider mb-1 block">IRCHLB VII — 2024</span>
-                        <h3 class="font-bold text-primary text-xl mb-2">Riverside, California</h3>
-                        <p class="text-sm text-slate-600">Themed "Transitioning Research to Field Reality," this edition assembled over 450 scientists to debate breakthrough genomic tools and antimicrobial orchard therapies.</p>
+                    <div class="z-20 bg-secondary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-secondary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-secondary uppercase tracking-wider mb-1 block">2024</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">VII IRCHLB</h3>
+                        <p class="text-sm text-slate-600">Riverside, California, USA</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 6 (Left) -->
-                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full" data-aos="fade-right">
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative" data-aos="fade-right">
                     <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
-                    <div class="z-20 flex items-center order-1 bg-primary shadow-xl w-10 h-10 rounded-full justify-center left-5 lg:left-1/2 -translate-x-1/2 absolute lg:relative">
-                        <span class="text-secondary font-bold text-sm">6</span>
-                    </div>
-                    <div class="order-1 bg-white rounded-xl shadow-md border border-slate-100 lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">IRCHLB VI — 2019</span>
-                        <h3 class="font-bold text-primary text-xl mb-2">Riverside, California</h3>
-                        <p class="text-sm text-slate-600">Focused heavily on psyllid vector population dynamics, regional monitoring networks, and chemical suppression methods under high disease pressure.</p>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2019</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">VI IRCHLB</h3>
+                        <p class="text-sm text-slate-600">Riverside, California, USA</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 5 (Right) -->
-                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full" data-aos="fade-left">
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative" data-aos="fade-left">
                     <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
-                    <div class="z-20 flex items-center order-1 bg-primary shadow-xl w-10 h-10 rounded-full justify-center left-5 lg:left-1/2 -translate-x-1/2 absolute lg:relative">
-                        <span class="text-secondary font-bold text-sm">5</span>
-                    </div>
-                    <div class="order-1 bg-white rounded-xl shadow-md border border-slate-100 lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">IRCHLB V — 2017</span>
-                        <h3 class="font-bold text-primary text-xl mb-2">Orlando, Florida</h3>
-                        <p class="text-sm text-slate-600">Centered on genomic sequencing of *Candidatus Liberibacter* species and early-stage trials of tolerant transgenic citrus rootstocks.</p>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2017</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">V IRCHLB</h3>
+                        <p class="text-sm text-slate-600">Orlando, Florida, USA</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 4 (Left) -->
-                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full" data-aos="fade-right">
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative" data-aos="fade-right">
                     <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
-                    <div class="z-20 flex items-center order-1 bg-primary shadow-xl w-10 h-10 rounded-full justify-center left-5 lg:left-1/2 -translate-x-1/2 absolute lg:relative">
-                        <span class="text-secondary font-bold text-sm">4</span>
-                    </div>
-                    <div class="order-1 bg-white rounded-xl shadow-md border border-slate-100 lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">IRCHLB IV — 2015</span>
-                        <h3 class="font-bold text-primary text-xl mb-2">Orlando, Florida</h3>
-                        <p class="text-sm text-slate-600">Highlighted biological vector control via *Tamarixia radiata* releases and targeted nutritional spray programs to extend grove productivity.</p>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2015</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">IV IRCHLB</h3>
+                        <p class="text-sm text-slate-600">Orlando, Florida, USA</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 3 (Right) -->
-                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full" data-aos="fade-left">
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative" data-aos="fade-left">
                     <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
-                    <div class="z-20 flex items-center order-1 bg-primary shadow-xl w-10 h-10 rounded-full justify-center left-5 lg:left-1/2 -translate-x-1/2 absolute lg:relative">
-                        <span class="text-secondary font-bold text-sm">3</span>
-                    </div>
-                    <div class="order-1 bg-white rounded-xl shadow-md border border-slate-100 lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">IRCHLB III — 2013</span>
-                        <h3 class="font-bold text-primary text-xl mb-2">Orlando, Florida</h3>
-                        <p class="text-sm text-slate-600">Addressed grove epidemiology, vector feeding mechanics, and international quarantine standards for material exchanges.</p>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2013</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">III IRCHLB</h3>
+                        <p class="text-sm text-slate-600">Orlando, Florida, USA</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 2 (Left) -->
-                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full" data-aos="fade-right">
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative" data-aos="fade-right">
                     <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
-                    <div class="z-20 flex items-center order-1 bg-primary shadow-xl w-10 h-10 rounded-full justify-center left-5 lg:left-1/2 -translate-x-1/2 absolute lg:relative">
-                        <span class="text-secondary font-bold text-sm">2</span>
-                    </div>
-                    <div class="order-1 bg-white rounded-xl shadow-md border border-slate-100 lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">IRCHLB II — 2011</span>
-                        <h3 class="font-bold text-primary text-xl mb-2">Orlando, Florida</h3>
-                        <p class="text-sm text-slate-600">Established cooperative research programs between the USA and Brazil to standardize data collections and vector mapping criteria.</p>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2011</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">II IRCHLB</h3>
+                        <p class="text-sm text-slate-600">Orlando, Florida, USA</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 1 (Right) -->
-                <div class="flex flex-row lg:flex-row items-center justify-between w-full" data-aos="fade-left">
+                <div class="flex flex-row lg:flex-row items-center justify-between w-full relative" data-aos="fade-left">
                     <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
-                    <div class="z-20 flex items-center order-1 bg-primary shadow-xl w-10 h-10 rounded-full justify-center left-5 lg:left-1/2 -translate-x-1/2 absolute lg:relative">
-                        <span class="text-secondary font-bold text-sm">1</span>
-                    </div>
-                    <div class="order-1 bg-white rounded-xl shadow-md border border-slate-100 lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">IRCHLB I — 2008</span>
-                        <h3 class="font-bold text-primary text-xl mb-2">Orlando, Florida</h3>
-                        <p class="text-sm text-slate-600">The inaugural assembly defining the threat global parameters, establishing early joint budgets, and drawing up a global collaborative roadmap.</p>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2008</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">I IRCHLB</h3>
+                        <p class="text-sm text-slate-600">Orlando, Florida, USA</p>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Timeline Container: IOCV -->
+            <div id="timeline-iocv" class="hidden relative wrap overflow-hidden p-2 lg:p-10 h-full transition-all duration-200 opacity-0">
+                <!-- Vertical Line -->
+                <div class="absolute border-l-2 border-slate-300 h-full left-5 lg:left-1/2 -translate-x-1/2"></div>
+
+                <!-- Timeline Item 23 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-secondary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-secondary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-secondary uppercase tracking-wider mb-1 block">2025</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XXIII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Mildura, Australia</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 22 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2022</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XXII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Virtual Conference</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 21 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2019</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XXI IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Riverside, California, USA</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 20 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2016</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XX IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Chongqing, China</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 19 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2013</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XIX IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Skukuza, South Africa</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 18 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2010</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XVIII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Campinas, Brazil</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 17 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2007</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XVII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Adana, Türkiye</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 16 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2004</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XVI IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Monterrey, Mexico</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 15 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">2001</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XV IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Paphos, Cyprus</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 14 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1998</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XIV IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Campinas, Brazil</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 13 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1995</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XIII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Fuzhou, China</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 12 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1992</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">New Delhi, India</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 11 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1989</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">XI IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Orlando, Florida, USA</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 10 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1986</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">X IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Valencia, Spain</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 9 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1983</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">IX IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Foz do Iguaçu, Brazil</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 8 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1979</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">VIII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Mildura, Australia</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 7 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1975</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">VII IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Athens, Greece</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 6 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1972</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">VI IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Mbabane, Eswatini</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1969</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">V IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Hiroshima, Japan</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1966</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">IV IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Rome, Italy</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 (Right) -->
+                <div class="mb-12 flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1963</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">III IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Campinas and São Paulo, Brazil</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 (Left) -->
+                <div class="mb-12 flex flex-row lg:flex-row-reverse items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1960</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">II IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Lake Alfred and Orlando, Florida, USA</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 1 (Right) -->
+                <div class="flex flex-row lg:flex-row items-center justify-between w-full relative">
+                    <div class="order-1 lg:w-5/12 w-0 hidden lg:block"></div>
+                    <div class="z-20 bg-primary border-4 border-white shadow-md w-6 h-6 rounded-full absolute left-5 lg:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="order-1 bg-white rounded-xl shadow-lg border-y border-r border-slate-200 border-l-4 border-l-primary lg:w-5/12 w-[calc(100%-3rem)] ml-12 lg:ml-0 p-6 hover-effect">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 block">1957</span>
+                        <h3 class="font-bold text-primary text-xl mb-1">I IOCV Conference</h3>
+                        <p class="text-sm text-slate-600">Riverside, California, USA</p>
+                    </div>
+                </div>
+            </div>
     </section>
 
-    <!-- Organizing Committee -->
+    <!-- Organizing & Scientific Committee -->
     {% if committee_members is not empty %}
-        <section class="py-24 bg-white border-t border-b border-slate-100">
+        <section class="py-24 bg-slate-50 border-t border-b border-slate-100" id="section-committee">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-primary mb-4 text-center" data-aos="fade-up">Organizing Committee</h2>
-                <p class="text-center text-slate-500 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Meet the specialists and institutional leaders dedicated to bringing forth a world-class conference.</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4" data-aos="fade-up">Organizing Committee &amp; Scientific Committee</h2>
+                    <p class="text-secondary text-lg font-bold italic" data-aos="fade-up" data-aos-delay="100">(Subject to confirmation)</p>
+                </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {% set countries = [
+                    'Brazil', 'Florida, USA', 'Texas, USA', 'California, USA', 'USDA APHIS',
+                    'China', 'South Africa', 'Argentina', 'Costa Rica', 'Spain', 'Australia', 'Mexico', 'Scientific Advisor'
+                ] %}
+
+                {% for country in countries %}
+                    {% set country_members = [] %}
                     {% for member in committee_members %}
-                        <div class="bg-white rounded-xl card-shadow border border-slate-100 p-8 text-center hover-effect" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 4) * 100 }}">
-                            {% if member.image and member.image.imageName %}
-                                <img src="{{ ('uploads/' ~ member.image.imageName)|imagine_filter('avatar') }}" alt="{{ member.name }}" width="128" height="128" loading="lazy"
-                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-6 bg-slate-200">
-                            {% else %}
-                                <img src="{{ asset('images/avatar-placeholder.jpg') }}" alt="{{ member.name }}" width="128" height="128" loading="lazy"
-                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-6 bg-slate-200">
-                            {% endif %}
-                            
-                            <h3 class="text-xl font-bold text-primary">{{ member.name }}</h3>
-                            <p class="text-sm font-semibold text-secondary mb-1">{{ member.role }}</p>
-                            <p class="text-xs text-slate-400 mb-3">{{ member.institution }}</p>
-                            <p class="text-sm text-slate-500 line-clamp-3">{{ member.bio }}</p>
-                            
-                            <div class="flex justify-center gap-3 mt-4">
-                                {% if member.linkedinUrl %}
-                                    <a href="{{ member.linkedinUrl }}" target="_blank" class="text-slate-400 hover:text-primary transition-colors">
-                                        <i class="fa-brands fa-linkedin text-lg"></i>
-                                    </a>
-                                {% endif %}
-                                {% if member.academicLink %}
-                                    <a href="{{ member.academicLink }}" target="_blank" class="text-slate-400 hover:text-primary transition-colors">
-                                        <span class="material-symbols-outlined text-lg">school</span>
-                                    </a>
-                                {% endif %}
+                        {% if member.groupType == country %}
+                            {% set country_members = country_members|merge([member]) %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if country_members is not empty %}
+                        <div class="mb-16" data-aos="fade-up">
+                            <!-- Country Header -->
+                            <div class="flex items-center gap-4 mb-8">
+                                <h3 class="text-2xl font-bold text-primary border-l-4 border-secondary pl-4">{{ country }}</h3>
+                                <div class="flex-grow h-px bg-slate-200"></div>
+                            </div>
+
+                            <!-- Members Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                                {% for member in country_members %}
+                                    <div class="bg-white rounded-xl card-shadow border border-slate-100 p-6 text-center hover-effect flex flex-col justify-between h-full">
+                                        <div>
+                                            <div class="relative w-28 h-28 mx-auto mb-6">
+                                                {% if member.image and member.image.imageName %}
+                                                    <img src="{{ ('uploads/' ~ member.image.imageName)|imagine_filter('avatar') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
+                                                        class="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-slate-100">
+                                                {% else %}
+                                                    {% if member.name in ['MaryLou Polek', 'Carolina Ramirez'] %}
+                                                        <img src="{{ asset('images/avatar-placeholder-2.jpg') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
+                                                            class="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-slate-100">
+                                                    {% else %}
+                                                        <img src="{{ asset('images/avatar-placeholder.jpg') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
+                                                            class="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-slate-100">
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% if member.role == 'Chair' %}
+                                                    <span class="absolute bottom-0 right-0 bg-secondary text-primary font-bold text-[10px] px-2 py-0.5 rounded-full uppercase shadow">Chair</span>
+                                                {% endif %}
+                                            </div>
+
+                                            <h4 class="text-lg font-bold text-primary mb-1">
+                                                {{ member.name }}
+                                                {% if member.role == 'Chair' %}
+                                                    <span class="text-secondary text-xs block lg:inline-block font-semibold">(Chair)</span>
+                                                {% endif %}
+                                            </h4>
+                                            
+                                            <p class="text-xs font-semibold text-secondary mb-2">
+                                                {% if member.role != 'Chair' and member.role != 'Member' %}
+                                                    {{ member.role }}
+                                                {% endif %}
+                                            </p>
+                                            
+                                            <p class="text-xs text-slate-500 mb-3 leading-relaxed font-semibold">{{ member.institution }}</p>
+                                            <p class="text-xs text-slate-400 leading-relaxed">{{ member.bio }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </section>
     {% endif %}
@@ -185,14 +496,14 @@
             <div class="flex flex-col md:flex-row gap-16 items-center">
                 <div class="md:w-1/2" data-aos="fade-right">
                     <h2 class="text-4xl font-bold mb-6">Why You Should Attend</h2>
-                    <p class="text-lg text-slate-300 mb-8 leading-relaxed">Attending the IRCHLB represents an imperative investment for professionals and academics within the agricultural sciences.</p>
+                    <p class="text-lg text-slate-300 mb-8 leading-relaxed">Attending the joint conferences represents an imperative investment for professionals and academics within the agricultural sciences.</p>
 
                     <ul class="space-y-4">
                         <li class="flex items-start gap-4">
                             <span class="material-symbols-outlined text-secondary align-top">tips_and_updates</span>
                             <div>
                                 <h4 class="font-bold text-xl">Knowledge Acquisition</h4>
-                                <p class="text-slate-300">Access unreleased papers, frontier research, and data from international groups working directly on the HLB challenge.</p>
+                                <p class="text-slate-300">Access unreleased papers, frontier research, and data from international groups working directly on HLB and citrus virology.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
@@ -213,6 +524,44 @@
             </div>
         </div>
     </section>
+
+    <!-- Timeline Switching Script -->
+    <script>
+        function switchTimeline(type) {
+            const btnIrchlb = document.getElementById('tab-irchlb');
+            const btnIocv = document.getElementById('tab-iocv');
+            const tlIrchlb = document.getElementById('timeline-irchlb');
+            const tlIocv = document.getElementById('timeline-iocv');
+
+            if (type === 'irchlb') {
+                btnIrchlb.className = "px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 bg-primary text-white shadow-sm";
+                btnIocv.className = "px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 text-slate-600 hover:text-primary";
+                
+                tlIocv.classList.add('opacity-0');
+                setTimeout(() => {
+                    tlIocv.classList.add('hidden');
+                    tlIrchlb.classList.remove('hidden');
+                    setTimeout(() => {
+                        tlIrchlb.classList.remove('opacity-0');
+                        if (window.AOS) window.AOS.refresh();
+                    }, 50);
+                }, 200);
+            } else {
+                btnIocv.className = "px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 bg-primary text-white shadow-sm";
+                btnIrchlb.className = "px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 text-slate-600 hover:text-primary";
+                
+                tlIrchlb.classList.add('opacity-0');
+                setTimeout(() => {
+                    tlIrchlb.classList.add('hidden');
+                    tlIocv.classList.remove('hidden');
+                    setTimeout(() => {
+                        tlIocv.classList.remove('opacity-0');
+                        if (window.AOS) window.AOS.refresh();
+                    }, 50);
+                }, 200);
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block stylesheets %}

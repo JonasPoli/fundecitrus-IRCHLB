@@ -28,11 +28,15 @@ use Symfony\Component\Routing\Attribute\Route;
 final class MainController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function home(StatisticItemRepository $statRepo, \App\Repository\HomeBannerRepository $bannerRepo): Response
-    {
+    public function home(
+        StatisticItemRepository $statRepo,
+        \App\Repository\HomeBannerRepository $bannerRepo,
+        \App\Repository\OrganizerRepository $organizerRepository
+    ): Response {
         return $this->render('pub/main/home.html.twig', [
             'statistic_items' => $statRepo->findBy(['isActive' => true], ['position' => 'ASC']),
             'banners' => $bannerRepo->findBy(['isActive' => true], ['position' => 'ASC']),
+            'organizers' => $organizerRepository->findBy([], ['position' => 'ASC']),
         ]);
     }
 

@@ -1,7 +1,8 @@
 {% extends 'pub/base.html.twig' %}
 
 {% block body %}
-    <section class="bg-slate-900 text-white py-16 relative overflow-hidden border-b-8 border-secondary">
+    <!-- Page Header -->
+    <section class="bg-slate-900 text-white py-20 relative overflow-hidden border-b-8 border-secondary">
         {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
             <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}'); background-color: #004040;"></div>
         {% else %}
@@ -10,143 +11,302 @@
         <div class="container mx-auto px-6 text-center relative z-10">
             <span class="material-symbols-outlined text-secondary text-5xl mb-4">explore</span>
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Venue & Travel Guide</h1>
-            <p class="text-secondary text-lg max-w-2xl mx-auto">Comprehensive information mapping out your journey, stay, and culinary experience in Ribeirão Preto.</p>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Comprehensive guide to Multiplan Hall, parking, transportation, and local hospitality in Ribeirão Preto.</p>
         </div>
     </section>
 
-    <!-- Map & Address Component -->
-    <section class="py-16 bg-white border-b border-slate-200">
+    <!-- Venue Overview Section -->
+    <section class="py-24 bg-white border-b border-slate-200">
         <div class="container mx-auto px-6 max-w-6xl">
-            <div class="flex flex-col md:flex-row gap-12 bg-white rounded-2xl overflow-hidden card-shadow" data-aos="fade-up">
-                
-                <div class="md:w-1/3 p-10 bg-primary text-white flex flex-col justify-center">
+            <!-- Event Complex Info Box & Map -->
+            <div class="flex flex-col lg:flex-row gap-12 bg-white rounded-2xl overflow-hidden card-shadow mb-20" data-aos="fade-up">
+                <div class="lg-w-5-12-custom p-10 bg-primary text-white flex flex-col justify-center">
                     <span class="material-symbols-outlined text-secondary text-5xl mb-6">pin_drop</span>
                     <h2 class="text-3xl font-bold mb-4">Event Complex</h2>
-                    <p class="text-slate-300 mb-6 font-semibold">{{ event_config.locationName ?? 'Convention Center' }}</p>
-                    <address class="not-italic text-sm text-slate-400 space-y-2 mb-8 border-l-2 border-secondary pl-4">
+                    <h3 class="text-xl text-slate-100 mb-6 font-semibold">{{ event_config.locationName ?? 'Multiplan Hall – RibeirãoShopping' }}</h3>
+                    <address class="not-italic text-sm text-slate-300 space-y-2 mb-8 border-l-2 border-secondary pl-4">
                         {% if event_config %}
                             <p>{{ event_config.addressStreet }}</p>
                             <p>{{ event_config.addressNeighborhood }}</p>
                             <p>{{ event_config.addressCity }} - {{ event_config.addressZipCode }}</p>
                         {% else %}
-                            <p>Av. Dr. Adhemar Pereira de Barros, 201</p>
-                            <p>Vila Melhado, Ribeirão Preto</p>
-                            <p>SP, Brazil - 14807-040</p>
+                            <p>Av. Cel. Fernando Ferreira Leite, 1540</p>
+                            <p>Jardim California, Ribeirão Preto</p>
+                            <p>SP, Brazil - 14026-900</p>
                         {% endif %}
                     </address>
                     {% if event_config and event_config.googleMapsUrl %}
-                        <a href="{{ event_config.googleMapsUrl }}" target="_blank" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-white transition-colors">
+                        <a href="{{ event_config.googleMapsUrl }}" target="_blank" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-white transition-colors" aria-label="Get Directions on Google Maps" id="btn-maps-directions">
                             Get Directions <span class="material-symbols-outlined text-sm">open_in_new</span>
                         </a>
                     {% endif %}
                 </div>
-
-                <!-- Google Map API Integration -->
-                <div class="md:w-2/3 h-80 md:h-auto bg-slate-200 relative">
+                <div class="lg-w-7-12-custom h-96 lg:h-full min-h-[400px] bg-slate-200 relative map-container">
                     {% if event_config and event_config.googleMapsUrl and ('iframe' in event_config.googleMapsUrl) %}
                         {{ event_config.googleMapsUrl|raw }}
                     {% elseif event_config and event_config.googleMapsUrl %}
-                        <iframe src="{{ event_config.googleMapsUrl }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="{{ event_config.googleMapsUrl }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy" aria-label="Google Map location of venue" id="map-iframe"></iframe>
                     {% else %}
                         <div class="absolute inset-0 flex items-center justify-center text-slate-500 flex-col">
                             <span class="material-symbols-outlined text-5xl mb-2 text-slate-400">map</span>
                             <p class="font-bold">Interactive Google Map API Integration</p>
-                            <p class="text-xs">Location pointer explicitly marked</p>
                         </div>
                     {% endif %}
                 </div>
+            </div>
 
+            <!-- Two Column Layout: Multiplan Hall & Ribeirão Preto -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div data-aos="fade-right">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">corporate_fare</span>
+                    <h2 class="text-3xl font-bold text-primary mb-6">Multiplan Hall</h2>
+                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
+                        The joint conferences will be held in the state-of-the-art <strong>Multiplan Hall</strong>, located within the prestigious <strong>RibeirãoShopping</strong>. This prime venue offers world-class facilities and is surrounded by premium services, shopping, and entertainment.
+                    </p>
+                    <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="{{ asset('images/multiplan-hall.webp') }}" alt="Multiplan Hall" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">location_city</span>
+                    <h2 class="text-3xl font-bold text-primary mb-6">Ribeirão Preto</h2>
+                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
+                        The conference will be held in <strong>Ribeirão Preto</strong>, one of the most important cities in the state of São Paulo and one of Brazil's leading agribusiness hubs.
+                    </p>
+                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
+                        Known as the <strong>"Brazilian Capital of Agribusiness,"</strong> Ribeirão Preto is recognized for its strong economy, modern infrastructure, excellent quality of life, extensive hotel network, outstanding dining options, and well-established convention facilities, making it one of Brazil's premier destinations for international conferences and business events.
+                    </p>
+                    <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                        <img src="{{ asset('images/ribeirao-preto.jpeg') }}" alt="Ribeirão Preto Cityscape" class="w-full h-64 object-cover">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Air Travel & Flights -->
-    {% if airports is not empty %}
-        <section class="py-20 bg-slate-50">
-            <div class="container mx-auto px-6 max-w-6xl">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg">
-                        <span class="material-symbols-outlined">flight_takeoff</span>
-                    </div>
-                    <h2 class="text-3xl font-bold text-primary">Air Travel & Connectivity</h2>
+    <!-- Parking Section -->
+    <section class="py-20 bg-slate-50 border-b border-slate-200">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="flex flex-col md:flex-row gap-16 items-center">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">local_parking</span>
+                    <h2 class="text-3xl font-bold text-primary mb-6">Parking & Accessibility</h2>
+                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
+                        Multiplan Hall is directly connected to the covered parking facilities of RibeirãoShopping, offering <strong>1,250 covered parking spaces</strong>.
+                    </p>
+                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
+                        The venue can be accessed conveniently through <strong>three elevators</strong> and <strong>eight escalators</strong> directly connecting the parking areas to the main convention floor.
+                    </p>
                 </div>
-                
-                <p class="text-slate-600 mb-10 max-w-3xl text-lg">Multiple options are available to reach Ribeirão Preto. Choose the airport that best fits your international or domestic flight schedule.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {% for airport in airports %}
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow flex flex-col justify-between h-full hover-effect group" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 3) * 100 }}">
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200">
+                        <img src="{{ asset('images/parking.webp') }}" alt="Covered Parking" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting There Section -->
+    <section class="py-24 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="material-symbols-outlined text-secondary text-5xl mb-4">directions_car</span>
+                <h2 class="text-3xl font-bold text-primary mb-4">Getting There</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto text-lg">Detailed guide for air travel and road directions to ensure a safe and smooth trip to the venue.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- By Air -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200 shadow-md flex flex-col justify-between" data-aos="fade-right">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6 border-b border-slate-200 pb-4">
+                            <span class="material-symbols-outlined text-primary text-4xl">flight</span>
+                            <h3 class="text-2xl font-bold text-primary">By Air</h3>
+                        </div>
+                        <div class="relative rounded-xl overflow-hidden shadow-md border border-slate-200 mb-6 h-48">
+                            <img src="{{ asset('images/airport-rao.jpg') }}" alt="Dr. Leite Lopes State Airport" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold text-primary mb-3">Dr. Leite Lopes State Airport (RAO)</h4>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Dr. Leite Lopes Airport offers daily flights with convenient connections through Brazil's major aviation hubs, including:
+                        </p>
+                        <ul class="space-y-2 mb-8 text-sm text-slate-700 font-semibold pl-4 list-disc">
+                            <li>São Paulo/Congonhas Airport (CGH)</li>
+                            <li>São Paulo/Guarulhos International Airport (GRU)</li>
+                            <li>Campinas/Viracopos International Airport (VCP)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200">
+                        <h5 class="font-bold text-primary mb-3 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-secondary">hail</span> Ground Transportation
+                        </h5>
+                        <ul class="space-y-2 text-xs text-slate-600">
+                            <li><strong>Distance to Venue:</strong> Approximately 12 km (7.5 miles)</li>
+                            <li><strong>Travel Time:</strong> Approximately 15–25 minutes</li>
+                            <li><strong>Options:</strong> Taxis, ride-hailing services (Uber and 99), and private shuttle services</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- By Road -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200 shadow-md flex flex-col justify-between" data-aos="fade-left">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6 border-b border-slate-200 pb-4">
+                            <span class="material-symbols-outlined text-primary text-4xl">directions_bus</span>
+                            <h3 class="text-2xl font-bold text-primary">By Road</h3>
+                        </div>
+                        <div class="relative rounded-xl overflow-hidden shadow-md border border-slate-200 mb-6 h-48">
+                            <img src="{{ asset('images/anhanguera-highway.jpg') }}" alt="Anhanguera Highway" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- From SP -->
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold text-primary mb-2">From São Paulo</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                Ribeirão Preto is connected to the city of São Paulo through one of Brazil's finest highway systems, primarily via the <strong>Bandeirantes Highway (SP-348)</strong> and the <strong>Anhanguera Highway (SP-330)</strong>.
+                            </p>
+                            <ul class="space-y-1 text-xs text-slate-600 mb-2 pl-4 list-disc">
+                                <li><strong>Distance:</strong> Approximately 310 km (193 miles)</li>
+                                <li><strong>Travel Time:</strong> Approximately 3 hours 20 minutes to 4 hours 30 minutes, depending on traffic</li>
+                            </ul>
+                            <p class="text-xs text-slate-500 font-medium">
+                                <strong>Intercity Bus Services:</strong> Regular daily bus services between São Paulo and Ribeirão Preto are operated by Cometa, Piracicabana, and Rápido Ribeirão.
+                            </p>
+                        </div>
+
+                        <!-- From Campinas -->
+                        <div>
+                            <h4 class="text-lg font-bold text-primary mb-2">From Campinas</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                Campinas is connected primarily via the <strong>Anhanguera Highway (SP-330)</strong>.
+                            </p>
+                            <ul class="space-y-1 text-xs text-slate-600 mb-2 pl-4 list-disc">
+                                <li><strong>Distance:</strong> Approximately 220 km (137 miles)</li>
+                                <li><strong>Travel Time:</strong> Approximately 2.5–3 hours</li>
+                            </ul>
+                            <p class="text-xs text-slate-500 font-medium">
+                                <strong>Intercity Bus Service:</strong> Regular daily service between Campinas and Ribeirão Preto is operated by Cometa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practical Information -->
+    <section class="py-24 bg-white border-b border-slate-200" id="section-practical-info">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="material-symbols-outlined text-secondary text-5xl mb-4">info</span>
+                <h2 class="text-3xl font-bold text-primary mb-4">Practical Information</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto text-lg">Essential travel facts and safety details to support your stay in Ribeirão Preto.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Travel Essentials -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-effect card-shadow" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-2xl">travel_explore</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-primary mb-4">Travel Essentials</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li><strong class="text-slate-700">Currency:</strong> Brazilian Real (BRL)</li>
+                        <li><strong class="text-slate-700">Time Zone:</strong> Brasília Time (BRT, UTC−3)</li>
+                        <li><strong class="text-slate-700">Official Language:</strong> Portuguese</li>
+                    </ul>
+                </div>
+
+                <!-- Electricity & Plugs -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-effect card-shadow" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-2xl">power</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-primary mb-4">Electricity &amp; Plugs</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li><strong class="text-slate-700">Voltage:</strong> 127 V (Ribeirão Preto standard)</li>
+                        <li><strong class="text-slate-700">Plug Type:</strong> Type N (three round pins, Brazilian standard)</li>
+                    </ul>
+                </div>
+
+                <!-- Emergency Numbers -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-effect card-shadow" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-2xl">emergency</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-primary mb-4">Emergency Numbers</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li><strong class="text-slate-700">Police:</strong> 190</li>
+                        <li><strong class="text-slate-700">Medical (SAMU):</strong> 192</li>
+                        <li><strong class="text-slate-700">Fire Department:</strong> 193</li>
+                    </ul>
+                </div>
+
+                <!-- Secretariat -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-effect card-shadow" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-2xl">contact_support</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-primary mb-4">Secretariat</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li><strong class="text-slate-700">Conference Secretariat:</strong> <span class="italic text-slate-500">To be announced</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Hotels (Accommodation) -->
+    {% if hotels is not empty %}
+        <section class="py-24 bg-slate-50 border-b border-slate-200" id="section-accommodation">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">bed</span>
+                    <h2 class="text-3xl font-bold text-primary mb-4">Recommended Hotels</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto text-lg">We recommend the following hotel partners located near the venue offering discount rates for attendees.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% for hotel in hotels %}
+                        <div class="bg-white rounded-2xl border border-slate-200 card-shadow hover-effect group flex flex-col justify-between h-full overflow-hidden" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 3) * 100 }}">
                             <div>
-                                <div class="overflow-hidden h-48">
-                                    {% if airport.image and airport.image.imageName %}
-                                        <img src="{{ ('uploads/' ~ airport.image.imageName)|imagine_filter('card_image') }}" alt="{{ airport.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-500">
+                                <div class="relative h-48 overflow-hidden bg-slate-100">
+                                    {% if hotel.image and hotel.image.imageName %}
+                                        <img src="{{ ('uploads/' ~ hotel.image.imageName)|imagine_filter('card_image') }}" alt="{{ hotel.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                     {% else %}
-                                        <img src="{{ asset('images/flights.jpg') }}" alt="{{ airport.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-500">
+                                        <img src="{{ asset('images/hotels.jpg') }}" alt="{{ hotel.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                     {% endif %}
+                                    <div class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-xs text-secondary">star</span>
+                                        {{ hotel.stars }} Stars
+                                    </div>
                                 </div>
-                                <div class="p-6">
-                                    <span class="text-xs font-bold text-secondary uppercase tracking-wider mb-2 block">{{ airport.code }} Hub</span>
-                                    <h3 class="text-xl font-bold text-primary mb-3">{{ airport.name }}</h3>
-                                    <p class="text-sm text-slate-600 mb-4">{{ airport.description }}</p>
+                                <div class="p-6 flex-grow">
+                                    <h3 class="font-bold text-primary text-xl mb-3">{{ hotel.name }}</h3>
+                                    
+                                    <!-- Category Badge -->
+                                    <div class="mb-3">
+                                        <span class="inline-block bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">
+                                            {{ hotel.description }}
+                                        </span>
+                                    </div>
+                                    
+                                    <!-- Distance Badge -->
+                                    <div class="flex items-center gap-1.5 text-xs text-slate-500 font-semibold mb-4">
+                                        <span class="material-symbols-outlined text-secondary text-sm">directions_walk</span>
+                                        <span>{{ hotel.address }} from venue</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="p-6 pt-0">
-                                <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-100 pt-4">
-                                    <li><strong class="text-slate-700">Distance:</strong> {{ airport.distance }}</li>
-                                    <li><strong class="text-slate-700">Transport:</strong> {{ airport.transport }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-    {% endif %}
-
-    <!-- Partner Hotels -->
-    {% if hotels is not empty %}
-        <section class="py-20 bg-white border-y border-slate-200">
-            <div class="container mx-auto px-6 max-w-6xl">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg">
-                        <span class="material-symbols-outlined">bed</span>
-                    </div>
-                    <h2 class="text-3xl font-bold text-primary">Official Hotel Partners</h2>
-                </div>
-                
-                <p class="text-slate-600 mb-10 max-w-3xl text-lg">We have negotiated exclusive rate discounts with premium hospitality partners to guarantee comfort and logistical ease for all participants.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {% for hotel in hotels %}
-                        <div class="bg-white rounded-xl border border-slate-100 card-shadow hover-effect group flex flex-col justify-between h-full" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 4) * 100 }}">
-                            <div>
-                                <div class="relative h-40 overflow-hidden rounded-t-xl">
-                                    {% if hotel.image and hotel.image.imageName %}
-                                        <img src="{{ ('uploads/' ~ hotel.image.imageName)|imagine_filter('card_image') }}" alt="{{ hotel.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    {% else %}
-                                        <img src="{{ asset('images/hotels.jpg') }}" alt="{{ hotel.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    {% endif %}
-                                </div>
-                                <div class="p-5">
-                                    <h3 class="font-bold text-primary mb-1">{{ hotel.name }}</h3>
-                                    <div class="flex text-amber-400 text-sm mb-3">
-                                        {% if hotel.stars > 0 %}
-                                            {% for i in 1..hotel.stars %}
-                                                <span class="material-symbols-outlined text-sm">star</span>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                    <p class="text-xs text-slate-500 mb-4">{{ hotel.description }}</p>
-                                </div>
-                            </div>
-                            <div class="p-5 pt-0">
-                                <div class="bg-slate-50 p-2 rounded text-center border border-slate-100">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
                                     {% if hotel.bookingLink %}
-                                        <span class="text-xs text-slate-400 block mb-1">Booking Link:</span>
-                                        <a href="{{ hotel.bookingLink }}" target="_blank" class="text-secondary font-bold text-xs hover:underline">Click Here</a>
+                                        <span class="text-xs text-slate-400 block mb-1">Direct Rate Link:</span>
+                                        <a href="{{ hotel.bookingLink }}" target="_blank" class="text-secondary font-bold text-sm hover:underline">Book Directly</a>
                                     {% elseif hotel.bookingCode %}
-                                        <span class="text-xs text-slate-400 block mb-1">Booking Code:</span>
-                                        <strong class="text-secondary font-mono">{{ hotel.bookingCode }}</strong>
+                                        <span class="text-xs text-slate-400 block mb-1">Special Booking Code:</span>
+                                        <strong class="text-secondary font-mono text-sm">{{ hotel.bookingCode }}</strong>
                                     {% endif %}
                                 </div>
                             </div>
@@ -159,41 +319,38 @@
 
     <!-- Culinary & Dining -->
     {% if restaurants is not empty %}
-        <section class="py-20 bg-slate-50">
+        <section class="py-24 bg-white" id="section-dining">
             <div class="container mx-auto px-6 max-w-6xl">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg">
-                        <span class="material-symbols-outlined">restaurant</span>
-                    </div>
-                    <h2 class="text-3xl font-bold text-primary">Dining & Culture</h2>
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">restaurant</span>
+                    <h2 class="text-3xl font-bold text-primary mb-4">Dining & Gastronomy</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto text-lg">Top recommendations for local dining in and around the Ribeirão Preto area.</p>
                 </div>
-                
-                <p class="text-slate-600 mb-10 max-w-3xl text-lg">Experience the vibrant "Capital of Agribusiness" culinary scene. From casual networking to executive fine dining.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {% for rest in restaurants %}
-                        <div class="bg-white rounded-xl overflow-hidden card-shadow group flex flex-col justify-between h-full hover-effect" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 3) * 100 }}">
+                        <div class="bg-white rounded-2xl border border-slate-200 card-shadow group flex flex-col justify-between h-full overflow-hidden hover-effect" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 4) * 100 }}">
                             <div>
-                                <div class="overflow-hidden h-56">
+                                <div class="overflow-hidden h-40 bg-slate-100">
                                     {% if rest.image and rest.image.imageName %}
-                                        <img src="{{ ('uploads/' ~ rest.image.imageName)|imagine_filter('card_image') }}" alt="{{ rest.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                        <img src="{{ ('uploads/' ~ rest.image.imageName)|imagine_filter('card_image') }}" alt="{{ rest.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                     {% else %}
-                                        <img src="{{ asset('images/restaurants.jpg') }}" alt="{{ rest.name }}" width="600" height="314" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                        <img src="{{ asset('images/restaurants.jpg') }}" alt="{{ rest.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                     {% endif %}
                                 </div>
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h3 class="text-xl font-bold text-primary">{{ rest.name }}</h3>
-                                        <span class="bg-slate-100 text-slate-500 text-xs px-2 py-1 rounded font-bold">{{ rest.priceRange }}</span>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-start gap-2 mb-2">
+                                        <h3 class="text-lg font-bold text-primary leading-snug">{{ rest.name }}</h3>
+                                        <span class="bg-slate-100 text-slate-500 text-[10px] px-2 py-0.5 rounded font-extrabold flex-shrink-0">{{ rest.priceRange }}</span>
                                     </div>
-                                    <p class="text-sm font-semibold text-secondary mb-2">{{ rest.category }}</p>
-                                    <p class="text-slate-600 text-sm mb-4">{{ rest.description }}</p>
+                                    <p class="text-xs font-bold text-secondary uppercase tracking-wider mb-3">{{ rest.category }}</p>
+                                    <p class="text-slate-600 text-xs leading-relaxed">{{ rest.description }}</p>
                                 </div>
                             </div>
-                            <div class="p-6 pt-0">
+                            <div class="p-5 pt-0">
                                 {% if rest.locationUrl %}
-                                    <a href="{{ rest.locationUrl }}" target="_blank" class="text-primary hover:text-secondary font-bold text-sm flex items-center gap-1 transition-colors">
-                                        Location <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                    <a href="{{ rest.locationUrl }}" target="_blank" class="text-primary hover:text-secondary font-bold text-xs flex items-center gap-1 transition-colors border-t border-slate-100 pt-4 w-full" id="link-rest-{{ loop.index }}">
+                                        View on Google Maps <span class="material-symbols-outlined text-sm">open_in_new</span>
                                     </a>
                                 {% endif %}
                             </div>
@@ -213,3 +370,4 @@
         <link rel="preload" as="image" href="{{ asset('images/hero-bg.jpg') }}" />
     {% endif %}
 {% endblock %}
+

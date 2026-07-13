@@ -25,6 +25,7 @@ use App\Entity\StatisticItem;
 use App\Entity\ThematicGroup;
 use App\Entity\VenueRoom;
 use App\Entity\HomeBanner;
+use App\Entity\Organizer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -65,7 +66,7 @@ class SeedDataCommand extends Command
             'speaker_paper', 'speaker_agenda', 'speaker', 'venue_room', 'event_day',
             'thematic_group', 'registration_batch', 'committee_member',
             'page_content', 'statistic_item', 'event_config', 'image', 'home_banner',
-            'newsletter_request'
+            'newsletter_request', 'organizer'
         ];
         
         foreach ($tables as $table) {
@@ -118,13 +119,13 @@ class SeedDataCommand extends Command
         $eventConfig = new EventConfig();
         $eventConfig->setTitle('VIII International Research Conference on Huanglongbing');
         $eventConfig->setSubtitle('Join the global scientific community in Ribeirão Preto, Brazil, to discuss the most rigorous advancements against HLB.');
-        $eventConfig->setEventDates('October 26-29, 2027');
-        $eventConfig->setLocationName('Fundecitrus Convention Center');
-        $eventConfig->setAddressStreet('Av. Dr. Adhemar Pereira de Barros, 201');
-        $eventConfig->setAddressNeighborhood('Vila Melhado');
+        $eventConfig->setEventDates('October 25-29, 2027');
+        $eventConfig->setLocationName('Multiplan Hall – RibeirãoShopping');
+        $eventConfig->setAddressStreet('Av. Cel. Fernando Ferreira Leite, 1540');
+        $eventConfig->setAddressNeighborhood('Jardim California');
         $eventConfig->setAddressCity('Ribeirão Preto, SP');
-        $eventConfig->setAddressZipCode('14807-040');
-        $eventConfig->setGoogleMapsUrl('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3714.770932223847!2d-47.809315!3d-21.393154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDIzJzM1LjQiUyA0N8KwNDgnMzMuNSJX!5e0!3m2!1spt-BR!2sbr!4v1625123456789!5m2!1spt-BR!2sbr');
+        $eventConfig->setAddressZipCode('14026-900');
+        $eventConfig->setGoogleMapsUrl('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.646875881452!2d-47.81745422396116!3d-21.206173080488667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b9be39e5555555%3A0x4a480e6c64187042!2sRibeir%C3%A3oShopping!5e0!3m2!1sen!2sbr!4v1700000000000!5m2!1sen!2sbr');
         $eventConfig->setHeroDescription('The VIII International Research Conference on Huanglongbing represents the most vital academic and operational convergence point for discussing, mapping, and confronting the HLB citrus disease. Our root conceptual objective is to foster deep collaboration across borders.');
         
         $heroImage = $uploadImage($layoutImagesDir . '/hero-bg.jpg', 'hero');
@@ -149,11 +150,11 @@ class SeedDataCommand extends Command
         // 3.1. Injeção de Dados: HomeBanner
         $io->section('Seeding HomeBanners...');
         $banner = new HomeBanner();
-        $banner->setEventDate('October 26-29, 2027');
-        $banner->setSubtitle('VIII International Research');
-        $banner->setMainTitle('Conference on Huanglongbing');
-        $banner->setDescription1('Join the global scientific community in Ribeirão Preto, Brazil, to discuss the most rigorous advancements against HLB.');
-        $banner->setDescription('The VIII International Research Conference on Huanglongbing represents the most vital academic and operational convergence point for discussing, mapping, and confronting the HLB citrus disease. Our root conceptual objective is to foster deep collaboration across borders.');
+        $banner->setEventDate('October 25–29, 2027');
+        $banner->setSubtitle('CONFERENCE INFORMATION');
+        $banner->setMainTitle('Two Conferences. One Global Community. One Shared Mission.');
+        $banner->setDescription1('XXIV IOCV Conference: October 25, 2027');
+        $banner->setDescription('VIII IRCHLB: October 26–29, 2027');
         $banner->setButton1Text('Register Now');
         $banner->setButton1Link('/inscricoes');
         $banner->setButton2Text('Call for Papers');
@@ -171,7 +172,7 @@ class SeedDataCommand extends Command
             ['value' => '500+', 'label' => 'Expected Participants'],
             ['value' => '25+', 'label' => 'Countries Reached'],
             ['value' => '100+', 'label' => 'Approved Papers'],
-            ['value' => '4', 'label' => 'Days of Content']
+            ['value' => '5', 'label' => 'Days of Content']
         ];
         foreach ($stats as $idx => $statData) {
             $statItem = new StatisticItem();
@@ -207,65 +208,258 @@ class SeedDataCommand extends Command
         // 6. Injeção de Dados: CommitteeMember
         $io->section('Seeding CommitteeMembers...');
         $members = [
+            // Brazil
             [
-                'name' => 'Dr. Arthur Pendragon',
-                'role' => 'General Coordinator',
+                'name' => 'Juliano Ayres',
+                'role' => 'Chair',
                 'institution' => 'Fundecitrus',
-                'bio' => 'General Coordinator. Research specialist in integrated HLB management with 15+ years of grove trials.',
-                'academicLink' => 'https://scholar.google.com',
-                'linkedinUrl' => 'https://linkedin.com',
-                'groupType' => 'Coordination',
-                'imageFile' => 'speaker2.jpg'
+                'bio' => 'Organizing & Scientific Committee Chair for Brazil.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Brazil',
+                'imageFile' => 'committee-juliano-ayres.webp'
             ],
             [
-                'name' => 'Dr. Elena Rostova',
-                'role' => 'Head of the Scientific Review Board',
+                'name' => 'Renato Bassanezi',
+                'role' => 'Member',
+                'institution' => 'Fundecitrus',
+                'bio' => 'Organizing & Scientific Committee Member for Brazil.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Brazil',
+                'imageFile' => 'committee-renato-bassanezi.jpg'
+            ],
+            [
+                'name' => 'Franklin Behlau',
+                'role' => 'Member',
+                'institution' => 'Fundecitrus',
+                'bio' => 'Organizing & Scientific Committee Member for Brazil.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Brazil',
+                'imageFile' => 'committee-franklin-behlau.webp'
+            ],
+            [
+                'name' => 'Silvio Lopes',
+                'role' => 'Member',
+                'institution' => 'Fundecitrus',
+                'bio' => 'Organizing & Scientific Committee Member for Brazil.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Brazil',
+                'imageFile' => 'committee-silvio-lopes.jpg'
+            ],
+            [
+                'name' => 'Juliana de Freitas Astúa',
+                'role' => 'Member (to be confirmed)',
+                'institution' => 'Embrapa Cassava & Fruits',
+                'bio' => 'Organizing & Scientific Committee Member for Brazil.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Brazil',
+                'imageFile' => 'committee-juliana-astua.jpg'
+            ],
+            [
+                'name' => 'Dirceu de Mattos Junior',
+                'role' => 'Member',
+                'institution' => 'Agronomic Institute of Campinas (IAC)',
+                'bio' => 'Organizing & Scientific Committee Member for Brazil.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Brazil',
+                'imageFile' => 'committee-dirceu-mattos.jpeg'
+            ],
+            [
+                'name' => 'Lilian Amorim',
+                'role' => 'Member',
                 'institution' => 'University of São Paulo (USP)',
-                'bio' => 'Head of the Scientific Review Board. Expert in plant pathology, genomic sequencing, and early pathogen detection.',
-                'academicLink' => 'https://scholar.google.com',
-                'linkedinUrl' => 'https://linkedin.com',
-                'groupType' => 'Scientific Board',
-                'imageFile' => 'speaker1.jpg'
+                'bio' => 'Organizing & Scientific Committee Member for Brazil.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Brazil',
+                'imageFile' => 'committee-lilian-amorim.webp'
+            ],
+            // Florida, USA
+            [
+                'name' => 'Jim Graham',
+                'role' => 'Member',
+                'institution' => 'University of Florida, IFAS',
+                'bio' => 'Organizing & Scientific Committee Member representing Florida, USA.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Florida, USA',
+                'imageFile' => 'committee-jim-graham.jpeg'
             ],
             [
-                'name' => 'Dr. Kenji Sato',
-                'role' => 'International Relations Director',
-                'institution' => 'IRCHLB Foundation',
-                'bio' => 'International Relations Director. Vector dynamics analyst specializing in regional pest management networks.',
-                'academicLink' => 'https://scholar.google.com',
-                'linkedinUrl' => 'https://linkedin.com',
-                'groupType' => 'International Relations',
-                'imageFile' => 'speaker3.jpg'
+                'name' => 'Michael Rogers',
+                'role' => 'Member',
+                'institution' => 'University of Florida, IFAS',
+                'bio' => 'Organizing & Scientific Committee Member representing Florida, USA.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Florida, USA',
+                'imageFile' => 'committee-michael-rogers.jpg'
             ],
+            // Texas, USA
             [
-                'name' => 'Dr. Sarah Lee',
-                'role' => 'Logistics and Execution Supervisor',
-                'institution' => 'Florida Citrus Dept',
-                'bio' => 'Logistics and execution supervisor for technical tours and grower forums.',
-                'academicLink' => 'https://scholar.google.com',
-                'linkedinUrl' => 'https://linkedin.com',
-                'groupType' => 'Logistics',
-                'imageFile' => 'avatar-placeholder.jpg'
+                'name' => 'Mamoudou Setamou',
+                'role' => 'Member',
+                'institution' => 'Texas A&M University',
+                'bio' => 'Organizing & Scientific Committee Member representing Texas, USA.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Texas, USA',
+                'imageFile' => 'committee-mamoudou-setamou.png'
             ],
+            // California, USA
             [
-                'name' => 'Dr. Marcus Vinicius',
-                'role' => 'Advisor for Regulatory Protocols',
-                'institution' => 'Embrapa',
-                'bio' => 'Advisor for national regulatory protocols, quarantine rules, and regional disease suppression.',
-                'academicLink' => 'https://scholar.google.com',
-                'linkedinUrl' => 'https://linkedin.com',
-                'groupType' => 'Advisory Board',
+                'name' => 'MaryLou Polek',
+                'role' => 'Chair',
+                'institution' => 'California',
+                'bio' => 'Organizing & Scientific Committee Chair representing California, USA.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'California, USA',
                 'imageFile' => 'avatar-placeholder-2.jpg'
             ],
             [
-                'name' => 'Dr. Helena Costa',
-                'role' => 'Sponsorships & Industrial Integration',
-                'institution' => 'Citrus BR',
-                'bio' => 'Sponsorships and industrial integration management. Bridging the gap between growers and biotech developers.',
-                'academicLink' => 'https://scholar.google.com',
-                'linkedinUrl' => 'https://linkedin.com',
-                'groupType' => 'Sponsorships',
-                'imageFile' => 'speaker1.jpg'
+                'name' => 'Georgios Vidalakis',
+                'role' => 'Member',
+                'institution' => 'University of California, Riverside',
+                'bio' => 'Organizing & Scientific Committee Member representing California, USA.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'California, USA',
+                'imageFile' => 'committee-georgios-vidalakis.jpeg'
+            ],
+            [
+                'name' => 'Robert Krueger',
+                'role' => 'Member',
+                'institution' => 'USDA Agricultural Research Service (ARS)',
+                'bio' => 'National Clonal Germplasm Repository for Citrus and Dates, Riverside.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'California, USA',
+                'imageFile' => 'committee-robert-krueger.avif'
+            ],
+            // USDA APHIS
+            [
+                'name' => 'Dave Bartels',
+                'role' => 'Member',
+                'institution' => 'USDA Animal and Plant Health Inspection Service (APHIS)',
+                'bio' => 'Organizing & Scientific Committee Member representing USDA APHIS.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'USDA APHIS',
+                'imageFile' => 'committee-dave-bartels.jpeg'
+            ],
+            [
+                'name' => 'Donald Seaver',
+                'role' => 'Member',
+                'institution' => 'USDA Animal and Plant Health Inspection Service (APHIS)',
+                'bio' => 'Organizing & Scientific Committee Member representing USDA APHIS.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'USDA APHIS',
+                'imageFile' => 'avatar-placeholder.jpg'
+            ],
+            // China
+            [
+                'name' => 'Changyong Zhou',
+                'role' => 'Member',
+                'institution' => 'Citrus Research Institute',
+                'bio' => 'Organizing & Scientific Committee Member representing China.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'China',
+                'imageFile' => 'committee-changyong-zhou.jpeg'
+            ],
+            [
+                'name' => 'Xuefeng Wang',
+                'role' => 'Member',
+                'institution' => 'Citrus Research Institute (CAAS / SWU)',
+                'bio' => 'Deputy Director, CAAS and Southwest University (SWU).',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'China',
+                'imageFile' => 'committee-xuefeng-wang.jpeg'
+            ],
+            // South Africa
+            [
+                'name' => 'Hano Maree',
+                'role' => 'Member',
+                'institution' => 'Citrus Research International & Stellenbosch University',
+                'bio' => 'Organizing & Scientific Committee Member representing South Africa.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'South Africa',
+                'imageFile' => 'committee-hano-maree.webp'
+            ],
+            // Argentina
+            [
+                'name' => 'Beatriz Stein',
+                'role' => 'Member (Retired)',
+                'institution' => 'Obispo Colombres Agroindustrial Experimental Station (EEAOC)',
+                'bio' => 'Organizing & Scientific Committee Member representing Argentina.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Argentina',
+                'imageFile' => 'committee-beatriz-stein.jpeg'
+            ],
+            // Costa Rica
+            [
+                'name' => 'Juan Delgado Fernandez',
+                'role' => 'Member',
+                'institution' => 'LIFE-RID / Agricenter / AMVAC',
+                'bio' => 'Organizing & Scientific Committee Member representing Costa Rica.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Costa Rica',
+                'imageFile' => 'committee-juan-delgado.jpeg'
+            ],
+            // Spain
+            [
+                'name' => 'Leandro Peña',
+                'role' => 'Member',
+                'institution' => 'Spain Research Complex',
+                'bio' => 'Organizing & Scientific Committee Member representing Spain.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Spain',
+                'imageFile' => 'committee-leandro-pena.jpg'
+            ],
+            // Australia
+            [
+                'name' => 'Nerida Donovan',
+                'role' => 'Member',
+                'institution' => 'Department of Primary Industries',
+                'bio' => 'Organizing & Scientific Committee Member representing Australia.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Australia',
+                'imageFile' => 'committee-nerida-donovan.jpeg'
+            ],
+            // Mexico
+            [
+                'name' => 'Carolina Ramirez',
+                'role' => 'Member',
+                'institution' => 'Mexico Agricultural Research',
+                'bio' => 'Organizing & Scientific Committee Member representing Mexico.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Mexico',
+                'imageFile' => 'avatar-placeholder-2.jpg'
+            ],
+            // Scientific Advisor
+            [
+                'name' => 'Tim Gottwald',
+                'role' => 'Scientific Advisor (Retired)',
+                'institution' => 'USDA Agricultural Research Service (ARS)',
+                'bio' => 'Lead Scientific Advisor representing USDA ARS.',
+                'academicLink' => null,
+                'linkedinUrl' => null,
+                'groupType' => 'Scientific Advisor',
+                'imageFile' => 'committee-tim-gottwald.webp'
             ]
         ];
 
@@ -367,6 +561,50 @@ class SeedDataCommand extends Command
             $this->entityManager->persist($sponsor);
         }
 
+        // 10.1. Injeção de Dados: Organizer
+        $io->section('Seeding Organizers...');
+        $organizerLogosDir = $this->projectDir . '/seed-data/logos';
+        $organizers = [
+            [
+                'name' => 'Fundecitrus',
+                'logo' => 'Fundecitrus.webp',
+                'url' => 'https://www.fundecitrus.com.br',
+                'pos' => 1
+            ],
+            [
+                'name' => 'Embrapa',
+                'logo' => 'Embrapa.png',
+                'url' => 'https://www.embrapa.br',
+                'pos' => 2
+            ],
+            [
+                'name' => 'Luiz de Queiroz College of Agriculture (ESALQ/USP)',
+                'logo' => 'Luiz de Queiroz College of Agriculture (ESALQ:USP) .png',
+                'url' => 'https://www.esalq.usp.br',
+                'pos' => 3
+            ],
+            [
+                'name' => 'Sylvio Moreira Citrus Center – Agronomic Institute (IAC)',
+                'logo' => 'Sylvio Moreira Citrus Center – Agronomic Institute (IAC) .jpeg',
+                'url' => 'http://www.ccsm.br',
+                'pos' => 4
+            ]
+        ];
+
+        foreach ($organizers as $org) {
+            $organizer = new Organizer();
+            $organizer->setName($org['name']);
+            $organizer->setWebsiteUrl($org['url']);
+            $organizer->setPosition($org['pos']);
+
+            $logoPath = $organizerLogosDir . '/' . $org['logo'];
+            $logoImg = $uploadImage($logoPath, 'organizer');
+            if ($logoImg) {
+                $organizer->setLogo($logoImg);
+            }
+            $this->entityManager->persist($organizer);
+        }
+
         // 11. Injeção de Dados: SponsorshipInquiry
         $io->section('Seeding SponsorshipInquiries...');
         for ($i = 1; $i <= 5; $i++) {
@@ -382,9 +620,9 @@ class SeedDataCommand extends Command
         // 12. Injeção de Dados: AirportGuide
         $io->section('Seeding AirportGuides...');
         $airports = [
-            ['name' => 'Leite Lopes Airport', 'code' => 'RAO Hub', 'dist' => '8 km', 'trans' => 'Official Congress Vans available.', 'img' => 'airport-rao.jpg', 'pos' => 1],
-            ['name' => 'Guarulhos Int. Airport', 'code' => 'GRU Hub', 'dist' => '~300 km (1h connection)', 'trans' => 'Domestic connecting flights to RAO.', 'img' => 'airport-gru.jpg', 'pos' => 2],
-            ['name' => 'Viracopos Int. Airport', 'code' => 'VCP Hub', 'dist' => '~230 km', 'trans' => 'Direct Executive bus available.', 'img' => 'airport-vcp.jpg', 'pos' => 3]
+            ['name' => 'Dr. Leite Lopes State Airport (RAO)', 'code' => 'RAO Hub', 'dist' => '12 km (7.5 miles)', 'trans' => 'Taxis, ride-hailing services (Uber and 99), and private shuttle services (15–25 mins).', 'img' => 'airport-rao.jpg', 'pos' => 1],
+            ['name' => 'Guarulhos Int. Airport', 'code' => 'GRU Hub', 'dist' => '310 km (193 miles)', 'trans' => 'Connecting flights to RAO or car transport via modern highway system.', 'img' => 'airport-gru.jpg', 'pos' => 2],
+            ['name' => 'Viracopos Int. Airport', 'code' => 'VCP Hub', 'dist' => '220 km (137 miles)', 'trans' => 'Intercity bus service (Cometa) or road travel via Anhanguera Highway.', 'img' => 'airport-vcp.jpg', 'pos' => 3]
         ];
         foreach ($airports as $a) {
             $guide = new AirportGuide();
@@ -405,10 +643,12 @@ class SeedDataCommand extends Command
         // 13. Injeção de Dados: PartnerHotel
         $io->section('Seeding PartnerHotels...');
         $hotels = [
-            ['name' => 'Wyndham Ribeirão Preto', 'stars' => 4, 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-wyndham.jpg', 'pos' => 1],
-            ['name' => 'Ibis Styles Centro', 'stars' => 3, 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-ibis.jpg', 'pos' => 2],
-            ['name' => 'Mont Blanc Premium', 'stars' => 5, 'code' => null, 'link' => 'https://www.montblancpremium.com.br', 'img' => 'hotel-montblanc.jpg', 'pos' => 3],
-            ['name' => 'TRYP by Wyndham', 'stars' => 4, 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-tryp.jpg', 'pos' => 4]
+            ['name' => 'Mont Blanc Premium', 'stars' => 5, 'category' => 'Premium Hotel', 'distance' => '2.3 km', 'code' => null, 'link' => 'https://www.montblancpremium.com.br', 'img' => 'hotel-montblanc.webp', 'pos' => 1],
+            ['name' => 'Hotel Araucária Plaza', 'stars' => 5, 'category' => 'Premium Hotel', 'distance' => '2.6 km', 'code' => null, 'link' => 'http://www.araucariaplaza.com.br', 'img' => 'hotel-araucaria.webp', 'pos' => 2],
+            ['name' => 'TRYP by Wyndham Ribeirão Preto', 'stars' => 4, 'category' => 'International Business Hotel', 'distance' => '700 m', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-tryp.webp', 'pos' => 3],
+            ['name' => 'Wyndham Garden Ribeirão Preto Convention', 'stars' => 4, 'category' => 'International Business Hotel', 'distance' => '1.8 km', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-wyndham.webp', 'pos' => 4],
+            ['name' => 'ibis Ribeirão Preto Shopping', 'stars' => 3, 'category' => 'Best Location (connected to RibeirãoShopping)', 'distance' => '200 m', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-ibis.webp', 'pos' => 5],
+            ['name' => 'Matiz Vilaboim Ribeirão Preto', 'stars' => 3, 'category' => 'Best Value for Money', 'distance' => '1.2 km', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-matiz.webp', 'pos' => 6]
         ];
         foreach ($hotels as $h) {
             $hotel = new PartnerHotel();
@@ -416,8 +656,8 @@ class SeedDataCommand extends Command
             $hotel->setStars($h['stars']);
             $hotel->setBookingCode($h['code']);
             $hotel->setBookingLink($h['link']);
-            $hotel->setDescription("Premium partnership hotel offering special discounted rates.");
-            $hotel->setAddress("Av. Wladimir Meirelles, " . rand(100, 2000));
+            $hotel->setDescription($h['category']);
+            $hotel->setAddress($h['distance']);
             $hotel->setContact("+55 (16) " . rand(3000, 9999) . "-" . rand(1000, 9999));
             $hotel->setPosition($h['pos']);
             
@@ -431,17 +671,22 @@ class SeedDataCommand extends Command
         // 14. Injeção de Dados: RestaurantRecommendation
         $io->section('Seeding RestaurantRecommendations...');
         $restaurants = [
-            ['name' => 'Pinguim Choperia', 'price' => '$$', 'cat' => 'Traditional & Cultural Icon', 'img' => 'dining-pinguim.jpg', 'pos' => 1],
-            ['name' => 'Ancho Premium Beef', 'price' => '$$$$', 'cat' => 'Executive Fine Dining', 'img' => 'dining-ancho.jpg', 'pos' => 2],
-            ['name' => 'Amici Ristorante', 'price' => '$$$', 'cat' => 'Authentic Italian', 'img' => 'dining-amici.jpg', 'pos' => 3]
+            ['name' => 'Jangada', 'price' => '$$$', 'cat' => 'Seafood & Premium Meats', 'desc' => 'Fresh seafood, fish, and premium meat dishes.', 'img' => 'dining-jangada.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Jangada+RibeiraoShopping', 'pos' => 1],
+            ['name' => 'Cabaña RibeirãoShopping', 'price' => '$$$$', 'cat' => 'Argentine Steakhouse', 'desc' => 'Premium Argentine steaks.', 'img' => 'dining-cabana.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Cabana+RibeiraoShopping', 'pos' => 2],
+            ['name' => 'Pinguim', 'price' => '$$', 'cat' => 'Traditional & Cultural Icon', 'desc' => 'One of Ribeirão Preto\'s most iconic restaurants, renowned for its traditional draft beer ("chopp").', 'img' => 'dining-pinguim.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Pinguim+RibeiraoShopping', 'pos' => 3],
+            ['name' => 'Bar do Nelson', 'price' => '$$', 'cat' => 'Traditional Brazilian', 'desc' => 'Traditional Brazilian cuisine, famous for its parmegiana specialties.', 'img' => 'dining-barnelson.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Bar+do+Nelson+Ribeirao+Preto', 'pos' => 4],
+            ['name' => 'Outback Steakhouse', 'price' => '$$$', 'cat' => 'Steakhouse & Bar', 'desc' => 'Australian-inspired international cuisine.', 'img' => 'dining-outback.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Outback+Steakhouse+RibeiraoShopping', 'pos' => 5],
+            ['name' => 'Madero Steak House', 'price' => '$$$', 'cat' => 'Burgers & Grill', 'desc' => 'Gourmet burgers and grilled meats.', 'img' => 'dining-madero.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Madero+Steak+House+RibeiraoShopping', 'pos' => 6],
+            ['name' => 'Mirai Japanese Restaurant', 'price' => '$$$', 'cat' => 'Japanese Cuisine', 'desc' => 'Authentic Japanese cuisine.', 'img' => 'dining-mirai.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Mirai+Japanese+Restaurant+RibeiraoShopping', 'pos' => 7],
+            ['name' => 'Ancho Di Tullio', 'price' => '$$$$', 'cat' => 'Argentine Parrilla', 'desc' => 'Premium steaks grilled over a traditional Argentine parrilla.', 'img' => 'dining-ancho.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Ancho+Di+Tullio+RibeiraoShopping', 'pos' => 8]
         ];
         foreach ($restaurants as $r) {
             $rest = new RestaurantRecommendation();
             $rest->setName($r['name']);
             $rest->setPriceRange($r['price']);
             $rest->setCategory($r['cat']);
-            $rest->setDescription("Top local gastronomy recommendation for congress networking dinners.");
-            $rest->setLocationUrl('https://maps.google.com');
+            $rest->setDescription($r['desc']);
+            $rest->setLocationUrl($r['map']);
             $rest->setPosition($r['pos']);
             
             $imgObj = $uploadImage($layoutImagesDir . '/' . $r['img'], 'dining');
