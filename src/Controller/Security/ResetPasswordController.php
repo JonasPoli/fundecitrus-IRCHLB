@@ -39,7 +39,7 @@ class ResetPasswordController extends AbstractController
             if ($user) {
                 // Gerar token único
                 $token     = bin2hex(random_bytes(32));
-                $expiresAt = new \DateTime('+1 hour');
+                $expiresAt = new \DateTimeImmutable('+1 hour');
 
                 $user->setResetPasswordToken($token);
                 $user->setResetPasswordExpiresAt($expiresAt);
