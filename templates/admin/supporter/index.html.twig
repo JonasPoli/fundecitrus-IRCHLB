@@ -1,0 +1,98 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            <i class="fa-solid fa-hand-holding-heart" style="margin-right:8px;color:var(--bm-accent)" aria-hidden="true"></i>
+            Entidades de Apoio
+        </h1>
+        <p class="page-subtitle">Gerencie as entidades de apoio exibidas na página inicial (Supported by).</p>
+    </div>
+    <div>
+        <a href="{{ path('admin_supporter_new') }}" class="btn-primary">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            Adicionar
+        </a>
+    </div>
+</div>
+
+<div class="admin-card">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Logotipo</th>
+                <th>Nome</th>
+                <th>Link do Website</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="supporter-sortable">
+            {% for supporter in supporters %}
+                <tr class="sortable-row" data-id="{{ supporter.id }}">
+                    <td style="width: 30px; text-align: center;"><i class="fa-solid fa-grip-vertical" style="cursor: grab; color: #a1a1aa;"></i></td>
+                    <td>{{ supporter.id }}</td>
+                    <td>
+                        {% if supporter.logo and supporter.logo.imageName %}
+                            <img src="{{ asset('uploads/' ~ supporter.logo.imageName) }}" alt="{{ supporter.name }}" style="max-width: 60px; max-height: 40px; object-fit: contain; border-radius: 4px;">
+                        {% else %}
+                            <span style="font-size: 11px; opacity: 0.6;">-</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ supporter.name }}</td>
+                    <td>
+                        {% if supporter.websiteUrl %}
+                            <a href="{{ supporter.websiteUrl }}" target="_blank" class="text-primary hover:underline text-xs">{{ supporter.websiteUrl }}</a>
+                        {% else %}
+                            <span class="text-xs opacity-50">-</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_supporter_edit', {'id': supporter.id}) }}" class="btn-secondary" aria-label="Editar {{ supporter.name }}" title="Editar {{ supporter.name }}">
+                            <i class="fa-solid fa-pen" aria-hidden="true"></i>
+                            Editar
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Nenhum registro</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <script>
+        {% if supporters is not empty %}
+            $(document).ready(function () {
+                $('.admin-table').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json',
+                    },
+                    ordering: false,
+                    pageLength: 10,
+                    lengthMenu: [[5, 10, 25, -1], [5, 10, 25, 'Todos']],
+                });
+            });
+        {% endif %}
+    </script>
+    {{ include('admin/_sortable_script.html.twig', {
+        tbody_id: 'supporter-sortable',
+        reorder_url: path('app_admin_reorder', { entityName: 'Supporter' })
+    }) }}
+{% endblock %}
