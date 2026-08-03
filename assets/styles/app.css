@@ -1049,7 +1049,8 @@ html.dark {
 }
 
 .organizer-logo-box {
-    width: 100% !important;
+    width: 230px !important;
+    max-width: 100% !important;
     height: 120px !important;
     display: flex !important;
     align-items: center !important;

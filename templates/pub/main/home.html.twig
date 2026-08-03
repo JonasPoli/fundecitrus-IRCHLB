@@ -408,7 +408,7 @@
                 <div class="flex flex-wrap gap-8 items-center justify-center">
                     {% for organizer in organizers %}
                         <a href="{{ organizer.websiteUrl ?? path('app_sobre') ~ '#section-committee' }}" target="_blank"
-                           class="organizer-logo-box hover-effect w-56">
+                           class="organizer-logo-box hover-effect">
                             {% if organizer.logo and organizer.logo.imageName %}
                                 <div class="w-full h-full flex items-center justify-center p-4">
                                     <img src="{{ asset('uploads/' ~ organizer.logo.imageName) }}" alt="{{ organizer.name }}"
@@ -432,9 +432,9 @@
                 <div class="flex flex-wrap gap-8 items-center justify-center">
                     {% for supporter in supporters %}
                         {% if supporter.websiteUrl %}
-                            <a href="{{ supporter.websiteUrl }}" target="_blank" rel="noopener noreferrer" class="organizer-logo-box hover-effect w-56">
+                            <a href="{{ supporter.websiteUrl }}" target="_blank" rel="noopener noreferrer" class="organizer-logo-box hover-effect">
                         {% else %}
-                            <div class="organizer-logo-box hover-effect w-56">
+                            <div class="organizer-logo-box hover-effect">
                         {% endif %}
                             {% if supporter.logo and supporter.logo.imageName %}
                                 <div class="w-full h-full flex items-center justify-center p-4">
