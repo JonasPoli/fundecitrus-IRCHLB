@@ -22,30 +22,35 @@
     <table class="admin-table">
         <thead>
             <tr>
-                                    <th></th>
-                                    <th>Id</th>
-                                    <th>Nome do Lote</th>
-                                    <th>Data de Início</th>
-                                    <th>Data de Término</th>
-                                    <th>Preço / Valor</th>
-                                <th></th>
+                <th style="width: 30px;"></th>
+                <th>Category</th>
+                <th>Period</th>
+                <th>HLB Congress</th>
+                <th>IOCV Conference</th>
+                <th>Full Congress</th>
+                <th>Notes / Restrictions</th>
+                <th></th>
             </tr>
-
         </thead>
         <tbody id="registration-batch-sortable">
             {% for registration_batch in registration_batches %}
                 <tr class="sortable-row" data-id="{{ registration_batch.id }}">
-                                                                    <td style="width: 30px; text-align: center;"><i class="fa-solid fa-grip-vertical" style="cursor: grab; color: #a1a1aa;"></i></td>
-                                                                    <td>{{ registration_batch.id }}</td>
-                                                                                            <td>{{ registration_batch.name }}</td>
-                                                                                            <td>{{ registration_batch.startDate ? registration_batch.startDate|date('Y-m-d H:i:s') : '' }}</td>
-                                                                                            <td>{{ registration_batch.endDate ? registration_batch.endDate|date('Y-m-d H:i:s') : '' }}</td>
-                                                                                            <td>{{ registration_batch.price }}</td>
-                                                                 <td><a href="{{ path('app_admin_registration_batch_edit', {'id': registration_batch.id}) }}" class="btn-secondary" aria-label="Editar {{ registration_batch.name }}" title="Editar {{ registration_batch.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                    <td style="width: 30px; text-align: center;"><i class="fa-solid fa-grip-vertical" style="cursor: grab; color: #a1a1aa;"></i></td>
+                    <td class="font-bold text-primary">{{ registration_batch.name }}</td>
+                    <td>{{ registration_batch.periodText ?? '-' }}</td>
+                    <td>{{ registration_batch.hlbPrice ?? '-' }}</td>
+                    <td>{{ registration_batch.iocvPrice ?? '-' }}</td>
+                    <td>{{ registration_batch.fullPrice ?? '-' }}</td>
+                    <td class="text-xs text-slate-500 max-w-xs truncate">{{ registration_batch.notes ?? '-' }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_registration_batch_edit', {'id': registration_batch.id}) }}" class="btn-secondary" aria-label="Edit {{ registration_batch.name }}" title="Edit {{ registration_batch.name }}">
+                            <i class="fa-solid fa-pen" aria-hidden="true"></i> Edit
+                        </a>
+                    </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">Nenhum registro</td>
+                    <td colspan="8">No categories found.</td>
                 </tr>
             {% endfor %}
         </tbody>

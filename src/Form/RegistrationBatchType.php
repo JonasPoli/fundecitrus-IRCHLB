@@ -14,19 +14,40 @@ class RegistrationBatchType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Nome do Lote (Ex: 1º Lote)'])
+                'label' => 'Registration Category (e.g., Professional, Student, Invited Speaker, Accompanying Person)',
+            ])
+            ->add('periodText', null, [
+                'label' => 'Registration Period (e.g., Early Bird* – Regular – Late)',
+                'required' => false,
+            ])
+            ->add('hlbPrice', null, [
+                'label' => 'HLB Congress Price (e.g., US$ 350 / 400 / 450 or Free)',
+                'required' => false,
+            ])
+            ->add('iocvPrice', null, [
+                'label' => 'IOCV Conference Price (e.g., US$ 100 / 150 / 200 or Free)',
+                'required' => false,
+            ])
+            ->add('fullPrice', null, [
+                'label' => 'Full Congress Price (HLB + IOCV) (e.g., US$ 400 / 450 / 500 or Free)',
+                'required' => false,
+            ])
+            ->add('notes', null, [
+                'label' => 'Special Restrictions / Notes',
+                'required' => false,
+                'attr' => ['rows' => 3],
+            ])
             ->add('startDate', null, [
-                'label' => 'Data de Início',
+                'label' => 'Start Date (Optional)',
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('endDate', null, [
-                'label' => 'Data de Término / Prazo',
+                'label' => 'End Date / Deadline (Optional)',
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('position', HiddenType::class)
-            ->add('price', null, [
-                'label' => 'Preço / Valor'])
-
         ;
     }
 

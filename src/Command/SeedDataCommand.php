@@ -481,20 +481,55 @@ class SeedDataCommand extends Command
             $this->entityManager->persist($member);
         }
 
-        // 7. Injeção de Dados: RegistrationBatch (Lotes)
+        // 7. Injeção de Dados: RegistrationBatch (Categorias de Inscrição)
         $io->section('Seeding RegistrationBatches...');
         $batches = [
-            ['name' => 'Early-Bird Tariff', 'days' => 60, 'price' => '300.00', 'pos' => 1],
-            ['name' => 'Regular Tariff', 'days' => 120, 'price' => '450.00', 'pos' => 2],
-            ['name' => 'Late / On-site Tariff', 'days' => 180, 'price' => '600.00', 'pos' => 3]
+            [
+                'name' => 'Professional',
+                'periodText' => 'Early Bird* – Regular – Late',
+                'hlbPrice' => 'US$ 350 / 400 / 450',
+                'iocvPrice' => 'US$ 100 / 150 / 200',
+                'fullPrice' => 'US$ 400 / 450 / 500',
+                'notes' => null,
+                'pos' => 1
+            ],
+            [
+                'name' => 'Student',
+                'periodText' => 'Early Bird*',
+                'hlbPrice' => 'US$ 150',
+                'iocvPrice' => 'US$ 50',
+                'fullPrice' => 'US$ 200',
+                'notes' => 'Limited to 100 spots. Must be working with HLB / greening research. Student registration is available only during Early Bird with abstract submission.',
+                'pos' => 2
+            ],
+            [
+                'name' => 'Invited Speaker',
+                'periodText' => 'Early Bird* – Regular – Late',
+                'hlbPrice' => 'Free',
+                'iocvPrice' => 'Free',
+                'fullPrice' => 'Free',
+                'notes' => null,
+                'pos' => 3
+            ],
+            [
+                'name' => 'Accompanying Person',
+                'periodText' => 'Early Bird* – Regular – Late',
+                'hlbPrice' => 'TBD',
+                'iocvPrice' => 'TBD',
+                'fullPrice' => 'TBD',
+                'notes' => 'No access to auditorium. Family member or caregiver only.',
+                'pos' => 4
+            ]
         ];
         foreach ($batches as $b) {
             $batch = new RegistrationBatch();
             $batch->setName($b['name']);
-            $batch->setStartDate(new \DateTime());
-            $batch->setEndDate((new \DateTime())->modify("+{$b['days']} days"));
+            $batch->setPeriodText($b['periodText']);
+            $batch->setHlbPrice($b['hlbPrice']);
+            $batch->setIocvPrice($b['iocvPrice']);
+            $batch->setFullPrice($b['fullPrice']);
+            $batch->setNotes($b['notes']);
             $batch->setPosition($b['pos']);
-            $batch->setPrice($b['price']);
             $this->entityManager->persist($batch);
         }
 

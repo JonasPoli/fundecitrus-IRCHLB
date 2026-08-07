@@ -26,8 +26,23 @@ class RegistrationBatch
     #[ORM\Column]
     private ?int $position = 0;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $price = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $hlbPrice = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $iocvPrice = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $fullPrice = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $periodText = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $notes = null;
 
     public function getId(): ?int
     {
@@ -87,9 +102,69 @@ class RegistrationBatch
         return $this->price;
     }
 
-    public function setPrice(string $price): static
+    public function setPrice(?string $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getHlbPrice(): ?string
+    {
+        return $this->hlbPrice;
+    }
+
+    public function setHlbPrice(?string $hlbPrice): static
+    {
+        $this->hlbPrice = $hlbPrice;
+
+        return $this;
+    }
+
+    public function getIocvPrice(): ?string
+    {
+        return $this->iocvPrice;
+    }
+
+    public function setIocvPrice(?string $iocvPrice): static
+    {
+        $this->iocvPrice = $iocvPrice;
+
+        return $this;
+    }
+
+    public function getFullPrice(): ?string
+    {
+        return $this->fullPrice;
+    }
+
+    public function setFullPrice(?string $fullPrice): static
+    {
+        $this->fullPrice = $fullPrice;
+
+        return $this;
+    }
+
+    public function getPeriodText(): ?string
+    {
+        return $this->periodText;
+    }
+
+    public function setPeriodText(?string $periodText): static
+    {
+        $this->periodText = $periodText;
+
+        return $this;
+    }
+
+    public function getNotes(): ?string
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(?string $notes): static
+    {
+        $this->notes = $notes;
 
         return $this;
     }
