@@ -325,10 +325,33 @@
                                         </span>
                                     </div>
                                     
-                                    <!-- Distance Badge -->
-                                    <div class="flex items-center gap-1.5 text-xs text-slate-500 font-semibold mb-4">
-                                        <span class="material-symbols-outlined text-secondary text-sm">directions_walk</span>
-                                        <span>{{ hotel.address }} from venue</span>
+                                    <!-- Distance & Travel Times -->
+                                    <div class="space-y-1.5 text-xs text-slate-600 font-semibold mb-4 border-t border-slate-100 pt-3">
+                                        {% if hotel.distance %}
+                                            <div class="flex items-center gap-2">
+                                                <span class="material-symbols-outlined text-secondary text-sm">near_me</span>
+                                                <span>{{ hotel.distance }} from venue</span>
+                                            </div>
+                                        {% elseif hotel.address %}
+                                            <div class="flex items-center gap-2">
+                                                <span class="material-symbols-outlined text-secondary text-sm">near_me</span>
+                                                <span>{{ hotel.address }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if hotel.walkingTime %}
+                                            <div class="flex items-center gap-2">
+                                                <span class="material-symbols-outlined text-secondary text-sm">directions_walk</span>
+                                                <span>{{ hotel.walkingTime }} walking time</span>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if hotel.drivingTime %}
+                                            <div class="flex items-center gap-2">
+                                                <span class="material-symbols-outlined text-secondary text-sm">directions_car</span>
+                                                <span>{{ hotel.drivingTime }} driving time</span>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
