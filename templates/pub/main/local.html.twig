@@ -35,22 +35,15 @@
                             <p>Ribeirão Preto, SP - 14026-900</p>
                         {% endif %}
                     </address>
-                    {% if event_config and event_config.googleMapsUrl %}
-                        <a href="{{ event_config.googleMapsUrl }}" target="_blank" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-white transition-colors" aria-label="Get Directions on Google Maps" id="btn-maps-directions">
-                            Get Directions <span class="material-symbols-outlined text-sm">open_in_new</span>
-                        </a>
-                    {% endif %}
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=Ribeir%C3%A3oShopping%2C+Av.+Cel.+Fernando+Ferreira+Leite%2C+1540+-+Jardim+California%2C+Ribeir%C3%A3o+Preto+-+SP%2C+14026-900" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-white transition-colors" aria-label="Get Directions on Google Maps" id="btn-maps-directions">
+                        Get Directions <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </a>
                 </div>
                 <div class="lg-w-7-12-custom h-96 lg:h-full min-h-[400px] bg-slate-200 relative map-container">
                     {% if event_config and event_config.googleMapsUrl and ('iframe' in event_config.googleMapsUrl) %}
                         {{ event_config.googleMapsUrl|raw }}
-                    {% elseif event_config and event_config.googleMapsUrl %}
-                        <iframe src="{{ event_config.googleMapsUrl }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy" aria-label="Google Map location of venue" id="map-iframe"></iframe>
                     {% else %}
-                        <div class="absolute inset-0 flex items-center justify-center text-slate-500 flex-col">
-                            <span class="material-symbols-outlined text-5xl mb-2 text-slate-400">map</span>
-                            <p class="font-bold">Interactive Google Map API Integration</p>
-                        </div>
+                        <iframe src="https://maps.google.com/maps?q=Ribeir%C3%A3oShopping%20Av.%20Cel.%20Fernando%20Ferreira%20Leite%2C%201540%20-%20Jardim%20California%2C%20Ribeir%C3%A3o%20Preto%20-%20SP%2C%2014026-900&t=&z=16&ie=UTF8&iwloc=B&output=embed" class="w-full h-full border-0 min-h-[400px]" allowfullscreen="" loading="lazy" aria-label="Google Map location of venue" id="map-iframe"></iframe>
                     {% endif %}
                 </div>
             </div>

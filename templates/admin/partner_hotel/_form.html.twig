@@ -4,16 +4,20 @@
             {{ form_row(form.name) }}
             {{ form_row(form.stars) }}
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {{ form_row(form.bookingCode) }}
-            {{ form_row(form.bookingLink) }}
+        <div>
+            {{ form_row(form.description) }}
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {{ form_row(form.address) }}
-            {{ form_row(form.contact) }}
+            {{ form_row(form.distance) }}
         </div>
-        <div>
-            {{ form_row(form.description) }}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.walkingTime) }}
+            {{ form_row(form.drivingTime) }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ form_row(form.contact) }}
+            {{ form_row(form.bookingLink) }}
         </div>
         <div>
             {{ form_row(form.image) }}

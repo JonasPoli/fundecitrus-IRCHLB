@@ -125,7 +125,7 @@ class SeedDataCommand extends Command
         $eventConfig->setAddressNeighborhood('Jardim California');
         $eventConfig->setAddressCity('Ribeirão Preto, SP');
         $eventConfig->setAddressZipCode('14026-900');
-        $eventConfig->setGoogleMapsUrl('https://maps.google.com/maps?q=Multiplan+Hall+RibeiraoShopping+Av+Cel+Fernando+Ferreira+Leite+1540+Jardim+California+Ribeirao+Preto+SP+14026-900&t=&z=16&ie=UTF8&iwloc=&output=embed');
+        $eventConfig->setGoogleMapsUrl('https://maps.google.com/maps?q=Ribeir%C3%A3oShopping%20Av.%20Cel.%20Fernando%20Ferreira%20Leite%2C%201540%20-%20Jardim%20California%2C%20Ribeir%C3%A3o%20Preto%20-%20SP%2C%2014026-900&t=&z=16&ie=UTF8&iwloc=B&output=embed');
         $eventConfig->setHeroDescription('The VIII International Research Conference on Huanglongbing represents the most vital academic and operational convergence point for discussing, mapping, and confronting the HLB citrus disease. Our root conceptual objective is to foster deep collaboration across borders.');
         
         $heroImage = $uploadImage($layoutImagesDir . '/hero-bg.jpg', 'hero');
