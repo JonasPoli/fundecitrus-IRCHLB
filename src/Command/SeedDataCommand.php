@@ -678,12 +678,12 @@ class SeedDataCommand extends Command
         // 13. Injeção de Dados: PartnerHotel
         $io->section('Seeding PartnerHotels...');
         $hotels = [
-            ['name' => 'Mont Blanc Premium', 'stars' => 5, 'category' => 'Premium Hotel', 'distance' => '2.3 km', 'code' => null, 'link' => 'https://www.montblancpremium.com.br', 'img' => 'hotel-montblanc.webp', 'pos' => 1],
-            ['name' => 'Hotel Araucária Plaza', 'stars' => 5, 'category' => 'Premium Hotel', 'distance' => '2.6 km', 'code' => null, 'link' => 'http://www.araucariaplaza.com.br', 'img' => 'hotel-araucaria.webp', 'pos' => 2],
-            ['name' => 'TRYP by Wyndham Ribeirão Preto', 'stars' => 4, 'category' => 'International Business Hotel', 'distance' => '700 m', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-tryp.webp', 'pos' => 3],
-            ['name' => 'Wyndham Garden Ribeirão Preto Convention', 'stars' => 4, 'category' => 'International Business Hotel', 'distance' => '1.8 km', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-wyndham.webp', 'pos' => 4],
-            ['name' => 'ibis Ribeirão Preto Shopping', 'stars' => 3, 'category' => 'Best Location (connected to RibeirãoShopping)', 'distance' => '200 m', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-ibis.webp', 'pos' => 5],
-            ['name' => 'Matiz Vilaboim Ribeirão Preto', 'stars' => 3, 'category' => 'Best Value for Money', 'distance' => '1.2 km', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-matiz.webp', 'pos' => 6]
+            ['name' => 'Mont Blanc Premium', 'stars' => 5, 'category' => 'Premium Hotel', 'distance' => '2.3 km', 'walk' => '25 min', 'drive' => '5 min', 'code' => null, 'link' => 'https://www.montblancpremium.com.br', 'img' => 'hotel-montblanc.webp', 'pos' => 1],
+            ['name' => 'Hotel Araucária Plaza', 'stars' => 5, 'category' => 'Premium Hotel', 'distance' => '2.6 km', 'walk' => '30 min', 'drive' => '6 min', 'code' => null, 'link' => 'http://www.araucariaplaza.com.br', 'img' => 'hotel-araucaria.webp', 'pos' => 2],
+            ['name' => 'TRYP by Wyndham Ribeirão Preto', 'stars' => 4, 'category' => 'International Business Hotel', 'distance' => '700 m', 'walk' => '8 min', 'drive' => '2 min', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-tryp.webp', 'pos' => 3],
+            ['name' => 'Wyndham Garden Ribeirão Preto Convention', 'stars' => 4, 'category' => 'International Business Hotel', 'distance' => '1.8 km', 'walk' => '20 min', 'drive' => '4 min', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-wyndham.webp', 'pos' => 4],
+            ['name' => 'ibis Ribeirão Preto Shopping', 'stars' => 3, 'category' => 'Best Location (connected to RibeirãoShopping)', 'distance' => '200 m', 'walk' => '2 min', 'drive' => '1 min', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-ibis.webp', 'pos' => 5],
+            ['name' => 'Matiz Vilaboim Ribeirão Preto', 'stars' => 3, 'category' => 'Best Value for Money', 'distance' => '1.2 km', 'walk' => '14 min', 'drive' => '3 min', 'code' => 'IRCHLB27', 'link' => null, 'img' => 'hotel-matiz.webp', 'pos' => 6]
         ];
         foreach ($hotels as $h) {
             $hotel = new PartnerHotel();
@@ -692,6 +692,9 @@ class SeedDataCommand extends Command
             $hotel->setBookingCode($h['code']);
             $hotel->setBookingLink($h['link']);
             $hotel->setDescription($h['category']);
+            $hotel->setDistance($h['distance']);
+            $hotel->setWalkingTime($h['walk']);
+            $hotel->setDrivingTime($h['drive']);
             $hotel->setAddress($h['distance']);
             $hotel->setContact("+55 (16) " . rand(3000, 9999) . "-" . rand(1000, 9999));
             $hotel->setPosition($h['pos']);
@@ -706,14 +709,14 @@ class SeedDataCommand extends Command
         // 14. Injeção de Dados: RestaurantRecommendation
         $io->section('Seeding RestaurantRecommendations...');
         $restaurants = [
-            ['name' => 'Jangada', 'price' => '$$$', 'cat' => 'Seafood & Premium Meats', 'desc' => 'Fresh seafood, fish, and premium meat dishes.', 'img' => 'dining-jangada.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Jangada+RibeiraoShopping', 'pos' => 1],
-            ['name' => 'Cabaña RibeirãoShopping', 'price' => '$$$$', 'cat' => 'Argentine Steakhouse', 'desc' => 'Premium Argentine steaks.', 'img' => 'dining-cabana.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Cabana+RibeiraoShopping', 'pos' => 2],
-            ['name' => 'Pinguim', 'price' => '$$', 'cat' => 'Traditional & Cultural Icon', 'desc' => 'One of Ribeirão Preto\'s most iconic restaurants, renowned for its traditional draft beer ("chopp").', 'img' => 'dining-pinguim.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Pinguim+RibeiraoShopping', 'pos' => 3],
-            ['name' => 'Bar do Nelson', 'price' => '$$', 'cat' => 'Traditional Brazilian', 'desc' => 'Traditional Brazilian cuisine, famous for its parmegiana specialties.', 'img' => 'dining-barnelson.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Bar+do+Nelson+Ribeirao+Preto', 'pos' => 4],
-            ['name' => 'Outback Steakhouse', 'price' => '$$$', 'cat' => 'Steakhouse & Bar', 'desc' => 'Australian-inspired international cuisine.', 'img' => 'dining-outback.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Outback+Steakhouse+RibeiraoShopping', 'pos' => 5],
-            ['name' => 'Madero Steak House', 'price' => '$$$', 'cat' => 'Burgers & Grill', 'desc' => 'Gourmet burgers and grilled meats.', 'img' => 'dining-madero.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Madero+Steak+House+RibeiraoShopping', 'pos' => 6],
-            ['name' => 'Mirai Japanese Restaurant', 'price' => '$$$', 'cat' => 'Japanese Cuisine', 'desc' => 'Authentic Japanese cuisine.', 'img' => 'dining-mirai.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Mirai+Japanese+Restaurant+RibeiraoShopping', 'pos' => 7],
-            ['name' => 'Ancho Di Tullio', 'price' => '$$$$', 'cat' => 'Argentine Parrilla', 'desc' => 'Premium steaks grilled over a traditional Argentine parrilla.', 'img' => 'dining-ancho.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Ancho+Di+Tullio+RibeiraoShopping', 'pos' => 8]
+            ['name' => 'Jangada', 'price' => '$$$', 'cat' => 'Seafood & Premium Meats', 'desc' => 'Fresh seafood, fish, and premium meat dishes.', 'inside' => true, 'img' => 'dining-jangada.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Jangada+RibeiraoShopping', 'pos' => 1],
+            ['name' => 'Cabaña RibeirãoShopping', 'price' => '$$$$', 'cat' => 'Argentine Steakhouse', 'desc' => 'Premium Argentine steaks.', 'inside' => true, 'img' => 'dining-cabana.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Cabana+RibeiraoShopping', 'pos' => 2],
+            ['name' => 'Pinguim', 'price' => '$$', 'cat' => 'Traditional & Cultural Icon', 'desc' => 'One of Ribeirão Preto\'s most iconic restaurants, renowned for its traditional draft beer ("chopp").', 'inside' => true, 'img' => 'dining-pinguim.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Pinguim+RibeiraoShopping', 'pos' => 3],
+            ['name' => 'Bar do Nelson', 'price' => '$$', 'cat' => 'Traditional Brazilian', 'desc' => 'Traditional Brazilian cuisine, famous for its parmegiana specialties.', 'inside' => false, 'img' => 'dining-barnelson.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Bar+do+Nelson+Ribeirao+Preto', 'pos' => 4],
+            ['name' => 'Outback Steakhouse', 'price' => '$$$', 'cat' => 'Steakhouse & Bar', 'desc' => 'Australian-inspired international cuisine.', 'inside' => true, 'img' => 'dining-outback.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Outback+Steakhouse+RibeiraoShopping', 'pos' => 5],
+            ['name' => 'Madero Steak House', 'price' => '$$$', 'cat' => 'Burgers & Grill', 'desc' => 'Gourmet burgers and grilled meats.', 'inside' => true, 'img' => 'dining-madero.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Madero+Steak+House+RibeiraoShopping', 'pos' => 6],
+            ['name' => 'Mirai Japanese Restaurant', 'price' => '$$$', 'cat' => 'Japanese Cuisine', 'desc' => 'Authentic Japanese cuisine.', 'inside' => true, 'img' => 'dining-mirai.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Mirai+Japanese+Restaurant+RibeiraoShopping', 'pos' => 7],
+            ['name' => 'Ancho Di Tullio', 'price' => '$$$$', 'cat' => 'Argentine Parrilla', 'desc' => 'Premium steaks grilled over a traditional Argentine parrilla.', 'inside' => true, 'img' => 'dining-ancho.webp', 'map' => 'https://www.google.com/maps/search/?api=1&query=Ancho+Di+Tullio+RibeiraoShopping', 'pos' => 8]
         ];
         foreach ($restaurants as $r) {
             $rest = new RestaurantRecommendation();
@@ -721,6 +724,7 @@ class SeedDataCommand extends Command
             $rest->setPriceRange($r['price']);
             $rest->setCategory($r['cat']);
             $rest->setDescription($r['desc']);
+            $rest->setInsideShopping($r['inside']);
             $rest->setLocationUrl($r['map']);
             $rest->setPosition($r['pos']);
             
