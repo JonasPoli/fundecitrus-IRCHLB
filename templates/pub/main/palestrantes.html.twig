@@ -30,14 +30,21 @@
                                         <img src="{{ asset('images/avatar-placeholder.jpg') }}" alt="{{ speaker.name }}" width="400" height="400" loading="{{ loop.index <= 4 ? 'eager' : 'lazy' }}"
                                              class="w-full h-80 object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-700">
                                     {% endif %}
-                                    {% if speaker.eventGroup %}
-                                        <div class="absolute top-4 right-4 z-10">
+                                    {% if speaker.eventGroup or speaker.committeeType %}
+                                        <div class="absolute top-4 right-4 z-10 flex flex-col items-end gap-1">
                                             {% if speaker.eventGroup == 'IOCV' %}
                                                 <span class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">XXIV IOCV</span>
                                             {% elseif speaker.eventGroup == 'IRCHLB' %}
                                                 <span class="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">VIII IRCHLB</span>
                                             {% elseif speaker.eventGroup == 'BOTH' %}
                                                 <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">IOCV & IRCHLB</span>
+                                            {% endif %}
+                                            {% if speaker.committeeType == 'organizing' %}
+                                                <span class="bg-purple-700 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Organizing Committee</span>
+                                            {% elseif speaker.committeeType == 'scientific' %}
+                                                <span class="bg-indigo-700 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Scientific Committee</span>
+                                            {% elseif speaker.committeeType == 'steering' %}
+                                                <span class="bg-teal-700 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Steering Committee</span>
                                             {% endif %}
                                         </div>
                                     {% endif %}

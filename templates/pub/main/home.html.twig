@@ -28,9 +28,11 @@
                                     </h5>
                                 {% endif %}
                                 
-                                {% if banner.mainTitle is not empty %}
-                                    <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="600">
-                                        {{ banner.mainTitle }}
+                                {% set titleSizeClass = banner.titleFontSize ? banner.titleFontSize : 'text-3xl sm:text-4xl md:text-6xl lg:text-7xl' %}
+                                {% if banner.mainTitle is not empty or banner.mainTitleLine2 is not empty %}
+                                    <h1 class="{{ titleSizeClass }} font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="600">
+                                        {% if banner.mainTitle is not empty %}<span>{{ banner.mainTitle }}</span>{% endif %}
+                                        {% if banner.mainTitleLine2 is not empty %}<br><span>{{ banner.mainTitleLine2 }}</span>{% endif %}
                                     </h1>
                                 {% endif %}
                                 
@@ -91,9 +93,11 @@
                         </h5>
                     {% endif %}
                     
-                    {% if banner.mainTitle is not empty %}
-                        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="600">
-                            {{ banner.mainTitle }}
+                    {% set titleSizeClass = banner.titleFontSize ? banner.titleFontSize : 'text-3xl sm:text-4xl md:text-6xl lg:text-7xl' %}
+                    {% if banner.mainTitle is not empty or banner.mainTitleLine2 is not empty %}
+                        <h1 class="{{ titleSizeClass }} font-bold mb-6 leading-tight text-white" data-aos="fade-up" data-aos-delay="600">
+                            {% if banner.mainTitle is not empty %}<span>{{ banner.mainTitle }}</span>{% endif %}
+                            {% if banner.mainTitleLine2 is not empty %}<br><span>{{ banner.mainTitleLine2 }}</span>{% endif %}
                         </h1>
                     {% endif %}
                     

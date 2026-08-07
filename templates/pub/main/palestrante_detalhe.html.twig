@@ -46,14 +46,22 @@
                             <span class="material-symbols-outlined text-secondary text-3xl">person</span>
                             {{ speaker.name }}
                         </h1>
-                        {% if speaker.eventGroup %}
-                            <div class="mb-3">
+                        {% if speaker.eventGroup or speaker.committeeType %}
+                            <div class="mb-3 flex flex-wrap gap-2">
                                 {% if speaker.eventGroup == 'IOCV' %}
                                     <span class="inline-block bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">XXIV IOCV Conference Speaker</span>
                                 {% elseif speaker.eventGroup == 'IRCHLB' %}
                                     <span class="inline-block bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">VIII IRCHLB Speaker</span>
                                 {% elseif speaker.eventGroup == 'BOTH' %}
                                     <span class="inline-block bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">IOCV & IRCHLB Keynote Speaker</span>
+                                {% endif %}
+
+                                {% if speaker.committeeType == 'organizing' %}
+                                    <span class="inline-block bg-purple-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Organizing Committee</span>
+                                {% elseif speaker.committeeType == 'scientific' %}
+                                    <span class="inline-block bg-indigo-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Scientific Committee</span>
+                                {% elseif speaker.committeeType == 'steering' %}
+                                    <span class="inline-block bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Steering Committee</span>
                                 {% endif %}
                             </div>
                         {% endif %}

@@ -534,19 +534,24 @@ class SeedDataCommand extends Command
             $this->entityManager->persist($batch);
         }
 
-        // 8. Injeção de Dados: ThematicGroup (Cronograma Crítico / Call for Papers)
-        $io->section('Seeding ThematicGroups (Critical Timeline)...');
-        $groups = [
-            ['title' => 'Call for Papers Opens', 'desc' => 'Submission portal opens online via Fealq integration.', 'days' => 30],
-            ['title' => 'Submission Deadline', 'desc' => 'Final call for all abstracts and full papers under peer review.', 'days' => 90],
-            ['title' => 'Acceptance Notification', 'desc' => 'Scientific board releases the final review decisions to authors.', 'days' => 120]
+        // 8. Injeção de Dados: ThematicGroup (Grupos Temáticos do Programa)
+        $io->section('Seeding ThematicGroups...');
+        $groupsData = [
+            ['title' => 'Consumer Health, Citrus Juice Quality, and the Future of the Citrus Industry', 'desc' => 'Exploring consumer perception, juice nutritional quality, and market trends.'],
+            ['title' => 'Understanding Why HLB Remains Difficult to Control', 'desc' => 'Biological, physiological, and environmental mechanisms of Ca. Liberibacter.'],
+            ['title' => 'Climate Effects on HLB and Vector-Host-Pathogen Interactions', 'desc' => 'Impact of climate change and temperature variations on psyllid dynamics and disease progression.'],
+            ['title' => 'Peptides as a Novel Approach for Vector Control', 'desc' => 'Antimicrobial and insecticidal peptide applications for sustainable management.'],
+            ['title' => 'Current Strategies for HLB Mitigation: Advances and Challenges', 'desc' => 'Field practices, therapeutic treatments, and integrated pest management.'],
+            ['title' => 'Genetic Resistance to HLB and Its Challenges', 'desc' => 'Breeding programs, gene editing, and transgenic approaches for resistant cultivars.']
         ];
-        foreach ($groups as $g) {
+        $thematicGroupObjs = [];
+        foreach ($groupsData as $idx => $g) {
             $group = new ThematicGroup();
             $group->setTitle($g['title']);
             $group->setDescription($g['desc']);
-            $group->setEventDate((new \DateTime())->modify("+{$g['days']} days"));
+            $group->setEventDate((new \DateTime())->modify("+{$idx} days"));
             $this->entityManager->persist($group);
+            $thematicGroupObjs[] = $group;
         }
 
         // 9. Injeção de Dados: SponsorshipTier
@@ -930,9 +935,10 @@ class SeedDataCommand extends Command
             $activity->setTitle($activityTitles[$titleIndex] . " - Part " . (ceil($i / 10)));
             $activity->setType($activityTypes[array_rand($activityTypes)]);
             
-            // Atribui dia e sala de forma balanceada
+            // Atribui dia, sala e grupo temático de forma balanceada
             $activity->setEventDay($dayObjs[($i - 1) % count($dayObjs)]);
             $activity->setRoom($roomObjs[($i - 1) % count($roomObjs)]);
+            $activity->setThematicGroup($thematicGroupObjs[($i - 1) % count($thematicGroupObjs)]);
             
             // Atribui slot de hora
             $slot = $timeSlots[($i - 1) % count($timeSlots)];

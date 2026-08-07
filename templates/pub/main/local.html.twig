@@ -48,29 +48,59 @@
                 </div>
             </div>
 
-            <!-- Two Column Layout: Multiplan Hall & Ribeirão Preto -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-                <div data-aos="fade-right">
-                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">corporate_fare</span>
-                    <h2 class="text-3xl font-bold text-primary mb-6">Multiplan Hall</h2>
-                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
-                        The joint conferences will be held in the state-of-the-art <strong>Multiplan Hall</strong>, located within the prestigious <strong>RibeirãoShopping</strong>. This prime venue offers world-class facilities and is surrounded by premium services, shopping, and entertainment.
-                    </p>
-                    <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100">
-                        <img src="{{ asset('images/multiplan-hall.webp') }}" alt="Multiplan Hall" class="w-full h-64 object-cover">
+            <!-- Two Column Layout: Text on Left, Ribeirão Slider on Right -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-16">
+                <!-- Text Column -->
+                <div class="flex flex-col justify-center space-y-8" data-aos="fade-right">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-secondary text-4xl">corporate_fare</span>
+                            <h2 class="text-3xl font-bold text-primary">Multiplan Hall</h2>
+                        </div>
+                        <p class="text-slate-700 text-lg leading-relaxed">
+                            The joint conferences will be held in the state-of-the-art <strong>Multiplan Hall</strong>, located within the prestigious <strong>RibeirãoShopping</strong>. This prime venue offers world-class facilities and is surrounded by premium services, shopping, and entertainment.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-secondary text-4xl">location_city</span>
+                            <h2 class="text-3xl font-bold text-primary">Ribeirão Preto</h2>
+                        </div>
+                        <p class="text-slate-700 text-lg leading-relaxed mb-4">
+                            The conference will be held in <strong>Ribeirão Preto</strong>, one of the most important cities in the state of São Paulo and one of Brazil's leading agribusiness hubs.
+                        </p>
+                        <p class="text-slate-700 text-lg leading-relaxed">
+                            Known as the <strong>"Brazilian Capital of Agribusiness,"</strong> Ribeirão Preto is recognized for its strong economy, modern infrastructure, excellent quality of life, extensive hotel network, outstanding dining options, and well-established convention facilities, making it one of Brazil's premier destinations for international conferences and business events.
+                        </p>
                     </div>
                 </div>
-                <div data-aos="fade-left">
-                    <span class="material-symbols-outlined text-secondary text-5xl mb-4">location_city</span>
-                    <h2 class="text-3xl font-bold text-primary mb-6">Ribeirão Preto</h2>
-                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
-                        The conference will be held in <strong>Ribeirão Preto</strong>, one of the most important cities in the state of São Paulo and one of Brazil's leading agribusiness hubs.
-                    </p>
-                    <p class="text-slate-700 text-lg leading-relaxed mb-6">
-                        Known as the <strong>"Brazilian Capital of Agribusiness,"</strong> Ribeirão Preto is recognized for its strong economy, modern infrastructure, excellent quality of life, extensive hotel network, outstanding dining options, and well-established convention facilities, making it one of Brazil's premier destinations for international conferences and business events.
-                    </p>
-                    <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100">
-                        <img src="{{ asset('images/ribeirao-preto.jpeg') }}" alt="Ribeirão Preto Cityscape" class="w-full h-64 object-cover">
+
+                <!-- Slider Column (Automatically fills visual height) -->
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 min-h-[400px] flex flex-col" data-aos="fade-left">
+                    {% set ribeirao_images = [
+                        'images/ribeirao/GettyImages-695498468-1.jpg',
+                        'images/ribeirao/MateusZF_29-05-2011_(5781508380).jpg',
+                        'images/ribeirao/gettyimages-485331421-1024x1024.jpg',
+                        'images/ribeirao/pexels-marcelo-brigato-1868038-19341257.jpg',
+                        'images/ribeirao/ribeirao-preto-sao-paulo-brasil-23-de-abril-de-2022-imagens-noturnas-da-cidade-de-ribeirao-preto-avenida-joao-fiusa-famosa-avenida-em-ribeirao-preto_579344-714.jpg',
+                        'images/ribeirao/ribeirao-preto-sao-paulo-brasil-27-de-marco-de-2022-imagem-aerea-da-rodovia-antonio-duarte-nogueira_579344-652.jpg',
+                        'images/ribeirao/ribeirao-preto-sao-paulo-brasil-por-volta-de-agosto-de-2022-festival-da-feira-do-livro-de-ribeirao-preto-realizado-na-praca-15-ao-lado-do-theatro-pedro-ii-na-cidade-de-ribeirao-preto-estado-de-sao-paulo_579344-13284.jpg',
+                        'images/ribeirao/ribeirao-preto-sao-paulobrasil-cerca-de-abril-de-2023-jardim-botanico-de-ribeirao-preto-vista-aerea-do-parque-luis-carlos-raya_579344-14437.jpg',
+                        'images/ribeirao/ribeirao-preto-sao-paulobrasil-cerca-de-abril-de-2023-jardim-botanico-de-ribeirao-preto-vista-aerea-do-parque-luis-carlos-raya_579344-14449.jpg',
+                        'images/ribeirao/ribeirao-preto-sao-paulobrasil-cerca-de-abril-de-2023-jardim-botanico-de-ribeirao-preto-vista-aerea-do-parque-luis-carlos-raya_579344-14450.jpg'
+                    ] %}
+                    <div class="swiper ribeirao-swiper w-full h-full min-h-[400px]">
+                        <div class="swiper-wrapper h-full">
+                            {% for imgPath in ribeirao_images %}
+                                <div class="swiper-slide h-full relative">
+                                    <img src="{{ asset(imgPath) }}" alt="Ribeirão Preto & Multiplan Hall" class="w-full h-full object-cover absolute inset-0">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="swiper-pagination !bottom-4"></div>
+                        <div class="swiper-button-prev !text-white opacity-75 hover:opacity-100 transition-opacity"></div>
+                        <div class="swiper-button-next !text-white opacity-75 hover:opacity-100 transition-opacity"></div>
                     </div>
                 </div>
             </div>
@@ -230,7 +260,7 @@
                 <p class="text-slate-600 max-w-2xl mx-auto text-lg">Essential travel facts and safety details to support your stay in Ribeirão Preto.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Travel Essentials -->
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-effect card-shadow" data-aos="fade-up" data-aos-delay="0">
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
@@ -266,17 +296,6 @@
                         <li><strong class="text-slate-700">Police:</strong> 190</li>
                         <li><strong class="text-slate-700">Medical (SAMU):</strong> 192</li>
                         <li><strong class="text-slate-700">Fire Department:</strong> 193</li>
-                    </ul>
-                </div>
-
-                <!-- Secretariat -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-effect card-shadow" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-primary text-2xl">contact_support</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-primary mb-4">Secretariat</h3>
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li><strong class="text-slate-700">Conference Secretariat:</strong> <span class="italic text-slate-500">To be announced</span></li>
                     </ul>
                 </div>
             </div>
@@ -411,12 +430,19 @@
                         </div>
                     {% endfor %}
                 </div>
+
+                <div class="mt-12 text-center" data-aos="fade-up">
+                    <a href="https://www.ribeiraoshopping.com.br/gastronomia/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-secondary hover:text-primary transition-all text-base">
+                        Explore More Options <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </a>
+                </div>
             </div>
         </section>
     {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     {# Preload the LCP Banner Image #}
     {% if event_config and event_config.heroImage and event_config.heroImage.imageName %}
         <link rel="preload" as="image" href="{{ ('uploads/' ~ event_config.heroImage.imageName)|imagine_filter('banner_hero') }}" />
@@ -426,8 +452,27 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            if (document.querySelector('.ribeirao-swiper')) {
+                new Swiper('.ribeirao-swiper', {
+                    loop: true,
+                    autoplay: {
+                        delay: 3500,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            }
+
             const wrapper = document.getElementById('sp-map-wrapper');
             const img = document.getElementById('sp-map-img');
             const lens = document.getElementById('sp-map-lens');

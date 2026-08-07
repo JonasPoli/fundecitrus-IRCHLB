@@ -62,6 +62,16 @@ class SpeakerType extends AbstractType
                 'placeholder' => 'Selecione o evento...',
                 'required' => false,
             ])
+            ->add('committeeType', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, [
+                'label' => 'Comitê',
+                'choices' => [
+                    'Comitê Organizador (Organizing Committee)' => 'organizing',
+                    'Comitê Científico (Scientific Committee)' => 'scientific',
+                    'Comitê Diretivo (Steering Committee)' => 'steering',
+                ],
+                'placeholder' => 'Nenhum / Apenas Palestrante...',
+                'required' => false,
+            ])
             ->add('position', HiddenType::class)
             ->add('image', ImageType::class, [
                 'label' => 'Foto de Perfil',

@@ -23,6 +23,12 @@ class HomeBanner
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mainTitle = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mainTitleLine2 = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $titleFontSize = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description1 = null;
 
@@ -88,6 +94,30 @@ class HomeBanner
     public function setMainTitle(?string $mainTitle): static
     {
         $this->mainTitle = $mainTitle;
+
+        return $this;
+    }
+
+    public function getMainTitleLine2(): ?string
+    {
+        return $this->mainTitleLine2;
+    }
+
+    public function setMainTitleLine2(?string $mainTitleLine2): static
+    {
+        $this->mainTitleLine2 = $mainTitleLine2;
+
+        return $this;
+    }
+
+    public function getTitleFontSize(): ?string
+    {
+        return $this->titleFontSize;
+    }
+
+    public function setTitleFontSize(?string $titleFontSize): static
+    {
+        $this->titleFontSize = $titleFontSize;
 
         return $this;
     }

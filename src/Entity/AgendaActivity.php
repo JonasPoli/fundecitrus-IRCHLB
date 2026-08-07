@@ -36,6 +36,10 @@ class AgendaActivity
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?VenueRoom $room = null;
 
+    #[ORM\ManyToOne(targetEntity: ThematicGroup::class)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?ThematicGroup $thematicGroup = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
@@ -124,6 +128,18 @@ class AgendaActivity
     public function setRoom(?VenueRoom $room): static
     {
         $this->room = $room;
+
+        return $this;
+    }
+
+    public function getThematicGroup(): ?ThematicGroup
+    {
+        return $this->thematicGroup;
+    }
+
+    public function setThematicGroup(?ThematicGroup $thematicGroup): static
+    {
+        $this->thematicGroup = $thematicGroup;
 
         return $this;
     }

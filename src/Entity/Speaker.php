@@ -65,6 +65,9 @@ class Speaker
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $eventGroup = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $committeeType = null;
+
     #[ORM\Column]
     private ?bool $isFeatured = null;
 
@@ -405,6 +408,18 @@ class Speaker
     public function setEventGroup(?string $eventGroup): static
     {
         $this->eventGroup = $eventGroup;
+
+        return $this;
+    }
+
+    public function getCommitteeType(): ?string
+    {
+        return $this->committeeType;
+    }
+
+    public function setCommitteeType(?string $committeeType): static
+    {
+        $this->committeeType = $committeeType;
 
         return $this;
     }

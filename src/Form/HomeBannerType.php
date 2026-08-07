@@ -24,9 +24,25 @@ class HomeBannerType extends AbstractType
                 'attr' => ['placeholder' => 'Ex: VIII International Research'],
             ])
             ->add('mainTitle', null, [
-                'label' => 'Título Principal',
+                'label' => 'Título Principal (Linha 1)',
                 'required' => false,
                 'attr' => ['placeholder' => 'Ex: Conference on Huanglongbing'],
+            ])
+            ->add('mainTitleLine2', null, [
+                'label' => 'Título Principal (Linha 2)',
+                'required' => false,
+                'attr' => ['placeholder' => 'Ex: & XXIV IOCV Conference'],
+            ])
+            ->add('titleFontSize', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, [
+                'label' => 'Tamanho da Fonte do Título',
+                'choices' => [
+                    'Padrão (Grande / Default)' => 'text-3xl sm:text-4xl md:text-6xl lg:text-7xl',
+                    'Extra Grande' => 'text-4xl sm:text-5xl md:text-7xl lg:text-8xl',
+                    'Médio' => 'text-2xl sm:text-3xl md:text-5xl lg:text-6xl',
+                    'Pequeno (Para textos longos)' => 'text-xl sm:text-2xl md:text-4xl lg:text-5xl',
+                ],
+                'placeholder' => 'Selecione o tamanho...',
+                'required' => false,
             ])
             ->add('description1', null, [
                 'label' => 'Descrição Curta / Destaque',

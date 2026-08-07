@@ -41,6 +41,13 @@ class AgendaActivityType extends AbstractType
                 'label' => 'Sala / Auditório',
                 'required' => false,
             ])
+            ->add('thematicGroup', EntityType::class, [
+                'class' => \App\Entity\ThematicGroup::class,
+                'choice_label' => 'title',
+                'label' => 'Grupo Temático / Sessão',
+                'required' => false,
+                'placeholder' => 'Nenhum / Selecione um grupo...',
+            ])
             ->add('speakers', EntityType::class, [
                 'class' => Speaker::class,
                 'choice_label' => 'name',
