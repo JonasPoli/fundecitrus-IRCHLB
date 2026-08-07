@@ -33,6 +33,9 @@ class RestaurantRecommendation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $locationUrl = null;
 
+    #[ORM\Column(options: ['default' => false])]
+    private bool $insideShopping = false;
+
     #[ORM\Column]
     private ?int $position = 0;
 
@@ -121,6 +124,23 @@ class RestaurantRecommendation
     public function setPosition(int $position): static
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function isInsideShopping(): bool
+    {
+        return $this->insideShopping;
+    }
+
+    public function getInsideShopping(): bool
+    {
+        return $this->insideShopping;
+    }
+
+    public function setInsideShopping(bool $insideShopping): static
+    {
+        $this->insideShopping = $insideShopping;
 
         return $this;
     }
