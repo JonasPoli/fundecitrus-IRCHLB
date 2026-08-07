@@ -15,6 +15,7 @@ class HomeBannerType extends AbstractType
         $builder
             ->add('eventDate', null, [
                 'label' => 'Data do Evento (Exibição)',
+                'required' => false,
                 'attr' => ['placeholder' => 'Ex: October 26-29, 2027'],
             ])
             ->add('subtitle', null, [
@@ -24,6 +25,7 @@ class HomeBannerType extends AbstractType
             ])
             ->add('mainTitle', null, [
                 'label' => 'Título Principal',
+                'required' => false,
                 'attr' => ['placeholder' => 'Ex: Conference on Huanglongbing'],
             ])
             ->add('description1', null, [

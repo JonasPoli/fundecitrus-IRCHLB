@@ -14,13 +14,13 @@ class HomeBanner
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $eventDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $subtitle = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $mainTitle = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -61,7 +61,7 @@ class HomeBanner
         return $this->eventDate;
     }
 
-    public function setEventDate(string $eventDate): static
+    public function setEventDate(?string $eventDate): static
     {
         $this->eventDate = $eventDate;
 
@@ -85,7 +85,7 @@ class HomeBanner
         return $this->mainTitle;
     }
 
-    public function setMainTitle(string $mainTitle): static
+    public function setMainTitle(?string $mainTitle): static
     {
         $this->mainTitle = $mainTitle;
 
