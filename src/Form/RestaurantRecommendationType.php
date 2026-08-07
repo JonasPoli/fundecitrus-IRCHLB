@@ -24,6 +24,10 @@ class RestaurantRecommendationType extends AbstractType
                 'label' => 'Descrição / Avaliação'])
             ->add('locationUrl', null, [
                 'label' => 'Link de Localização do Google Maps'])
+            ->add('insideShopping', \Symfony\Component\Form\Extension\Core\Type\CheckboxType::class, [
+                'label' => 'Localizado dentro do RibeirãoShopping?',
+                'required' => false,
+            ])
             ->add('position', HiddenType::class)
             ->add('image', ImageType::class, [
                 'label' => 'Imagem do Restaurante / Prato',
