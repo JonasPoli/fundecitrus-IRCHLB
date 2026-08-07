@@ -26,6 +26,18 @@ class PartnerHotelType extends AbstractType
                 'label' => 'Link Direto para Reserva'])
             ->add('address', null, [
                 'label' => 'Endereço'])
+            ->add('distance', null, [
+                'label' => 'Distância até o Evento (Ex: 500 m, 2 km)',
+                'required' => false,
+            ])
+            ->add('walkingTime', null, [
+                'label' => 'Tempo médio a pé (Ex: 5 min, 15 min)',
+                'required' => false,
+            ])
+            ->add('drivingTime', null, [
+                'label' => 'Tempo médio de carro (Ex: 3 min, 10 min)',
+                'required' => false,
+            ])
             ->add('contact', null, [
                 'label' => 'Telefone / Informações de Contato'])
             ->add('position', HiddenType::class)

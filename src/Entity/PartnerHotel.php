@@ -39,6 +39,15 @@ class PartnerHotel
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $contact = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $distance = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $walkingTime = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $drivingTime = null;
+
     #[ORM\Column]
     private ?int $position = 0;
 
@@ -151,6 +160,42 @@ class PartnerHotel
     public function setPosition(int $position): static
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getDistance(): ?string
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(?string $distance): static
+    {
+        $this->distance = $distance;
+
+        return $this;
+    }
+
+    public function getWalkingTime(): ?string
+    {
+        return $this->walkingTime;
+    }
+
+    public function setWalkingTime(?string $walkingTime): static
+    {
+        $this->walkingTime = $walkingTime;
+
+        return $this;
+    }
+
+    public function getDrivingTime(): ?string
+    {
+        return $this->drivingTime;
+    }
+
+    public function setDrivingTime(?string $drivingTime): static
+    {
+        $this->drivingTime = $drivingTime;
 
         return $this;
     }
