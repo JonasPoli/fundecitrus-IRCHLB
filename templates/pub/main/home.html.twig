@@ -412,11 +412,11 @@
                 <div class="flex flex-wrap gap-8 items-center justify-center">
                     {% for organizer in organizers %}
                         <a href="{{ organizer.websiteUrl ?? path('app_sobre') ~ '#section-committee' }}" target="_blank"
-                           class="organizer-logo-box hover-effect">
+                           class="organizer-logo-box hover-effect group">
                             {% if organizer.logo and organizer.logo.imageName %}
                                 <div class="w-full h-full flex items-center justify-center p-4">
                                     <img src="{{ asset('uploads/' ~ organizer.logo.imageName) }}" alt="{{ organizer.name }}"
-                                         class="max-h-full max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                                         class="max-h-full max-w-full object-contain opacity-75 group-hover:opacity-100 filter grayscale group-hover:grayscale-0 transition-all duration-300">
                                 </div>
                             {% else %}
                                 <span class="font-bold text-primary group-hover:text-secondary transition-colors text-sm text-center leading-snug px-4">{{ organizer.name }}</span>
@@ -436,14 +436,14 @@
                 <div class="flex flex-wrap gap-8 items-center justify-center">
                     {% for supporter in supporters %}
                         {% if supporter.websiteUrl %}
-                            <a href="{{ supporter.websiteUrl }}" target="_blank" rel="noopener noreferrer" class="organizer-logo-box hover-effect">
+                            <a href="{{ supporter.websiteUrl }}" target="_blank" rel="noopener noreferrer" class="organizer-logo-box hover-effect group">
                         {% else %}
-                            <div class="organizer-logo-box hover-effect">
+                            <div class="organizer-logo-box hover-effect group">
                         {% endif %}
                             {% if supporter.logo and supporter.logo.imageName %}
                                 <div class="w-full h-full flex items-center justify-center p-4">
                                     <img src="{{ asset('uploads/' ~ supporter.logo.imageName) }}" alt="{{ supporter.name }}"
-                                         class="max-h-full max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                                         class="max-h-full max-w-full object-contain opacity-75 group-hover:opacity-100 filter grayscale group-hover:grayscale-0 transition-all duration-300">
                                 </div>
                             {% else %}
                                 <span class="font-bold text-primary group-hover:text-secondary transition-colors text-sm text-center leading-snug px-4">{{ supporter.name }}</span>
