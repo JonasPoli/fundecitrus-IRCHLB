@@ -184,7 +184,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Flights Card -->
-                <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="400">
+                <a href="{{ path('app_local', {'_fragment': 'section-flights'}) }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="400">
                     <div class="h-56 bg-slate-200 relative overflow-hidden">
                         <img src="{{ asset('images/flights.jpg') }}" alt="Flights" width="1200" height="627" loading="lazy"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -196,29 +196,29 @@
                     </div>
                 </a>
 
-                <!-- Partner Hotels Card -->
-                <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="600">
+                <!-- Hotels Card -->
+                <a href="{{ path('app_local', {'_fragment': 'section-hotels'}) }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="600">
                     <div class="h-56 bg-slate-200 relative overflow-hidden">
                         <img src="{{ asset('images/hotels.jpg') }}" alt="Hotels" width="1200" height="627" loading="lazy"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Partner Hotels</h3>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Hotels</h3>
                     </div>
                     <div class="p-6">
-                        <p class="text-slate-600">Curated accommodations with exclusive rates and optimal proximity to the conference center.</p>
+                        <p class="text-slate-600">Selected accommodations with optimal proximity to the conference center.</p>
                     </div>
                 </a>
 
-                <!-- Restaurants Card -->
-                <a href="{{ path('app_local') }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="800">
+                <!-- Food Card -->
+                <a href="{{ path('app_local', {'_fragment': 'section-food'}) }}" class="group bg-white rounded-xl overflow-hidden card-shadow hover-effect block" data-aos="fade-up" data-aos-delay="800">
                     <div class="h-56 bg-slate-200 relative overflow-hidden">
-                        <img src="{{ asset('images/restaurants.jpg') }}" alt="Restaurants" width="1200" height="627" loading="lazy"
+                        <img src="{{ asset('images/restaurants.jpg') }}" alt="Food" width="1200" height="627" loading="lazy"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Dining</h3>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Food</h3>
                     </div>
                     <div class="p-6">
-                        <p class="text-slate-600">Top recommendations for local gastronomy, from executive lunches to elegant dinners.</p>
+                        <p class="text-slate-600">Food options in and around the venue, including shopping food court fast food and local restaurants.</p>
                     </div>
                 </a>
             </div>
