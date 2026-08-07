@@ -171,7 +171,7 @@ class SeedDataCommand extends Command
         $stats = [
             ['value' => '500+', 'label' => 'Expected Participants'],
             ['value' => '25+', 'label' => 'Countries Reached'],
-            ['value' => '100+', 'label' => 'Approved Papers'],
+            ['value' => '150+', 'label' => 'Abstracts'],
             ['value' => '5', 'label' => 'Days of Content']
         ];
         foreach ($stats as $idx => $statData) {
