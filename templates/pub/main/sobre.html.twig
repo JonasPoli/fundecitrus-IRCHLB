@@ -533,6 +533,8 @@
             const tlIrchlb = document.getElementById('timeline-irchlb');
             const tlIocv = document.getElementById('timeline-iocv');
 
+            if (!btnIrchlb || !btnIocv || !tlIrchlb || !tlIocv) return;
+
             if (type === 'irchlb') {
                 btnIrchlb.className = "px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 bg-primary text-white shadow-sm";
                 btnIocv.className = "px-6 py-3 rounded-lg text-sm font-bold transition-all duration-200 text-slate-600 hover:text-primary";
@@ -561,6 +563,23 @@
                 }, 200);
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash.includes('iocv')) {
+                switchTimeline('iocv');
+                const target = document.getElementById('section-timeline');
+                if (target) {
+                    setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 100);
+                }
+            } else if (hash.includes('irchlb')) {
+                switchTimeline('irchlb');
+                const target = document.getElementById('section-timeline');
+                if (target) {
+                    setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 100);
+                }
+            }
+        });
     </script>
 {% endblock %}
 
