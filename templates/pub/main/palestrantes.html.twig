@@ -30,6 +30,17 @@
                                         <img src="{{ asset('images/avatar-placeholder.jpg') }}" alt="{{ speaker.name }}" width="400" height="400" loading="{{ loop.index <= 4 ? 'eager' : 'lazy' }}"
                                              class="w-full h-80 object-cover bg-slate-200 group-hover:scale-105 transition-transform duration-700">
                                     {% endif %}
+                                    {% if speaker.eventGroup %}
+                                        <div class="absolute top-4 right-4 z-10">
+                                            {% if speaker.eventGroup == 'IOCV' %}
+                                                <span class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">XXIV IOCV</span>
+                                            {% elseif speaker.eventGroup == 'IRCHLB' %}
+                                                <span class="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">VIII IRCHLB</span>
+                                            {% elseif speaker.eventGroup == 'BOTH' %}
+                                                <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">IOCV & IRCHLB</span>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
                                     <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
                                     <div class="absolute bottom-4 left-6 right-6">
                                         <h3 class="text-xl font-bold text-white mb-1">{{ speaker.name }}</h3>
@@ -71,9 +82,10 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="text-center py-20 bg-white rounded-xl card-shadow">
-                    <span class="material-symbols-outlined text-5xl text-slate-300 mb-4">groups</span>
-                    <h3 class="text-xl font-bold text-slate-700">No speakers registered yet.</h3>
+                <div class="text-center py-20 bg-white rounded-2xl card-shadow max-w-2xl mx-auto p-12" data-aos="fade-up">
+                    <span class="material-symbols-outlined text-6xl text-secondary mb-4">record_voice_over</span>
+                    <h3 class="text-2xl font-bold text-primary mb-3">Speakers to be Announced</h3>
+                    <p class="text-slate-600 leading-relaxed">Keynote speakers and distinguished presenters will be announced soon. Stay tuned for official updates on our conference lineup!</p>
                 </div>
             {% endif %}
         </div>

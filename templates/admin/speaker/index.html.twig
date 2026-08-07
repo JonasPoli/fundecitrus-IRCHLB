@@ -22,56 +22,66 @@
     <table class="admin-table">
         <thead>
             <tr>
-                                    <th></th>
-                                    <th>ID</th>
-                                    <th>Foto</th>
-                                    <th>Nome</th>
-                                    <th>Instituição / Departamento</th>
-                                    <th>Áreas de Pesquisa</th>
-                                    <th>Destaque?</th>
-                                <th></th>
+                <th></th>
+                <th>ID</th>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Instituição / Departamento</th>
+                <th>Conferência</th>
+                <th>Status</th>
+                <th>Destaque?</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="speaker-sortable">
             {% for speaker in speakers %}
                 <tr class="sortable-row" data-id="{{ speaker.id }}">
-                                                                    <td class="admin-table-grip-td"><i class="fa-solid fa-grip-vertical admin-table-grip-icon" aria-hidden="true"></i></td>
-                                                                    <td>{{ speaker.id }}</td>
-                                                                    <td>
-                                                                        {% if speaker.image and speaker.image.imageName %}
-                                                                            <img src="{{ asset('uploads/' ~ speaker.image.imageName) }}" alt="{{ speaker.name }}" class="admin-table-thumb-round">
-                                                                        {% else %}
-                                                                            <span style="font-size: 11px; opacity: 0.6;">-</span>
-                                                                        {% endif %}
-                                                                    </td>
-                                                                                            <td>{{ speaker.name }}</td>
-                                                                                            <td>
-                                                                                                <div class="font-semibold">{{ speaker.institution }}</div>
-                                                                                                {% if speaker.department %}
-                                                                                                    <div class="text-xs text-slate-500">{{ speaker.department }}</div>
-                                                                                                {% endif %}
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                {% if speaker.researchAreas is not empty %}
-                                                                                                    {% for area in speaker.researchAreas %}
-                                                                                                        <span class="badge badge-neutral mb-1">{{ area }}</span>
-                                                                                                    {% endfor %}
-                                                                                                {% else %}
-                                                                                                    <span class="text-xs opacity-50">-</span>
-                                                                                                {% endif %}
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                {% if speaker.isFeatured %}
-                                                                                                    <span class="badge badge-success">Sim</span>
-                                                                                                {% else %}
-                                                                                                    <span class="badge badge-neutral">Não</span>
-                                                                                                {% endif %}
-                                                                                            </td>
-                                                                 <td><a href="{{ path('app_admin_speaker_edit', {'id': speaker.id}) }}" class="btn-secondary" aria-label="Editar {{ speaker.name }}" title="Editar {{ speaker.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                    <td class="admin-table-grip-td"><i class="fa-solid fa-grip-vertical admin-table-grip-icon" aria-hidden="true"></i></td>
+                    <td>{{ speaker.id }}</td>
+                    <td>
+                        {% if speaker.image and speaker.image.imageName %}
+                            <img src="{{ asset('uploads/' ~ speaker.image.imageName) }}" alt="{{ speaker.name }}" class="admin-table-thumb-round">
+                        {% else %}
+                            <span style="font-size: 11px; opacity: 0.6;">-</span>
+                        {% endif %}
+                    </td>
+                    <td><div class="font-bold">{{ speaker.name }}</div></td>
+                    <td>
+                        <div class="font-semibold">{{ speaker.institution }}</div>
+                        {% if speaker.department %}
+                            <div class="text-xs text-slate-500">{{ speaker.department }}</div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if speaker.eventGroup == 'IOCV' %}
+                            <span class="badge badge-info" style="background-color: #0284c7; color: #fff;">IOCV</span>
+                        {% elseif speaker.eventGroup == 'IRCHLB' %}
+                            <span class="badge badge-warning" style="background-color: #d97706; color: #fff;">IRCHLB</span>
+                        {% elseif speaker.eventGroup == 'BOTH' %}
+                            <span class="badge badge-success" style="background-color: #16a34a; color: #fff;">IOCV & IRCHLB</span>
+                        {% else %}
+                            <span class="text-xs opacity-50">-</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if speaker.active %}
+                            <span class="badge badge-success" style="background-color: #16a34a; color: #fff;">Ativo</span>
+                        {% else %}
+                            <span class="badge badge-neutral" style="background-color: #64748b; color: #fff;">Inativo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if speaker.isFeatured %}
+                            <span class="badge badge-success">Sim</span>
+                        {% else %}
+                            <span class="badge badge-neutral">Não</span>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('app_admin_speaker_edit', {'id': speaker.id}) }}" class="btn-secondary" aria-label="Editar {{ speaker.name }}" title="Editar {{ speaker.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="8">Nenhum registro</td>
+                    <td colspan="9">Nenhum registro</td>
                 </tr>
             {% endfor %}
         </tbody>

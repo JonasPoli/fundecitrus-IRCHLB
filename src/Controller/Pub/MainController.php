@@ -82,7 +82,7 @@ final class MainController extends AbstractController
     public function palestrantes(SpeakerRepository $speakerRepo): Response
     {
         return $this->render('pub/main/palestrantes.html.twig', [
-            'speakers' => $speakerRepo->findBy([], ['position' => 'ASC']),
+            'speakers' => $speakerRepo->findBy(['active' => true], ['position' => 'ASC']),
         ]);
     }
 
@@ -90,7 +90,7 @@ final class MainController extends AbstractController
     public function palestranteDetalhe(int $id, SpeakerRepository $speakerRepo): Response
     {
         $speaker = $speakerRepo->find($id);
-        if (!$speaker) {
+        if (!$speaker || !$speaker->isActive()) {
             throw $this->createNotFoundException('Speaker not found.');
         }
         

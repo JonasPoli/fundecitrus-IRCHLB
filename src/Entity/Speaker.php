@@ -59,6 +59,12 @@ class Speaker
     #[ORM\Column(type: Types::JSON)]
     private array $researchAreas = [];
 
+    #[ORM\Column(options: ['default' => false])]
+    private bool $active = false;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $eventGroup = null;
+
     #[ORM\Column]
     private ?bool $isFeatured = null;
 
@@ -370,6 +376,35 @@ class Speaker
         if ($this->activities->removeElement($activity)) {
             $activity->removeSpeaker($this);
         }
+
+        return $this;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function getActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getEventGroup(): ?string
+    {
+        return $this->eventGroup;
+    }
+
+    public function setEventGroup(?string $eventGroup): static
+    {
+        $this->eventGroup = $eventGroup;
 
         return $this;
     }

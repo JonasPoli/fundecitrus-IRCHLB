@@ -48,9 +48,24 @@ class SpeakerType extends AbstractType
             ])
             ->add('isFeatured', null, [
                 'label' => 'Destaque / Palestrante Principal?'])
+            ->add('active', \Symfony\Component\Form\Extension\Core\Type\CheckboxType::class, [
+                'label' => 'Exibir no site (Ativo)',
+                'required' => false,
+            ])
+            ->add('eventGroup', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, [
+                'label' => 'Conferência / Evento',
+                'choices' => [
+                    'XXIV IOCV Conference' => 'IOCV',
+                    'VIII IRCHLB' => 'IRCHLB',
+                    'Both Conferences (IOCV + IRCHLB)' => 'BOTH',
+                ],
+                'placeholder' => 'Selecione o evento...',
+                'required' => false,
+            ])
             ->add('position', HiddenType::class)
             ->add('image', ImageType::class, [
                 'label' => 'Foto de Perfil',
+                'help' => 'Dimensão recomendada: 400x400px (proporção 1:1). Formatos: JPG, PNG ou WEBP. Tamanho máx. recomendado: 2MB.',
                 'required' => false,
             ])
             ->add('activities', EntityType::class, [

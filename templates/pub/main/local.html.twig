@@ -31,8 +31,8 @@
                             <p>{{ event_config.addressCity }} - {{ event_config.addressZipCode }}</p>
                         {% else %}
                             <p>Av. Cel. Fernando Ferreira Leite, 1540</p>
-                            <p>Jardim California, Ribeirão Preto</p>
-                            <p>SP, Brazil - 14026-900</p>
+                            <p>Jardim California</p>
+                            <p>Ribeirão Preto, SP - 14026-900</p>
                         {% endif %}
                     </address>
                     {% if event_config and event_config.googleMapsUrl %}
@@ -79,6 +79,39 @@
                     <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100">
                         <img src="{{ asset('images/ribeirao-preto.jpeg') }}" alt="Ribeirão Preto Cityscape" class="w-full h-64 object-cover">
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- São Paulo State Map Section -->
+    <section class="py-20 bg-white border-b border-slate-200">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <span class="material-symbols-outlined text-secondary text-5xl mb-3">map</span>
+                <h2 class="text-3xl font-bold text-primary mb-3">Location in São Paulo State</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto text-base">
+                    Explore the location of Ribeirão Preto within the state of São Paulo. Hover over the map to inspect regional details and event context.
+                </p>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden card-shadow border border-slate-200 bg-slate-100 max-w-4xl mx-auto group cursor-crosshair" id="sp-map-wrapper" data-aos="zoom-in">
+                <!-- Base Map Image -->
+                <img src="{{ asset('images/mapa-sp.png') }}" 
+                     alt="São Paulo State Map - Ribeirão Preto Location" 
+                     id="sp-map-img"
+                     class="w-full h-auto block select-none">
+
+                <!-- Zoom Lens Overlay -->
+                <div id="sp-map-lens" 
+                     class="absolute hidden pointer-events-none w-56 h-56 rounded-full border-4 border-white shadow-2xl z-30 transition-opacity duration-200 opacity-0 group-hover:opacity-100"
+                     style="background-image: url('{{ asset('images/mapa-sp.zoom.png') }}'); background-repeat: no-repeat;">
+                </div>
+
+                <!-- Helper Badge -->
+                <div class="absolute bottom-4 right-4 bg-primary/80 backdrop-blur-md text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg pointer-events-none flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm text-secondary">zoom_in</span>
+                    <span>Hover map to magnify</span>
                 </div>
             </div>
         </div>
@@ -299,17 +332,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-6 pt-0">
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
-                                    {% if hotel.bookingLink %}
+                            {% if hotel.bookingLink %}
+                                <div class="p-6 pt-0">
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
                                         <span class="text-xs text-slate-400 block mb-1">Direct Rate Link:</span>
                                         <a href="{{ hotel.bookingLink }}" target="_blank" class="text-secondary font-bold text-sm hover:underline">Book Directly</a>
-                                    {% elseif hotel.bookingCode %}
-                                        <span class="text-xs text-slate-400 block mb-1">Special Booking Code:</span>
-                                        <strong class="text-secondary font-mono text-sm">{{ hotel.bookingCode }}</strong>
-                                    {% endif %}
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
@@ -369,5 +399,60 @@
     {% else %}
         <link rel="preload" as="image" href="{{ asset('images/hero-bg.jpg') }}" />
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.getElementById('sp-map-wrapper');
+            const img = document.getElementById('sp-map-img');
+            const lens = document.getElementById('sp-map-lens');
+
+            if (!wrapper || !img || !lens) return;
+
+            function updateLens(e) {
+                const rect = wrapper.getBoundingClientRect();
+                const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+                const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+                const width = rect.width;
+                const height = rect.height;
+
+                if (x < 0 || x > width || y < 0 || y > height) {
+                    lens.classList.add('hidden');
+                    return;
+                }
+
+                lens.classList.remove('hidden');
+
+                const lensRadius = lens.offsetWidth / 2;
+                let lensX = x - lensRadius;
+                let lensY = y - lensRadius;
+
+                lens.style.left = `${lensX}px`;
+                lens.style.top = `${lensY}px`;
+
+                const xPerc = (x / width) * 100;
+                const yPerc = (y / height) * 100;
+
+                lens.style.backgroundSize = `${width * 2.2}px ${height * 2.2}px`;
+                lens.style.backgroundPosition = `${xPerc}% ${yPerc}%`;
+            }
+
+            wrapper.addEventListener('mousemove', updateLens);
+            wrapper.addEventListener('mouseenter', function() {
+                lens.classList.remove('hidden');
+            });
+            wrapper.addEventListener('mouseleave', function() {
+                lens.classList.add('hidden');
+            });
+
+            wrapper.addEventListener('touchmove', function(e) {
+                updateLens(e);
+            }, { passive: true });
+        });
+    </script>
 {% endblock %}
 
