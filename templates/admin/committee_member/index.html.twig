@@ -22,37 +22,45 @@
     <table class="admin-table">
         <thead>
             <tr>
-                                    <th></th>
-                                    <th>ID</th>
-                                    <th>Foto</th>
-                                    <th>Nome</th>
-                                    <th>Cargo / Função</th>
-                                    <th>Instituição</th>
-                                    <th>Tipo de Grupo</th>
-                                <th></th>
+                <th></th>
+                <th>ID</th>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Cargo / Função</th>
+                <th>Instituição</th>
+                <th>Tipo de Grupo</th>
+                <th>Status</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="committee-member-sortable">
             {% for committee_member in committee_members %}
                 <tr class="sortable-row" data-id="{{ committee_member.id }}">
-                                                                    <td class="admin-table-grip-td"><i class="fa-solid fa-grip-vertical admin-table-grip-icon" aria-hidden="true"></i></td>
-                                                                    <td>{{ committee_member.id }}</td>
-                                                                    <td>
-                                                                        {% if committee_member.image and committee_member.image.imageName %}
-                                                                            <img src="{{ asset('uploads/' ~ committee_member.image.imageName) }}" alt="{{ committee_member.name }}" class="admin-table-thumb-round">
-                                                                        {% else %}
-                                                                            <span style="font-size: 11px; opacity: 0.6;">-</span>
-                                                                        {% endif %}
-                                                                    </td>
-                                                                                            <td>{{ committee_member.name }}</td>
-                                                                                            <td>{{ committee_member.role }}</td>
-                                                                                            <td>{{ committee_member.institution }}</td>
-                                                                                            <td>{{ committee_member.groupType }}</td>
-                                                                 <td><a href="{{ path('app_admin_committee_member_edit', {'id': committee_member.id}) }}" class="btn-secondary" aria-label="Editar {{ committee_member.name }}" title="Editar {{ committee_member.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                    <td class="admin-table-grip-td"><i class="fa-solid fa-grip-vertical admin-table-grip-icon" aria-hidden="true"></i></td>
+                    <td>{{ committee_member.id }}</td>
+                    <td>
+                        {% if committee_member.image and committee_member.image.imageName %}
+                            <img src="{{ asset('uploads/' ~ committee_member.image.imageName) }}" alt="{{ committee_member.name }}" class="admin-table-thumb-round">
+                        {% else %}
+                            <span style="font-size: 11px; opacity: 0.6;">-</span>
+                        {% endif %}
+                    </td>
+                    <td><div class="font-bold">{{ committee_member.name }}</div></td>
+                    <td>{{ committee_member.role }}</td>
+                    <td>{{ committee_member.institution }}</td>
+                    <td>{{ committee_member.groupType }}</td>
+                    <td>
+                        {% if committee_member.active %}
+                            <span class="badge badge-success" style="background-color: #16a34a; color: #fff;">Ativo</span>
+                        {% else %}
+                            <span class="badge badge-neutral" style="background-color: #64748b; color: #fff;">Inativo</span>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('app_admin_committee_member_edit', {'id': committee_member.id}) }}" class="btn-secondary" aria-label="Editar {{ committee_member.name }}" title="Editar {{ committee_member.name }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="8">Nenhum registro</td>
+                    <td colspan="9">Nenhum registro</td>
                 </tr>
             {% endfor %}
         </tbody>

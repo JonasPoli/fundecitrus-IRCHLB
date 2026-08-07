@@ -46,7 +46,7 @@ final class MainController extends AbstractController
     public function sobre(CommitteeMemberRepository $memberRepo): Response
     {
         return $this->render('pub/main/sobre.html.twig', [
-            'committee_members' => $memberRepo->findBy([], ['position' => 'ASC']),
+            'committee_members' => $memberRepo->findBy(['active' => true], ['position' => 'ASC']),
         ]);
     }
 

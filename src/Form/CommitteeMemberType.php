@@ -28,6 +28,10 @@ class CommitteeMemberType extends AbstractType
                 'label' => 'Link do LinkedIn'])
             ->add('groupType', null, [
                 'label' => 'Tipo de Grupo (Ex: Local, Scientific)'])
+            ->add('active', \Symfony\Component\Form\Extension\Core\Type\CheckboxType::class, [
+                'label' => 'Ativo (Exibir no site)',
+                'required' => false,
+            ])
             ->add('position', HiddenType::class)
             ->add('image', ImageType::class, [
                 'label' => 'Foto de Perfil',

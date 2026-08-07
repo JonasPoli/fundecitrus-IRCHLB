@@ -39,6 +39,9 @@ class CommitteeMember
     #[ORM\Column(length: 100)]
     private ?string $groupType = null;
 
+    #[ORM\Column(options: ['default' => false])]
+    private bool $active = false;
+
     #[ORM\Column]
     private ?int $position = 0;
 
@@ -151,6 +154,23 @@ class CommitteeMember
     public function setPosition(int $position): static
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function getActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
 
         return $this;
     }
