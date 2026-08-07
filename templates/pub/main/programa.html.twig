@@ -134,10 +134,17 @@
                                     <span>{{ activity.room.name ?? '' }}</span>
                                 </div>
                                 
-                                {% if activity.speakers is not empty and not isBreak %}
+                                {% set active_speakers = [] %}
+                                {% for speaker in activity.speakers %}
+                                    {% if speaker.active %}
+                                        {% set active_speakers = active_speakers|merge([speaker]) %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if active_speakers is not empty and not isBreak %}
                                     <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-4">
                                         <div class="flex -space-x-4">
-                                            {% for speaker in activity.speakers %}
+                                            {% for speaker in active_speakers %}
                                                 {% if speaker.image and speaker.image.imageName %}
                                                     <img class="w-10 h-10 rounded-full border-2 border-white object-cover bg-slate-200" 
                                                          src="{{ ('uploads/' ~ speaker.image.imageName)|imagine_filter('avatar_mini') }}" alt="{{ speaker.name }}" width="40" height="40" loading="lazy">
@@ -149,7 +156,7 @@
                                         </div>
                                         <div>
                                             <span class="text-xs text-slate-400 block">Speakers:</span>
-                                            {% for speaker in activity.speakers %}
+                                            {% for speaker in active_speakers %}
                                                 <a href="{{ path('app_palestrante_detalhe', {'id': speaker.id}) }}" class="text-sm font-bold text-secondary hover:underline mr-2">
                                                     {{ speaker.name }}{{ not loop.last ? ',' : '' }}
                                                 </a>
