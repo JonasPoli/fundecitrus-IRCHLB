@@ -398,6 +398,14 @@
                                     </div>
                                     <p class="text-xs font-bold text-secondary uppercase tracking-wider mb-3">{{ rest.category }}</p>
                                     <p class="text-slate-600 text-xs leading-relaxed">{{ rest.description }}</p>
+                                    {% if rest.insideShopping %}
+                                        <div class="mt-3">
+                                            <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full">
+                                                <span class="material-symbols-outlined text-xs text-secondary">shopping_bag</span>
+                                                Inside RibeirãoShopping Complex
+                                            </span>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="p-5 pt-0">
