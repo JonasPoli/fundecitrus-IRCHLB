@@ -522,30 +522,49 @@
                         <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">2026 IRCHLB Steering Committee</h2>
                     </div>
 
-                    {% set countries = [
-                        'Brazil', 'Florida, USA', 'Texas, USA', 'California, USA', 'USDA APHIS',
+                    {% set predefined_order = [
+                        'Brazil', 'Florida', 'Florida, USA', 'Texas', 'Texas, USA', 'California', 'California, USA', 'USDA APHIS',
                         'China', 'South Africa', 'Argentina', 'Costa Rica', 'Spain', 'Australia', 'Mexico', 'Scientific Advisor'
                     ] %}
 
-                    {% for country in countries %}
-                        {% set country_members = [] %}
+                    {% set active_groups = [] %}
+                    {% for member in steering_members %}
+                        {% if member.groupType is not empty and member.groupType not in active_groups %}
+                            {% set active_groups = active_groups|merge([member.groupType]) %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% set ordered_groups = [] %}
+                    {% for g in predefined_order %}
+                        {% if g in active_groups and g not in ordered_groups %}
+                            {% set ordered_groups = ordered_groups|merge([g]) %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for g in active_groups %}
+                        {% if g not in ordered_groups %}
+                            {% set ordered_groups = ordered_groups|merge([g]) %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for group in ordered_groups %}
+                        {% set group_members = [] %}
                         {% for member in steering_members %}
-                            {% if member.groupType == country %}
-                                {% set country_members = country_members|merge([member]) %}
+                            {% if member.groupType == group %}
+                                {% set group_members = group_members|merge([member]) %}
                             {% endif %}
                         {% endfor %}
 
-                        {% if country_members is not empty %}
+                        {% if group_members is not empty %}
                             <div class="mb-12" data-aos="fade-up">
-                                <!-- Country Header -->
+                                <!-- Group Header -->
                                 <div class="flex items-center gap-4 mb-8">
-                                    <h3 class="text-xl font-bold text-primary border-l-4 border-secondary pl-4">{{ country }}</h3>
+                                    <h3 class="text-xl font-bold text-primary border-l-4 border-secondary pl-4">{{ group }}</h3>
                                     <div class="flex-grow h-px bg-slate-200"></div>
                                 </div>
 
                                 <!-- Members Grid -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                                    {% for member in country_members %}
+                                    {% for member in group_members %}
                                         {{ committee_helper.render_member_card(member) }}
                                     {% endfor %}
                                 </div>
@@ -553,16 +572,16 @@
                         {% endif %}
                     {% endfor %}
 
-                    {% set uncategorized_steering = [] %}
+                    {% set no_group_members = [] %}
                     {% for member in steering_members %}
-                        {% if member.groupType is empty or member.groupType not in countries %}
-                            {% set uncategorized_steering = uncategorized_steering|merge([member]) %}
+                        {% if member.groupType is empty %}
+                            {% set no_group_members = no_group_members|merge([member]) %}
                         {% endif %}
                     {% endfor %}
-                    {% if uncategorized_steering is not empty %}
+                    {% if no_group_members is not empty %}
                         <div class="mb-12" data-aos="fade-up">
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                                {% for member in uncategorized_steering %}
+                                {% for member in no_group_members %}
                                     {{ committee_helper.render_member_card(member) }}
                                 {% endfor %}
                             </div>
