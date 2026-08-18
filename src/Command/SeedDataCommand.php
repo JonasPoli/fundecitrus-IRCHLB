@@ -473,7 +473,7 @@ class SeedDataCommand extends Command
             $member->setLinkedinUrl($m['linkedinUrl']);
             $member->setGroupType($m['groupType']);
             $member->setCommittees(['Steering Committee']);
-            $member->setActive(false);
+            $member->setActive(true);
             $member->setPosition($idx + 1);
             
             $imgObj = $uploadImage($layoutImagesDir . '/' . $m['imageFile'], 'committee');
