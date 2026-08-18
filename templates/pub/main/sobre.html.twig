@@ -424,13 +424,8 @@
                                     <img src="{{ ('uploads/' ~ member.image.imageName)|imagine_filter('avatar') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
                                         class="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-slate-100">
                                 {% else %}
-                                    {% if member.name in ['MaryLou Polek', 'Carolina Ramirez'] %}
-                                        <img src="{{ asset('images/avatar-placeholder-2.jpg') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
-                                            class="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-slate-100">
-                                    {% else %}
-                                        <img src="{{ asset('images/avatar-placeholder.jpg') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
-                                            class="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-slate-100">
-                                    {% endif %}
+                                    <img src="{{ asset('images/avatar-placeholder.jpg') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
+                                        class="w-full h-full rounded-full object-cover bg-slate-100 border-2 border-slate-200">
                                 {% endif %}
                                 {% if member.role == 'Chair' %}
                                     <span class="absolute bottom-0 right-0 bg-secondary text-primary font-bold text-[10px] px-2 py-0.5 rounded-full uppercase shadow">Chair</span>
