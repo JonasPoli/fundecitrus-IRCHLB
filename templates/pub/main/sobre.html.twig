@@ -522,11 +522,6 @@
                         <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">2026 IRCHLB Steering Committee</h2>
                     </div>
 
-                    {% set predefined_order = [
-                        'Brazil', 'Florida', 'Florida, USA', 'Texas', 'Texas, USA', 'California', 'California, USA', 'USDA APHIS',
-                        'China', 'South Africa', 'Argentina', 'Costa Rica', 'Spain', 'Australia', 'Mexico', 'Scientific Advisor'
-                    ] %}
-
                     {% set active_groups = [] %}
                     {% for member in steering_members %}
                         {% if member.groupType is not empty and member.groupType not in active_groups %}
@@ -534,17 +529,7 @@
                         {% endif %}
                     {% endfor %}
 
-                    {% set ordered_groups = [] %}
-                    {% for g in predefined_order %}
-                        {% if g in active_groups and g not in ordered_groups %}
-                            {% set ordered_groups = ordered_groups|merge([g]) %}
-                        {% endif %}
-                    {% endfor %}
-                    {% for g in active_groups %}
-                        {% if g not in ordered_groups %}
-                            {% set ordered_groups = ordered_groups|merge([g]) %}
-                        {% endif %}
-                    {% endfor %}
+                    {% set ordered_groups = active_groups|sort %}
 
                     {% for group in ordered_groups %}
                         {% set group_members = [] %}
