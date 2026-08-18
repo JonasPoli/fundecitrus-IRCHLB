@@ -28,7 +28,8 @@
                 <th>Nome</th>
                 <th>Cargo / Função</th>
                 <th>Instituição</th>
-                <th>Tipo de Grupo</th>
+                <th>Comitês</th>
+                <th>Subgrupo / País</th>
                 <th>Status</th>
                 <th></th>
             </tr>
@@ -48,6 +49,7 @@
                     <td><div class="font-bold">{{ committee_member.name }}</div></td>
                     <td>{{ committee_member.role }}</td>
                     <td>{{ committee_member.institution }}</td>
+                    <td>{{ committee_member.committees|join(', ') }}</td>
                     <td>{{ committee_member.groupType }}</td>
                     <td>
                         {% if committee_member.active %}

@@ -57,27 +57,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- Social Media Integrations -->
-                    <div class="pt-8 border-t border-slate-200">
-                        <h4 class="font-bold text-slate-800 mb-4">Follow us</h4>
-                        <div class="flex gap-4">
-                            {% if event_config and event_config.linkedinUrl %}
-                                <a href="{{ event_config.linkedinUrl }}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary card-shadow hover-effect" title="LinkedIn">
-                                    <i class="fa-brands fa-linkedin-in text-base"></i>
-                                </a>
-                            {% endif %}
-                            {% if event_config and event_config.instagramUrl %}
-                                <a href="{{ event_config.instagramUrl }}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary card-shadow hover-effect" title="Instagram">
-                                    <i class="fa-brands fa-instagram text-base"></i>
-                                </a>
-                            {% endif %}
-                            {% if event_config and event_config.youtubeUrl %}
-                                <a href="{{ event_config.youtubeUrl }}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary card-shadow hover-effect" title="YouTube">
-                                    <i class="fa-brands fa-youtube text-base"></i>
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Transactional Form -->

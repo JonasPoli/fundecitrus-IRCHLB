@@ -82,10 +82,19 @@
         <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
 
             <div>
-                <a href="{{ path('app_home') }}" class="mb-4 inline-block">
-                    <img src="{{ asset('images/logo.png') }}" alt="IRCHLB 2027" width="1524" height="533" loading="lazy" class="h-12 w-auto">
-                </a>
-                <p class="text-sm mt-4">{{ event_config.title ?? 'VIII International Research Conference on Huanglongbing' }}. An event dedicated to science, innovation, and solutions for citriculture.</p>
+                <div class="flex items-center gap-4 sm:gap-6 mb-4 flex-wrap">
+                    <a href="{{ path('app_home') }}" class="inline-block">
+                        <img src="{{ asset('images/logo.png') }}" alt="IRCHLB 2027" width="1524" height="533" loading="lazy" decoding="async" class="h-10 sm:h-12 w-auto object-contain">
+                    </a>
+                    <div class="h-8 w-px bg-slate-700 hidden sm:block opacity-60" aria-hidden="true"></div>
+                    <a href="{{ path('app_home') }}" class="inline-block">
+                        <picture>
+                            <source srcset="{{ asset('images/logo-iocv.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/logo-iocv.png') }}" alt="IOCV - International Organization of Citrus Virologists" width="289" height="120" loading="lazy" decoding="async" class="h-10 sm:h-12 w-auto object-contain">
+                        </picture>
+                    </a>
+                </div>
+                <p class="text-sm mt-4"><strong>XXIV Conference of the International Organization of Citrus Virologists</strong> and <strong>VIII International Research Conference on Huanglongbing</strong>. Events dedicated to science, innovation, and solutions for the citrus industry.</p>
             </div>
 
             <div>

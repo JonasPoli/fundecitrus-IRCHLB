@@ -36,7 +36,13 @@ class CommitteeMember
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $linkedinUrl = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $committees = [];
+
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $groupType = null;
 
     #[ORM\Column(options: ['default' => false])]
@@ -134,12 +140,36 @@ class CommitteeMember
         return $this;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getCommittees(): array
+    {
+        return $this->committees ?? [];
+    }
+
+    public function setCommittees(?array $committees): static
+    {
+        $this->committees = $committees ?? [];
+
+        return $this;
+    }
+
     public function getGroupType(): ?string
     {
         return $this->groupType;
     }
 
-    public function setGroupType(string $groupType): static
+    public function setGroupType(?string $groupType): static
     {
         $this->groupType = $groupType;
 

@@ -472,6 +472,7 @@ class SeedDataCommand extends Command
             $member->setAcademicLink($m['academicLink']);
             $member->setLinkedinUrl($m['linkedinUrl']);
             $member->setGroupType($m['groupType']);
+            $member->setCommittees(['Steering Committee']);
             $member->setActive(false);
             $member->setPosition($idx + 1);
             
