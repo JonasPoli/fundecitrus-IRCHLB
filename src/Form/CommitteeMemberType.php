@@ -25,9 +25,11 @@ class CommitteeMemberType extends AbstractType
             ->add('committees', ChoiceType::class, [
                 'label' => 'Comitês / Grupos',
                 'choices' => [
-                    'Steering Committee' => 'Steering Committee',
                     'General Organizing Committee' => 'General Organizing Committee',
-                    'Scientific Committee' => 'Scientific Committee',
+                    'XXIV IOCV Steering Committee' => 'XXIV IOCV Steering Committee',
+                    'XXIV IOCV Scientific Committee' => 'XXIV IOCV Scientific Committee',
+                    'VIII IRCHLB Steering Committee' => 'VIII IRCHLB Steering Committee',
+                    'VIII IRCHLB Scientific Committee' => 'VIII IRCHLB Scientific Committee',
                 ],
                 'multiple' => true,
                 'expanded' => true,

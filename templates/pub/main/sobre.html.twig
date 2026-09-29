@@ -483,43 +483,73 @@
                     {% endif %}
                 </div>
 
-                {# 2. Scientific Committee #}
-                {% set scientific_members = [] %}
+                {# 2. XXIV IOCV Steering Committee #}
+                {% set iocv_steering_members = [] %}
                 {% for member in committee_members %}
-                    {% if 'Scientific Committee' in member.committees %}
-                        {% set scientific_members = scientific_members|merge([member]) %}
+                    {% if 'XXIV IOCV Steering Committee' in member.committees %}
+                        {% set iocv_steering_members = iocv_steering_members|merge([member]) %}
                     {% endif %}
                 {% endfor %}
 
                 <div data-aos="fade-up">
                     <div class="text-center mb-10 max-w-4xl mx-auto">
-                        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">Scientific Committee</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">XXIV IOCV Steering Committee</h2>
                     </div>
 
-                    {% if scientific_members is not empty %}
+                    {% if iocv_steering_members is not empty %}
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                            {% for member in scientific_members %}
+                            {% for member in iocv_steering_members %}
                                 {{ committee_helper.render_member_card(member) }}
                             {% endfor %}
                         </div>
                     {% endif %}
                 </div>
 
-                {# 3. 2026 IRCHLB Steering Committee #}
-                {% set steering_members = [] %}
+                {# 3. XXIV IOCV Scientific Committee #}
+                {% set iocv_scientific_members = [] %}
                 {% for member in committee_members %}
-                    {% if 'Steering Committee' in member.committees %}
-                        {% set steering_members = steering_members|merge([member]) %}
+                    {% if 'XXIV IOCV Scientific Committee' in member.committees %}
+                        {% set iocv_scientific_members = iocv_scientific_members|merge([member]) %}
+                    {% endif %}
+                {% endfor %}
+
+                <div data-aos="fade-up">
+                    <div class="text-center mb-10 max-w-4xl mx-auto">
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">XXIV IOCV Scientific Committee</h2>
+                    </div>
+
+                    {% if iocv_scientific_members is not empty %}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                            {% for member in iocv_scientific_members %}
+                                {{ committee_helper.render_member_card(member) }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# 4. VIII IRCHLB Steering Committee #}
+                {% set irchlb_steering_members = [] %}
+                {% for member in committee_members %}
+                    {% if 'VIII IRCHLB Steering Committee' in member.committees or 'Steering Committee' in member.committees %}
+                        {% set irchlb_steering_members = irchlb_steering_members|merge([member]) %}
                     {% endif %}
                 {% endfor %}
 
                 <div data-aos="fade-up">
                     <div class="text-center mb-12">
-                        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">2026 IRCHLB Steering Committee</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">VIII IRCHLB Steering Committee</h2>
                     </div>
 
-                    {% set active_groups = [] %}
-                    {% for member in steering_members %}
+                    {% if irchlb_steering_members is not empty %}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                            {% for member in irchlb_steering_members %}
+                                {{ committee_helper.render_member_card(member) }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {# {% set active_groups = [] %}
+                    {% for member in irchlb_steering_members %}
                         {% if member.groupType is not empty and member.groupType not in active_groups %}
                             {% set active_groups = active_groups|merge([member.groupType]) %}
                         {% endif %}
@@ -529,7 +559,7 @@
 
                     {% for group in ordered_groups %}
                         {% set group_members = [] %}
-                        {% for member in steering_members %}
+                        {% for member in irchlb_steering_members %}
                             {% if member.groupType == group %}
                                 {% set group_members = group_members|merge([member]) %}
                             {% endif %}
@@ -554,7 +584,7 @@
                     {% endfor %}
 
                     {% set no_group_members = [] %}
-                    {% for member in steering_members %}
+                    {% for member in irchlb_steering_members %}
                         {% if member.groupType is empty %}
                             {% set no_group_members = no_group_members|merge([member]) %}
                         {% endif %}
@@ -566,6 +596,28 @@
                                     {{ committee_helper.render_member_card(member) }}
                                 {% endfor %}
                             </div>
+                        </div>
+                    {% endif %} #}
+                </div>
+
+                {# 5. VIII IRCHLB Scientific Committee #}
+                {% set irchlb_scientific_members = [] %}
+                {% for member in committee_members %}
+                    {% if 'VIII IRCHLB Scientific Committee' in member.committees or 'Scientific Committee' in member.committees %}
+                        {% set irchlb_scientific_members = irchlb_scientific_members|merge([member]) %}
+                    {% endif %}
+                {% endfor %}
+
+                <div data-aos="fade-up">
+                    <div class="text-center mb-10 max-w-4xl mx-auto">
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">VIII IRCHLB Scientific Committee</h2>
+                    </div>
+
+                    {% if irchlb_scientific_members is not empty %}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                            {% for member in irchlb_scientific_members %}
+                                {{ committee_helper.render_member_card(member) }}
+                            {% endfor %}
                         </div>
                     {% endif %}
                 </div>
