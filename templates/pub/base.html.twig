@@ -38,7 +38,11 @@
     {# Dynamic Header #}
     <header class="bg-primary text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="{{ path('app_home') }}" class="flex items-center">
+            <a href="{{ path('app_home') }}" class="flex items-center gap-x-6">
+                <picture>
+                    <source srcset="{{ asset('images/logo-iocv.webp') }}" type="image/webp">
+                    <img src="{{ asset('images/logo-iocv.png') }}" alt="IOCV - International Organization of Citrus Virologists" width="289" height="120" loading="lazy" decoding="async" class="h-10 sm:h-12 w-auto object-contain">
+                </picture>
                 <img src="{{ asset('images/logo.png') }}" alt="IRCHLB 2027" width="1524" height="533" class="h-12 w-auto">
             </a>
             
@@ -50,9 +54,9 @@
                 <a href="{{ path('app_submissao') }}" class="transition-colors hover:text-secondary {{ route == 'app_submissao' ? 'text-secondary' : '' }}">Call for Papers</a>
                 <a href="{{ path('app_programa') }}" class="transition-colors hover:text-secondary {{ route == 'app_programa' ? 'text-secondary' : '' }}">Program</a>
                 <a href="{{ path('app_palestrantes') }}" class="transition-colors hover:text-secondary {{ route in ['app_palestrantes', 'app_palestrante_detalhe'] ? 'text-secondary' : '' }}">Speakers</a>
-                <a href="{{ path('app_patrocinadores') }}" class="transition-colors hover:text-secondary {{ route == 'app_patrocinadores' ? 'text-secondary' : '' }}">Sponsors</a>
+                {# <a href="{{ path('app_patrocinadores') }}" class="transition-colors hover:text-secondary {{ route == 'app_patrocinadores' ? 'text-secondary' : '' }}">Sponsors</a> #}
                 <a href="{{ path('app_local') }}" class="transition-colors hover:text-secondary {{ route == 'app_local' ? 'text-secondary' : '' }}">Venue</a>
-                <a href="{{ path('app_contato') }}" class="transition-colors hover:text-secondary {{ route == 'app_contato' ? 'text-secondary' : '' }}">Contact</a>
+                {# <a href="{{ path('app_contato') }}" class="transition-colors hover:text-secondary {{ route == 'app_contato' ? 'text-secondary' : '' }}">Contact</a> #}
             </nav>
             
             <button id="mobile-menu-open" class="lg:hidden text-white hover:text-secondary focus:outline-none active:scale-95 transition-transform" aria-label="Open Menu">
@@ -84,14 +88,14 @@
             <div>
                 <div class="flex items-center gap-4 sm:gap-6 mb-4 flex-wrap">
                     <a href="{{ path('app_home') }}" class="inline-block">
-                        <img src="{{ asset('images/logo.png') }}" alt="IRCHLB 2027" width="1524" height="533" loading="lazy" decoding="async" class="h-10 sm:h-12 w-auto object-contain">
-                    </a>
-                    <div class="h-8 w-px bg-slate-700 hidden sm:block opacity-60" aria-hidden="true"></div>
-                    <a href="{{ path('app_home') }}" class="inline-block">
                         <picture>
                             <source srcset="{{ asset('images/logo-iocv.webp') }}" type="image/webp">
                             <img src="{{ asset('images/logo-iocv.png') }}" alt="IOCV - International Organization of Citrus Virologists" width="289" height="120" loading="lazy" decoding="async" class="h-10 sm:h-12 w-auto object-contain">
                         </picture>
+                    </a>
+                    <div class="h-8 w-px bg-slate-700 hidden sm:block opacity-60" aria-hidden="true"></div>
+                    <a href="{{ path('app_home') }}" class="inline-block">
+                        <img src="{{ asset('images/logo.png') }}" alt="IRCHLB 2027" width="1524" height="533" loading="lazy" decoding="async" class="h-10 sm:h-12 w-auto object-contain">
                     </a>
                 </div>
                 <p class="text-sm mt-4"><strong>XXIV Conference of the International Organization of Citrus Virologists</strong> and <strong>VIII International Research Conference on Huanglongbing</strong>. Events dedicated to science, innovation, and solutions for the citrus industry.</p>
@@ -110,10 +114,10 @@
             <div>
                 <h4 class="text-lg font-bold text-white mb-4">Help & Support</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ path('app_contato') }}" class="hover:text-secondary transition-colors">Contact Us</a></li>
+                    {# <li><a href="{{ path('app_contato') }}" class="hover:text-secondary transition-colors">Contact Us</a></li> #}
                     <li><a href="{{ path('app_contato', {'_fragment': 'faq'}) }}" class="hover:text-secondary transition-colors">FAQ</a></li>
                     <li><a href="{{ path('app_local') }}" class="hover:text-secondary transition-colors">Venue & Travel</a></li>
-                    <li><a href="{{ path('app_patrocinadores') }}" class="hover:text-secondary transition-colors">Sponsorships</a></li>
+                    {# <li><a href="{{ path('app_patrocinadores') }}" class="hover:text-secondary transition-colors">Sponsorships</a></li> #}
                     {% for page in get_public_pages() %}
                         <li><a href="{{ path('app_page_content', {'slug': page.slug}) }}" class="hover:text-secondary transition-colors">{{ page.title }}</a></li>
                     {% endfor %}
@@ -149,10 +153,15 @@
                         {'route': 'app_submissao', 'label': 'Call for Papers', 'icon': 'description'},
                         {'route': 'app_programa', 'label': 'Program', 'icon': 'calendar_month'},
                         {'route': 'app_palestrantes', 'label': 'Speakers', 'icon': 'groups'},
-                        {'route': 'app_patrocinadores', 'label': 'Sponsors', 'icon': 'workspace_premium'},
+                        
                         {'route': 'app_local', 'label': 'Venue', 'icon': 'location_on'},
-                        {'route': 'app_contato', 'label': 'Contact', 'icon': 'mail'}
+                        
                     ] %}
+
+                    {#
+                    {'route': 'app_patrocinadores', 'label': 'Sponsors', 'icon': 'workspace_premium'},
+                    {'route': 'app_contato', 'label': 'Contact', 'icon': 'mail'}
+                     #}
 
                     {% for item in links %}
                         {% set isActive = (item.route == 'app_palestrantes' and route in ['app_palestrantes', 'app_palestrante_detalhe']) or (item.route == route) %}

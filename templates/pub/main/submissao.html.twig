@@ -22,31 +22,36 @@
                 <!-- Left Column (Text & Rules) -->
                 <div class="md:col-span-2 space-y-12" data-aos="fade-right">
                     
-                    <!-- Call Details -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 card-shadow hover-effect">
-                        <h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+                    <h2 class="text-2xl font-bold text-primary flex items-center gap-3">
                             <span class="material-symbols-outlined text-secondary text-3xl">description</span>
                             Thematic Groups
                         </h2>
-                        <ul class="list-disc list-inside space-y-3 text-slate-700 ml-4">
-                            <li><strong>Pathogen Biology & Genetics:</strong> Mechanisms of 'Candidatus Liberibacter' spp.</li>
-                            <li><strong>Vector Ecology & Control:</strong> Diaphorina citri population dynamics.</li>
-                            <li><strong>Citrus Plant Response:</strong> Genetic resistance, tolerance, and immunity.</li>
-                            <li><strong>Therapeutics & Disease Management:</strong> Novel antimicrobial delivery and orchard practices.</li>
+
+                    <!-- Call Details -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 card-shadow hover-effect">
+                        
+                        <p class="text-lg font-bold text-primary pb-2">XXIV INTERNATIONAL ORGANIZATION OF CITRUS VIROLOGISTS </p>
+                        <ul class="list-disc list-outside space-y-3 text-slate-700 ml-4 pl-2">
+                            <li><strong>Clean Plant (Certification) Programs</strong> <br> Ensuring Pathogen-Free Planting Material and Citrus Health</li>
+                            <li><strong>Endemic Pathogen Monitoring / Surveys</strong> <br> Surveillance, Distribution, and Disease Status Assessment</li>
+                            <li><strong>Endemic Pathogens and Control Strategies</strong> <br> Management Approaches for Established Citrus Diseases</li>
+                            <li><strong>New Pathogen Incursions / Disease Outbreaks</strong> <br> Detection, Response, and Management of New Disease Threats</li>
+                            <li><strong>Emerging Pathogens in Changing Environments</strong> <br> Understanding New Disease Risks under Environmental Change</li>
+                            <li><strong>Advances in Diagnostics</strong> <br> New Tools and Technologies for Pathogen Detection and Identification</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 card-shadow hover-effect">
+
+                        <p class="text-lg font-bold text-primary pb-2">VIII INTERNATIONAL RESEARCH CONFERENCE ON HUANGLONGBING </p>
+                        <ul class="list-disc list-outside space-y-3 text-slate-700 ml-4 pl-2">
+                            <li><strong>Epidemiology and Management Strategies</strong> <br> Current Practices, Field Outcomes and Emerging Approaches</li>
+                            <li><strong>Vector Biology, Transmission and Control</strong> <br> Vector Ecology, Pathogen Transmission and Emerging Control Strategies</li>
+                            <li><strong>Liberibacter Biology and Targeted Intervention Strategies</strong> <br> Pathogen Biology, Host Interactions and Emerging Approaches for Disease Control</li>
+                            <li><strong>Biotechnology, Genetics and Breeding </strong> <br> From Resistance Mechanisms to HLB-Resilient Citrus and Disrupting Strategies</li>
                         </ul>
                     </div>
 
-                    <!-- Regulation & Peer Review -->
-                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 card-shadow hover-effect">
-                        <h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-                            <span class="material-symbols-outlined text-secondary text-3xl">rule</span>
-                            Regulation & Evaluation
-                        </h2>
-                        <div class="prose text-slate-700">
-                            <p>All submissions undergo a rigorous blind peer-review process conducted by scientific committee. The evaluation criteria include originality, methodological soundness, and relevance to the global combat against HLB and other citrus deseases.</p>
-                            <p>Communication regarding acceptance or revision requests will be conducted via the centralized submission system. Only formatted PDFs following the exact template specifications will be considered.</p>
-                        </div>
-                    </div>
+                    
 
                     <!-- Direct Submission Button -->
                     <div class="pt-4 flex justify-start">
@@ -62,7 +67,7 @@
                 <div data-aos="fade-left">
                     <!-- Critical Timeline -->
                     {% if timeline_items is not empty %}
-                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 mb-8 card-shadow hover-effect">
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 mb-8 card-shadow ">
                             <h3 class="text-xl font-bold text-primary mb-6 text-center">Critical Timeline</h3>
                             <ul class="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
                                 {% for item in timeline_items %}
@@ -70,7 +75,7 @@
                                         <div class="flex items-center justify-center w-5 h-5 rounded-full border-2 {% if loop.first %}border-secondary bg-white{% else %}border-slate-300 bg-white{% endif %} text-slate-500 z-10 font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"></div>
                                         <div class="w-[calc(100%-2.5rem)] p-4 rounded-lg bg-white border border-slate-100 shadow-sm hover-effect">
                                             <h4 class="font-bold text-primary text-sm">{{ item.title }}</h4>
-                                            <p class="text-xs text-slate-500 mb-1">{{ item.description }}</p>
+                                            {# <p class="text-xs text-slate-500 mb-1">{{ item.description }}</p> #}
                                             <span class="text-xs {% if loop.first %}text-secondary{% else %}text-slate-500{% endif %} font-semibold">
                                                 {{ item.eventDate ? item.eventDate|date('M d, Y') : '' }}
                                             </span>
@@ -81,21 +86,7 @@
                         </div>
                     {% endif %}
 
-                    <!-- Edital Download -->
-                    <div class="bg-primary text-white rounded-xl p-8 text-center card-shadow hover-effect">
-                        <span class="material-symbols-outlined text-4xl text-secondary mb-4">picture_as_pdf</span>
-                        <h3 class="text-xl font-bold mb-4">Official Call Document</h3>
-                        <p class="text-sm text-slate-300 mb-6">Download the complete PDF containing absolute formatting rules and the official edital.</p>
-                        {% if event_config and event_config.prospectusFile and event_config.prospectusFile.imageName %}
-                            <a href="{{ asset('uploads/' ~ event_config.prospectusFile.imageName) }}" target="_blank" class="block w-full bg-secondary text-primary font-bold py-3 rounded hover-effect">
-                                Download PDF File
-                            </a>
-                        {% else %}
-                            <a href="#" onclick="alert('Document not uploaded yet.'); return false;" class="block w-full bg-secondary text-primary font-bold py-3 rounded hover-effect">
-                                Download PDF File
-                            </a>
-                        {% endif %}
-                    </div>
+                    
                 </div>
 
             </div>

@@ -9,8 +9,8 @@
         {% endif %}
         <div class="container mx-auto px-6 text-center relative z-10">
             <span class="material-symbols-outlined text-secondary text-5xl mb-4">handshake</span>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Sponsors & Exhibitors</h1>
-            <p class="text-secondary text-lg max-w-2xl mx-auto">Discover the organizations making IRCHLB 2027 possible and driving innovation in citriculture.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Sponsors</h1>
+            <p class="text-secondary text-lg max-w-2xl mx-auto">Discover the organizations making VIII IOCV and XXIV IRCHLB possible.</p>
         </div>
     </section>
 
@@ -36,7 +36,7 @@
                                         {% if sponsor.logo and sponsor.logo.imageName %}
                                             <div class="w-full h-full flex items-center justify-center p-2">
                                                 <img src="{{ asset('uploads/' ~ sponsor.logo.imageName) }}" alt="{{ sponsor.name }}" loading="lazy"
-                                                     class="max-h-full max-w-full object-contain opacity-80 group-hover:opacity-100 filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                                                     class="max-h-full max-w-full object-contain transition-all duration-300">
                                             </div>
                                         {% else %}
                                             <span class="font-bold text-primary text-center px-4">{{ sponsor.name }}</span>
