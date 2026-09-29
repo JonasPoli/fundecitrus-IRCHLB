@@ -609,25 +609,25 @@ class SeedDataCommand extends Command
         $organizers = [
             [
                 'name' => 'Fundecitrus',
-                'logo' => 'Fundecitrus.webp',
+                'logo' => 'fundecitrus.webp',
                 'url' => 'https://www.fundecitrus.com.br',
                 'pos' => 1
             ],
             [
                 'name' => 'Embrapa',
-                'logo' => 'Embrapa.png',
+                'logo' => 'embrapa.png',
                 'url' => 'https://www.embrapa.br',
                 'pos' => 2
             ],
             [
                 'name' => 'Luiz de Queiroz College of Agriculture (ESALQ/USP)',
-                'logo' => 'Luiz de Queiroz College of Agriculture (ESALQ:USP) .png',
+                'logo' => 'esalq-usp.png',
                 'url' => 'https://www.esalq.usp.br',
                 'pos' => 3
             ],
             [
                 'name' => 'Sylvio Moreira Citrus Center – Agronomic Institute (IAC)',
-                'logo' => 'Sylvio Moreira Citrus Center – Agronomic Institute (IAC) .jpeg',
+                'logo' => 'iac-sylvio-moreira.jpeg',
                 'url' => 'http://www.ccsm.br',
                 'pos' => 4
             ]
