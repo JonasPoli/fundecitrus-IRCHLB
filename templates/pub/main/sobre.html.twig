@@ -434,13 +434,13 @@
 
                             <h4 class="text-lg font-bold text-primary mb-1">
                                 {{ member.name }}
-                                {% if member.role == 'Chair' %}
+                                {# {% if member.role == 'Chair' %}
                                     <span class="text-secondary text-xs block lg:inline-block font-semibold">(Chair)</span>
-                                {% endif %}
+                                {% endif %} #}
                             </h4>
                             
                             <p class="text-xs font-semibold text-secondary mb-2">
-                                {% if member.role != 'Chair' and member.role != 'Member' %}
+                                {% if member.role is not empty %}
                                     {{ member.role }}
                                 {% endif %}
                             </p>

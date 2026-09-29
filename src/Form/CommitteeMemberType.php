@@ -35,7 +35,9 @@ class CommitteeMemberType extends AbstractType
                 'help' => 'Selecione um ou mais comitês dos quais este membro faz parte.',
             ])
             ->add('role', null, [
-                'label' => 'Cargo / Função'])
+                'label' => 'Cargo / Função',
+                'required' => false,
+            ])
             ->add('institution', null, [
                 'label' => 'Instituição de Vínculo'])
             ->add('bio', null, [

@@ -21,7 +21,7 @@ class CommitteeMember
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Image $image = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $role = null;
 
     #[ORM\Column(length: 255)]
@@ -85,7 +85,7 @@ class CommitteeMember
         return $this->role;
     }
 
-    public function setRole(string $role): static
+    public function setRole(?string $role): static
     {
         $this->role = $role;
 
