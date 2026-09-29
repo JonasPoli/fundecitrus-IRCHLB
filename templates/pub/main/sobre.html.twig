@@ -418,8 +418,8 @@
 
                 {% macro render_member_card(member) %}
                     <div class="bg-white rounded-xl card-shadow border border-slate-100 p-6 text-center hover-effect flex flex-col justify-between h-full">
-                        <div>
-                            <div class="relative w-28 h-28 mx-auto mb-6">
+                        <div class="pt-4">
+                            {# <div class="relative w-28 h-28 mx-auto mb-6">
                                 {% if member.image and member.image.imageName %}
                                     <img src="{{ ('uploads/' ~ member.image.imageName)|imagine_filter('avatar') }}" alt="{{ member.name }}" width="112" height="112" loading="lazy"
                                         class="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-slate-100">
@@ -430,7 +430,7 @@
                                 {% if member.role == 'Chair' %}
                                     <span class="absolute bottom-0 right-0 bg-secondary text-primary font-bold text-[10px] px-2 py-0.5 rounded-full uppercase shadow">Chair</span>
                                 {% endif %}
-                            </div>
+                            </div> #}
 
                             <h4 class="text-lg font-bold text-primary mb-1">
                                 {{ member.name }}
@@ -447,13 +447,15 @@
                             
                             <p class="text-xs text-slate-500 mb-2 leading-relaxed font-semibold">{{ member.institution }}</p>
 
-                            {% if member.email %}
+                            {# {% if member.email %}
                                 <a href="mailto:{{ member.email }}" class="text-xs text-primary hover:underline block mb-2 font-medium break-all">
                                     <i class="fa-solid fa-envelope mr-1 text-slate-400"></i>{{ member.email }}
                                 </a>
-                            {% endif %}
+                            {% endif %} #}
 
-                            <p class="text-xs text-slate-400 leading-relaxed">{{ member.bio }}</p>
+                            {# <p class="text-xs text-slate-400 leading-relaxed">{{ member.bio }}</p> #}
+
+                            <p class="text-xs text-slate-400 leading-relaxed">{{ member.groupType }}</p>
                         </div>
                     </div>
                 {% endmacro %}
