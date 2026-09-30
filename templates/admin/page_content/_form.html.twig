@@ -25,7 +25,7 @@
             
             {# Campo oculto real que sincroniza com o Quill #}
             <div class="hidden">
-                {{ form_widget(form.content) }}
+                {{ form_widget(form.content, {'required': false}) }}
             </div>
             
             {{ form_errors(form.content) }}
@@ -46,8 +46,26 @@
 
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const quill = new Quill('#quill-editor', {
+    function initQuillEditor() {
+        const editor = document.getElementById('quill-editor');
+        if (!editor || editor.__quillInstance) {
+            return;
+        }
+
+        const textarea = document.querySelector('textarea[name*="[content]"]') || document.querySelector('[name*="[content]"]');
+        if (!textarea) {
+            return;
+        }
+
+        if (typeof Quill === 'undefined') {
+            const script = document.querySelector('script[src*="quill"]');
+            if (script) {
+                script.addEventListener('load', initQuillEditor, { once: true });
+            }
+            return;
+        }
+
+        editor.__quillInstance = new Quill(editor, {
             theme: 'snow',
             modules: {
                 toolbar: [
@@ -59,18 +77,38 @@
             }
         });
 
-        // Preenche o editor Quill com o valor inicial do textarea do Symfony
-        const textarea = document.querySelector('[name*="[content]"]');
-        if (textarea) {
+        const quill = editor.__quillInstance;
+
+        if (textarea.value) {
             quill.root.innerHTML = textarea.value;
         }
 
-        // Sincroniza o conteúdo do Quill com o textarea antes de submeter
-        const form = document.querySelector('form');
-        form.addEventListener('submit', () => {
-            if (textarea) {
-                textarea.value = quill.root.innerHTML;
+        const syncContent = () => {
+            const text = quill.getText().trim();
+            const html = quill.root.innerHTML;
+            if (text.length === 0 && (html === '<p><br></p>' || html === '')) {
+                textarea.value = '';
+            } else {
+                textarea.value = html;
             }
-        });
-    });
+        };
+
+        quill.on('text-change', syncContent);
+
+        const form = textarea.closest('form');
+        if (form) {
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', syncContent);
+            }
+            form.addEventListener('submit', syncContent);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initQuillEditor);
+    } else {
+        initQuillEditor();
+    }
+    document.addEventListener('turbo:load', initQuillEditor);
 </script>

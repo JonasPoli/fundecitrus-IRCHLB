@@ -134,11 +134,12 @@
                                         <p class="text-slate-600 text-sm mb-4">{{ activity.description }}</p>
                                     {% endif %}
                                 </div>
-                                
-                                <div class="flex items-center gap-2 text-slate-500 text-sm mb-4">
-                                    <span class="material-symbols-outlined text-base">location_on</span>
-                                    <span>{{ activity.room.name ?? '' }}</span>
-                                </div>
+                                {% if activity.room %}
+                                    <div class="flex items-center gap-2 text-slate-500 text-sm mb-4">
+                                        <span class="material-symbols-outlined text-base">location_on</span>
+                                        <span>{{ activity.room.name ?? '' }}</span>
+                                    </div>
+                                {% endif %}
                                 
                                 {% set active_speakers = [] %}
                                 {% for speaker in activity.speakers %}
