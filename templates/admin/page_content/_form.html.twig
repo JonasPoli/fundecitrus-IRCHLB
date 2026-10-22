@@ -8,25 +8,9 @@
         <div class="wab-field mb-4">
             {{ form_label(form.content) }}
             
-            <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.7/quill.snow.css">
-            <style>
-                .ql-container {
-                    font-family: inherit;
-                    font-size: 14px;
-                }
-                .ql-editor {
-                    min-height: 250px;
-                    background: #fff;
-                    color: #333;
-                }
-            </style>
+            <link href="https://cdn.jsdelivr.net/npm/suneditor@2/dist/css/suneditor.min.css" rel="stylesheet">
             
-            <div id="quill-editor" class="border border-slate-300 rounded-b"></div>
-            
-            {# Campo oculto real que sincroniza com o Quill #}
-            <div class="hidden">
-                {{ form_widget(form.content, {'required': false}) }}
-            </div>
+            {{ form_widget(form.content, {'required': false, 'attr': {'data-suneditor': 'true'}}) }}
             
             {{ form_errors(form.content) }}
         </div>
@@ -44,71 +28,71 @@
     </div>
 {{ form_end(form) }}
 
-<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/suneditor@2/dist/suneditor.min.js"></script>
 <script>
-    function initQuillEditor() {
-        const editor = document.getElementById('quill-editor');
-        if (!editor || editor.__quillInstance) {
+    function initSunEditor() {
+        const textarea = document.querySelector('textarea[data-suneditor]');
+        if (!textarea || textarea.__suneditorInstance) {
             return;
         }
 
-        const textarea = document.querySelector('textarea[name*="[content]"]') || document.querySelector('[name*="[content]"]');
-        if (!textarea) {
-            return;
-        }
-
-        if (typeof Quill === 'undefined') {
-            const script = document.querySelector('script[src*="quill"]');
+        if (typeof SUNEDITOR === 'undefined') {
+            const script = document.querySelector('script[src*="suneditor"]');
             if (script) {
-                script.addEventListener('load', initQuillEditor, { once: true });
+                script.addEventListener('load', initSunEditor, { once: true });
             }
             return;
         }
 
-        editor.__quillInstance = new Quill(editor, {
-            theme: 'snow',
-            modules: {
-                toolbar: [
-                    [{ 'header': [1, 2, 3, false] }],
-                    ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    ['link', 'clean']
-                ]
-            }
+        const editor = SUNEDITOR.create(textarea, {
+            width: '100%',
+            height: '350px',
+            buttonList: [
+                ['undo', 'redo'],
+                ['font', 'fontSize'],
+                ['bold', 'underline', 'italic', 'strike'],
+                ['fontColor'],
+                ['removeFormat'],
+                ['outdent', 'indent'],
+                ['align', 'list'],
+                ['table', 'link', 'image'],
+                ['showBlocks', 'codeView'],
+            ],
+            attributesWhitelist: {
+                all: 'class|style|id'
+            },
+            allowedClassNames: '.+'
         });
 
-        const quill = editor.__quillInstance;
+        textarea.__suneditorInstance = editor;
 
-        if (textarea.value) {
-            quill.root.innerHTML = textarea.value;
-        }
-
-        const syncContent = () => {
-            const text = quill.getText().trim();
-            const html = quill.root.innerHTML;
-            if (text.length === 0 && (html === '<p><br></p>' || html === '')) {
-                textarea.value = '';
-            } else {
-                textarea.value = html;
-            }
+        editor.onChange = function () {
+            editor.save();
         };
-
-        quill.on('text-change', syncContent);
 
         const form = textarea.closest('form');
         if (form) {
-            const submitBtn = form.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.addEventListener('click', syncContent);
-            }
-            form.addEventListener('submit', syncContent);
+            form.addEventListener('submit', function () {
+                if (editor.core._variable.isCodeView) {
+                    editor.core.toggleCodeView();
+                }
+                editor.save();
+            });
         }
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initQuillEditor);
+        document.addEventListener('DOMContentLoaded', initSunEditor);
     } else {
-        initQuillEditor();
+        initSunEditor();
     }
-    document.addEventListener('turbo:load', initQuillEditor);
+    document.addEventListener('turbo:load', initSunEditor);
+
+    document.addEventListener('turbo:before-cache', function () {
+        const textarea = document.querySelector('textarea[data-suneditor]');
+        if (textarea && textarea.__suneditorInstance) {
+            textarea.__suneditorInstance.destroy();
+            delete textarea.__suneditorInstance;
+        }
+    });
 </script>

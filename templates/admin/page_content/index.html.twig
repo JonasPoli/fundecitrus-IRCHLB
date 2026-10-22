@@ -25,7 +25,7 @@
                                     <th>ID</th>
                                     <th>Identificador (Slug)</th>
                                     <th>Título</th>
-                                    <th>Conteúdo</th>
+                                 
                                     <th>Última Atualização</th>
                                 <th></th>
             </tr>
@@ -33,12 +33,12 @@
         <tbody>
             {% for page_content in page_contents %}
                 <tr>
-                                                                    <td>{{ page_content.id }}</td>
-                                                                                            <td>{{ page_content.slug }}</td>
-                                                                                            <td>{{ page_content.title }}</td>
-                                                                                            <td>{{ (page_content.content|slice(0, 20) ~ (page_content.content|length > 20 ? '...' : ''))|raw }}</td>
-                                                                                            <td>{{ page_content.updatedAt ? page_content.updatedAt|date('d/m/Y H:i') : '' }}</td>
-                                                                 <td><a href="{{ path('app_admin_page_content_edit', {'id': page_content.id}) }}" class="btn-secondary" aria-label="Editar {{ page_content.title }}" title="Editar {{ page_content.title }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
+                    <td>{{ page_content.id }}</td>
+                    <td>{{ page_content.slug }}</td>
+                    <td>{{ page_content.title }}</td>
+                    
+                    <td>{{ page_content.updatedAt ? page_content.updatedAt|date('d/m/Y H:i') : '' }}</td>
+                    <td><a href="{{ path('app_admin_page_content_edit', {'id': page_content.id}) }}" class="btn-secondary" aria-label="Editar {{ page_content.title }}" title="Editar {{ page_content.title }}"><i class="fa-solid fa-pen" aria-hidden="true"></i>Editar</a></td>
                 </tr>
             {% else %}
                 <tr>

@@ -77,7 +77,7 @@
                                             <h4 class="font-bold text-primary text-sm">{{ item.title }}</h4>
                                             {# <p class="text-xs text-slate-500 mb-1">{{ item.description }}</p> #}
                                             <span class="text-xs {% if loop.first %}text-secondary{% else %}text-slate-500{% endif %} font-semibold">
-                                                {{ item.eventDate ? item.eventDate|date('M d, Y') : '' }}
+                                                {% if item.eventDate %}{{ item.description|default('') ends with '[until]' ? 'Until ' : '' }}{{ item.eventDate|date('M d, Y') }}{% endif %}
                                             </span>
                                         </div>
                                     </li>

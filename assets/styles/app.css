@@ -1067,3 +1067,17 @@ html.dark {
     height: 100% !important;
     min-height: 400px !important;
 }
+
+.simple-table{
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #e2e8f0;
+}
+
+.simple-table th,
+.simple-table td {
+    border: 1px solid #e2e8f0;
+}
+.simple-table td{
+    padding:5px;
+}
