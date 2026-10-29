@@ -1,0 +1,185 @@
+{% extends 'pub/base.html.twig' %}
+
+{% block body %}
+
+<section class="bg-slate-900 text-white py-20 relative overflow-hidden" data-aos="fade-down">
+        
+            <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('{{ asset('images/hero-bg.jpg') }}'); background-color: #004040;"></div>
+        
+        <div class="container mx-auto px-6 text-center max-w-3xl relative z-10">
+            
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Technical Tours</h1>
+            <div class="w-16 h-1 bg-secondary mx-auto rounded-full"></div>
+        </div>
+    </section>
+
+<section class="max-w-5xl mx-auto my-10" data-aos="fade-up">
+    <p>Participants of these events will have the opportunity to gain first-hand knowledge of the research, technologies, and strategies adopted in Brazil to address HLB.</p>
+
+    <p>The technical tours will take place on <strong>October 28 and 29, 2027</strong>, following the conference’s scientific program, providing practical insights into different aspects of the Brazilian citrus industry.</p>
+
+    
+    <div class="my-10 space-y-8">
+                <div class="bg-white rounded-xl card-shadow border border-slate-200 overflow-hidden">
+                    <div class="bg-primary text-white px-6 py-4 flex flex-wrap items-center gap-3 md:gap-4">
+                        <div class="flex items-center gap-2 font-bold text-lg md:text-xl">
+                            <span class="material-symbols-outlined text-2xl">calendar_month</span>
+                            <span>October 28, 2027</span>
+                        </div>
+                        <span class="text-white/40 hidden sm:inline">|</span>
+                        <span class="font-semibold text-base md:text-lg">Afternoon</span>
+                        <span class="text-white/40 hidden sm:inline">|</span>
+                        <div class="flex items-center gap-1.5 font-medium text-sm md:text-base">
+                            <span class="material-symbols-outlined text-xl">location_on</span>
+                            <span>Visit to Fundecitrus</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6 md:p-8 space-y-6">
+                        <div class="flex items-start gap-4">
+                            
+                            <div class="space-y-4 text-slate-700 text-sm md:text-base leading-relaxed">
+                                <p>
+                                    Participants will visit <strong>Fundecitrus</strong> and learn about its main activities in research, innovation, technology transfer, and the management of HLB and its vector, the Asian citrus psyllid, Diaphorina citri.
+                                    <br><br>
+                                    The visit will provide an overview of the initiatives and strategies developed by Fundecitrus to support the Brazilian citrus industry in the prevention, monitoring, and control of HLB.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-200 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-start gap-3 sm:border-r sm:border-slate-200 sm:pr-6">
+                                <span class="material-symbols-outlined text-primary text-3xl">schedule</span>
+                                <div class="text-sm text-slate-700">
+                                    <p><strong class="text-primary">Departure</strong> at <strong class="text-primary">2:00 PM</strong></p>
+                                    <p>and return at <strong class="text-primary">6:30 PM</strong></p>
+                                    <p class="text-xs text-slate-500 mt-0.5">From and to the event venue (Multiplan Hall)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary text-3xl">groups</span>
+                                <div class="text-sm text-slate-700">
+                                    <p>Capacity:</p>
+                                    <p class="font-bold text-primary text-base">150 participants</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl card-shadow border border-slate-200 overflow-hidden">
+                    <div class="bg-primary text-white px-6 py-4 flex flex-wrap items-center gap-3 md:gap-4">
+                        <div class="flex items-center gap-2 font-bold text-lg md:text-xl">
+                            <span class="material-symbols-outlined text-2xl">calendar_month</span>
+                            <span>October 29, 2027</span>
+                        </div>
+                        <span class="text-white/40 hidden sm:inline">|</span>
+                        <div class="flex items-center gap-2 font-medium text-sm md:text-base">
+                            <span class="material-symbols-outlined text-xl">psychiatry</span>
+                            <span>Citrus Farms and Research Centers</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6 md:p-8 space-y-6">
+                        <div class="flex items-start gap-4">
+                            
+                            <div class="space-y-3 text-slate-700 text-sm md:text-base leading-relaxed">
+                                <p>Participants will be able to choose from five technical tour itineraries featuring citrus farms, experimental stations, universities, and research centers.</p>
+
+                                <p>The tours will provide first-hand exposure to citrus production in Brazil, including field management practices, technologies, and research aimed at addressing HLB and other challenges facing the citrus industry.</p>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-lg border border-slate-200">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="bg-secondary-100 text-primary font-bold divide-x divide-slate-200">
+                                        <th class="py-3 px-4 w-36">Option</th>
+                                        <th class="py-3 px-4">
+                                            <div class="flex items-center gap-2">
+                                                <span class="material-symbols-outlined text-lg">wb_sunny</span>
+                                                <span>Morning</span>
+                                            </div>
+                                        </th>
+                                        <th class="py-3 px-4">
+                                            <div class="flex items-center gap-2">
+                                                <span class="material-symbols-outlined text-lg">wb_twilight</span>
+                                                <span>Afternoon</span>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 bg-white text-slate-700">
+                                    <tr class="divide-x divide-slate-100 hover:bg-slate-50">
+                                        <td class="py-3 px-4 font-bold text-primary whitespace-nowrap">
+                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold mr-2">1</span>
+                                            Option 1
+                                        </td>
+                                        <td class="py-3 px-4">Bebedouro Experimental Station</td>
+                                        <td class="py-3 px-4">Citrus farm in Matão</td>
+                                    </tr>
+                                    <tr class="divide-x divide-slate-100 hover:bg-slate-50">
+                                        <td class="py-3 px-4 font-bold text-primary whitespace-nowrap">
+                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold mr-2">2</span>
+                                            Option 2
+                                        </td>
+                                        <td class="py-3 px-4">Citrus farm in Pirassununga</td>
+                                        <td class="py-3 px-4">Sylvio Moreira Citrus Research Center (IAC), Cordeirópolis</td>
+                                    </tr>
+                                    <tr class="divide-x divide-slate-100 hover:bg-slate-50">
+                                        <td class="py-3 px-4 font-bold text-primary whitespace-nowrap">
+                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold mr-2">3</span>
+                                            Option 3
+                                        </td>
+                                        <td class="py-3 px-4">Citrus farm in Luís Antônio</td>
+                                        <td class="py-3 px-4">Luiz de Queiroz College of Agriculture (ESALQ/USP), Piracicaba</td>
+                                    </tr>
+                                    <tr class="divide-x divide-slate-100 hover:bg-slate-50">
+                                        <td class="py-3 px-4 font-bold text-primary whitespace-nowrap">
+                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold mr-2">4</span>
+                                            Option 4
+                                        </td>
+                                        <td class="py-3 px-4">Citrus Farm 1 in Pedregulho</td>
+                                        <td class="py-3 px-4">Citrus Farm 2 in Pedregulho</td>
+                                    </tr>
+                                    <tr class="divide-x divide-slate-100 hover:bg-slate-50">
+                                        <td class="py-3 px-4 font-bold text-primary whitespace-nowrap">
+                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold mr-2">5</span>
+                                            Option 5
+                                        </td>
+                                        <td class="py-3 px-4">Citrus farm in Nova Europa</td>
+                                        <td class="py-3 px-4">Bebedouro Experimental Station</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-start gap-3 sm:border-r sm:border-slate-200 sm:pr-6">
+                                <span class="material-symbols-outlined text-primary text-3xl">schedule</span>
+                                <div class="text-sm text-slate-700">
+                                    <p><strong class="text-primary">Departure at 2:00 PM</strong></p>
+                                    <p><strong class="text-primary">and return at 6:30 PM</strong></p>
+                                    <p class="text-xs text-slate-500 mt-0.5">From and to the event venue (Multiplan Hall)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary text-3xl">groups</span>
+                                <div class="text-sm text-slate-700">
+                                    <p class="font-bold text-primary">Capacity:</p>
+                                    <p><strong class="text-primary">30 participants</strong> per itinerary</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+   
+
+    <p><strong>Registration</strong></p>
+
+    <p>Registration is subject to availability and is limited to 150 participants on October 28 and 30 participants per itinerary on October 29. Registration for each tour will close automatically once all available spots have been filled.</p>
+</section>
+
+{% endblock %}

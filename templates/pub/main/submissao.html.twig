@@ -18,7 +18,7 @@
     <section class="py-24 bg-white text-slate-800">
         <div class="container mx-auto px-6 max-w-5xl">
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1  gap-12">
                 <!-- Left Column (Text & Rules) -->
                 <div class="md:col-span-2 space-y-12" data-aos="fade-right">
                     
@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- Right Column (Sidebar) -->
-                <div data-aos="fade-left">
+                {# <div data-aos="fade-left">
                     <!-- Critical Timeline -->
                     {% if timeline_items is not empty %}
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 mb-8 card-shadow ">
@@ -75,7 +75,7 @@
                                         <div class="flex items-center justify-center w-5 h-5 rounded-full border-2 {% if loop.first %}border-secondary bg-white{% else %}border-slate-300 bg-white{% endif %} text-slate-500 z-10 font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"></div>
                                         <div class="w-[calc(100%-2.5rem)] p-4 rounded-lg bg-white border border-slate-100 shadow-sm hover-effect">
                                             <h4 class="font-bold text-primary text-sm">{{ item.title }}</h4>
-                                            {# <p class="text-xs text-slate-500 mb-1">{{ item.description }}</p> #}
+                                           
                                             <span class="text-xs {% if loop.first %}text-secondary{% else %}text-slate-500{% endif %} font-semibold">
                                                 {% if item.eventDate %}{{ item.description|default('') ends with '[until]' ? 'Until ' : '' }}{{ item.eventDate|date('M d, Y') }}{% endif %}
                                             </span>
@@ -87,7 +87,7 @@
                     {% endif %}
 
                     
-                </div>
+                </div> #}
 
             </div>
         </div>

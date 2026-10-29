@@ -32,13 +32,15 @@ final class MainController extends AbstractController
         StatisticItemRepository $statRepo,
         \App\Repository\HomeBannerRepository $bannerRepo,
         \App\Repository\OrganizerRepository $organizerRepository,
-        \App\Repository\SupporterRepository $supporterRepository
+        \App\Repository\SupporterRepository $supporterRepository,
+        ThematicGroupRepository $timelineRepo
     ): Response {
         return $this->render('pub/main/home.html.twig', [
             'statistic_items' => $statRepo->findBy(['isActive' => true], ['position' => 'ASC']),
             'banners' => $bannerRepo->findBy(['isActive' => true], ['position' => 'ASC']),
             'organizers' => $organizerRepository->findBy([], ['position' => 'ASC']),
             'supporters' => $supporterRepository->findBy([], ['position' => 'ASC']),
+            'timeline_items' => $timelineRepo->findBy([], ['eventDate' => 'ASC']),
         ]);
     }
 
@@ -233,6 +235,14 @@ final class MainController extends AbstractController
         }
 
         return $this->redirectToRoute('app_contato');
+    }
+
+    #[Route('/technical-tours', name: 'app_tours')]
+    public function tours(): Response
+    {
+        return $this->render('pub/main/tours.html.twig', [
+           
+        ]);
     }
 
     #[Route('/p/{slug}', name: 'app_page_content')]

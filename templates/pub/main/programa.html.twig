@@ -22,11 +22,11 @@
                     {% for day in days %}
                         {% if active_day and active_day.id == day.id %}
                             <a href="{{ path('app_programa', {'day': day.id}) }}" class="md:flex-1 text-center bg-primary text-white px-8 py-3 rounded-full font-bold card-shadow">
-                                {{ day.title }} ({{ day.date ? day.date|date('M d, Y') : '' }})
+                                {{ day.title }}
                             </a>
                         {% else %}
                             <a href="{{ path('app_programa', {'day': day.id}) }}" class="md:flex-1 text-center bg-slate-100 text-slate-600 hover:bg-slate-200 px-8 py-3 rounded-full font-bold transition-colors">
-                                {{ day.title }} ({{ day.date ? day.date|date('M d, Y') : '' }})
+                                {{ day.title }} 
                             </a>
                         {% endif %}
                     {% endfor %}
@@ -65,7 +65,7 @@
                                     <h3 class="text-2xl font-bold text-primary mb-2">{{ activity.title }}</h3>
                                     
                                     {% if activity.description %}
-                                        <p class="text-slate-600 text-sm mb-4">{{ activity.description }}</p>
+                                        <p class="text-slate-600 text-sm mb-4">{{ activity.description|raw }}</p>
                                     {% endif %}
                                 </div>
                                 {% if activity.room %}
