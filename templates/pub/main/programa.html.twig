@@ -108,6 +108,7 @@
                             </div>
                         </div>
                     {% endfor %}
+                    {% if active_day and active_day.id == 5 %}<p>The visit schedule is subject to change depending on demand and logistical considerations.</p>{% endif %}
                 </div>
             {% else %}
                 <div class="text-center py-20 bg-white rounded-xl card-shadow">
