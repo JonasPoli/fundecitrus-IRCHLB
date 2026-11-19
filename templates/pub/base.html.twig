@@ -27,8 +27,10 @@
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 </head>
+{% set isSiteUnderConstruction = not siteActive and not is_granted('ROLE_ADMIN') %}
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
+    <div class="flex flex-col min-h-screen flex-1{% if isSiteUnderConstruction %} site-under-construction-content{% endif %}"{% if isSiteUnderConstruction %} inert aria-hidden="true"{% endif %}>
     {# Skip to main content link for keyboard/screen reader users #}
     <a href="#main-content"
        class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:shadow-lg">
@@ -183,6 +185,30 @@
             </div>
         </div>
     </div>
+    </div>
+
+    {% if isSiteUnderConstruction %}
+        <div class="site-under-construction-overlay" role="status" aria-live="polite">
+            <div class="site-under-construction-banner">
+                <div class="site-under-construction-logos">
+                    <picture>
+                        <source srcset="{{ asset('images/logo-iocv.webp') }}" type="image/webp">
+                        <img src="{{ asset('images/logo-iocv.png') }}" alt="IOCV - International Organization of Citrus Virologists" width="289" height="120">
+                    </picture>
+                    <span class="site-under-construction-divider" aria-hidden="true"></span>
+                    <img src="{{ asset('images/logo.png') }}" alt="IRCHLB 2027" width="1524" height="533">
+                </div>
+                <div class="site-under-construction-badge">
+                    <i class="fa-solid fa-helmet-safety" aria-hidden="true"></i>
+                    <span>Coming Soon</span>
+                </div>
+                <h1 class="site-under-construction-title">Site Under Construction</h1>
+                <p class="site-under-construction-text">
+                    We are currently working on our website. Please check back soon.
+                </p>
+            </div>
+        </div>
+    {% endif %}
 
     {# Mobile Menu Toggle Script #}
     <script>

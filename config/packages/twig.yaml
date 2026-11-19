@@ -3,6 +3,7 @@ twig:
     form_themes: ['admin/form_theme.html.twig']
     globals:
         templateService: '@App\Service\TemplateService'
+        siteActive: '%siteActive%'
 
 when@test:
     twig:
